@@ -49,11 +49,95 @@ Arianne non è solo un gestionale, ma una soluzione completa per il benessere ps
 
 Una piattaforma digitale per terapeuti e pazienti
 
-- Chat e sedute on-line dentro la piattaforma
-- Appuntamenti, compiti e monitoraggio tra le sedute
+- Un sistema per la gestione dei pazienti
+- Possibilità di effettuare sedute on-line
+- Possibilità di assegnare compiti
+- Sistemi per guidare i pazienti tra le sedute
 - Dati clinici ordinati e consultabili nel tempo
 
 
 <img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10" />
 
 <img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+
+---
+layout: default
+---
+
+# Il progetto
+
+La piattaforma è sviluppata per terapeuti e pazienti 
+
+Collaborazione Terapeuta-Paziente
+- Sistema progettato per facilitare la collaborazione tra il terapeuta e il paziente con interfacce dedicate
+
+Supporto continuo
+- funzionalità per supportare il paziente tra le sedute attraverso compiti e test
+
+Prevenzione e Identificazione Precoce
+- Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
+
+---
+layout: default
+---
+
+# tutto in un unico sistema
+
+Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amministrativo, più cura
+
+---
+layout: default
+---
+
+# Attività tra le sedute
+
+<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
+
+
+---
+layout: default
+---
+
+# Insight leggibile
+
+<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
+
+---
+layout: default
+---
+
+# AI & Analytics
+
+Scrivere qualcosa 
+
+---
+layout: default
+---
+
+# Competitors
+
+Tesi
+
+---
+layout: default
+---
+
+# Modello di business
+
+Marco
+
+---
+layout: default
+---
+
+# Spinoff
+
+Marco
+
+---
+layout: default
+---
+
+# Sldie conclusiva
+
+Marco
