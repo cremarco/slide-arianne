@@ -85,22 +85,54 @@ layout: default
 
 Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amministrativo, più cura
 
----
-layout: default
----
-
-# Attività tra le sedute
-
-<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
-
+<img src="/img/platform.png" class="absolute top-80 -translate-y-1/2 drop-shadow-2xl rounded-xl " />
 
 ---
 layout: default
 ---
 
-# Insight leggibile
+# Attività tra le sedute - professionisti
 
-<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
+All’interno della piattaforma, il professionista dispone di un’area dedicata per progettare e monitorare le attività terapeutiche
+
+- Assegnazione di compiti personalizzati (diari, esercizi, questionari)
+- Definizione degli obiettivi terapeutici tra una seduta e l’altra
+- Monitoraggio strutturato dei progressi del paziente nel tempo
+
+Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
+<img src="/img/therapist.png" class="absolute right-60 top-140 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+
+---
+layout: default
+---
+
+# Attività tra le sedute - pazienti
+
+Il paziente ha accesso a un’area dedicata in cui può svolgere le attività assegnate dal terapeuta in modo semplice e guidato
+
+- Compilazione di diari ed esercizi direttamente in piattaforma
+- Somministrazione di questionari e test clinici
+- Continuità del percorso terapeutico anche tra le sedute
+
+Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
+
+<img src="/img/patient.png" class="absolute right-60 top-140 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+
+---
+layout: default
+---
+
+
+# Questionari con insight leggibili
+Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
+
+- Risultati strutturati, confrontabili ed esportabili
+- Scoring automatico e visualizzazione dei trend nel tempo
+- Supporto concreto a follow-up, prevenzione e decisioni cliniche
+
+L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
+
+<img src="/img/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
 
 ---
 layout: default
