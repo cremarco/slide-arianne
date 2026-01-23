@@ -1,15 +1,7 @@
 ---
-theme: seriph
-title: Arianne - L'ecosistema digitale per la salute mentale
 name: intro
-class: text-center
-drawings:
-  persist: false
-transition: slide-left
-mdc: true
-fonts:
-  sans: Inter
-  serif: Inter
+layout: cover
+class: text-center relative
 ---
 
 <div class="w-full h-full absolute inset-0 flex flex-col items-center justify-center animated-bg overflow-hidden">
@@ -30,7 +22,7 @@ fonts:
   </div>
 </div>
 
-<style>
+<style scoped>
 .animated-bg {
   background: linear-gradient(-45deg, #f97316, #fb923c, #ea580c, #c2410c);
   background-size: 400% 400%;
@@ -113,9 +105,11 @@ fonts:
 
 ---
 name: solution
+layout: default
+class: relative overflow-hidden
 ---
 
-<div class="absolute inset-0 w-full h-full overflow-hidden">
+<img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" alt="Logo Arianne" />
 
 <div class="px-14 py-10">
 
@@ -131,11 +125,16 @@ Una piattaforma digitale per terapeuti e pazienti
 
 </div>
 
-<img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" />
+<img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" alt="Schermata home Arianne" />
 
-<style>
+<style scoped>
 .logo-animation {
   animation: logo-entry 0.8s ease-out forwards;
+}
+
+.computer-image {
+  opacity: 0;
+  animation: slide-in-right 1s ease-out forwards 0.3s;
 }
 
 @keyframes logo-entry {
@@ -149,18 +148,6 @@ Una piattaforma digitale per terapeuti e pazienti
   }
 }
 
-.computer-image {
-  animation: slide-in-right 1s ease-out forwards 0.3s;
-}
-</style>
-
-<img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" />
-
-<style>
-.computer-image {
-  animation: slide-in-right 1s ease-out forwards;
-}
-
 @keyframes slide-in-right {
   from {
     transform: translate(100%, -50%);
@@ -172,8 +159,6 @@ Una piattaforma digitale per terapeuti e pazienti
   }
 }
 </style>
-
-</div>
 
 ---
 layout: default
@@ -193,20 +178,22 @@ Supporto continuo
 Prevenzione e Identificazione Precoce
 - Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
 
+<img src="/img/anna-rita.jpg" class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px]" alt="Anna Rita" />
+
 ---
 layout: default
 name: system
+class: relative
 ---
 
 # tutto in un unico sistema
 
 Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amministrativo, più cura
 
-<img src="/img/platform.png" class="absolute top-80 -translate-y-1/2 drop-shadow-2xl rounded-xl " />
-
 ---
 layout: default
 name: activities-pro
+class: relative
 ---
 
 # Attività tra le sedute - professionisti
@@ -218,11 +205,12 @@ All’interno della piattaforma, il professionista dispone di un’area dedicata
 - Monitoraggio strutturato dei progressi del paziente nel tempo
 
 Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
-<img src="/img/therapist.png" class="absolute right-60 top-90 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+<img src="/img/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area terapeuta" />
 
 ---
 layout: default
 name: activities-patient
+class: relative
 ---
 
 # Attività tra le sedute - pazienti
@@ -235,11 +223,12 @@ Il paziente ha accesso a un’area dedicata in cui può svolgere le attività as
 
 Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
 
-<img src="/img/patient.png" class="absolute right-60 top-90 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+<img src="/img/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area paziente" />
 
 ---
 layout: default
 name: insights
+class: relative
 ---
 
 
@@ -252,7 +241,7 @@ Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
 
 L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
 
-<img src="/img/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+<img src="/img/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata questionari" />
 
 ---
 layout: default
@@ -291,7 +280,7 @@ class: bg-[#4F46E5] text-white
   <div class="text-3xl font-light mb-12 text-center max-w-2xl leading-relaxed">
     Arianne è un prodotto <span class="highlight">Whattadata</span>, spin off dell’<span class="highlight">Università degli Studi di Milano Bicocca</span>
   </div>
-  <img src="/img/whattadata-logo.svg" class="h-48" />
+  <img src="/img/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />
 </div>
 
 <style scoped>
