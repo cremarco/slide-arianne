@@ -1,6 +1,7 @@
 ---
 theme: seriph
 title: Arianne - L'ecosistema digitale per la salute mentale
+name: intro
 class: text-center
 drawings:
   persist: false
@@ -11,13 +12,21 @@ fonts:
   serif: Inter
 ---
 
-<div class="w-full h-full absolute inset-0 flex flex-col items-center justify-center animated-bg">
-  <div class="absolute top-6 right-6">
+<div class="w-full h-full absolute inset-0 flex flex-col items-center justify-center animated-bg overflow-hidden">
+  <div class="ribbons-container">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+  </div>
+  <div class="absolute top-6 right-6 z-20">
     <img src="/img/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center z-10">
     <img src="/img/arianne-logo.png" class="h-48 mb-8" alt="Arianne" />
-    <h2 class="text-white text-3xl font-light tracking-wide">L'ecosistema digitale per la salute mentale</h2>
+    <div class="text-white text-3xl font-light tracking-wide" mdc>
+      L'ecosistema digitale per la salute mentale
+    </div>
   </div>
 </div>
 
@@ -29,20 +38,82 @@ fonts:
 }
 
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Ribbons Container */
+.ribbons-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Base ribbon style */
+.ribbon {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 60px;
+  border-radius: 30px 30px 0 0;
+}
+
+/* Ribbon 1 - orange-600 */
+.ribbon-1 {
+  background: #ea580c;
+  bottom: 120px;
+  height: 50px;
+  animation: ribbon-wave 18s ease-in-out infinite;
+}
+
+/* Ribbon 2 - orange-700 */
+.ribbon-2 {
+  background: #c2410c;
+  bottom: 80px;
+  height: 55px;
+  animation: ribbon-wave 22s ease-in-out infinite -3s;
+}
+
+/* Ribbon 3 - orange-800 */
+.ribbon-3 {
+  background: #9a3412;
+  bottom: 40px;
+  height: 60px;
+  animation: ribbon-wave 20s ease-in-out infinite -5s;
+}
+
+/* Ribbon 4 - orange-900 */
+.ribbon-4 {
+  background: #7c2d12;
+  bottom: 0;
+  height: 65px;
+  animation: ribbon-wave 16s ease-in-out infinite -2s;
+}
+
+@keyframes ribbon-wave {
+  0%, 100% { 
+    transform: translateX(0) translateY(0) skewY(-1deg);
   }
-  50% {
-    background-position: 100% 50%;
+  25% { 
+    transform: translateX(3%) translateY(-8px) skewY(0.5deg);
   }
-  100% {
-    background-position: 0% 50%;
+  50% { 
+    transform: translateX(0) translateY(0) skewY(1deg);
+  }
+  75% { 
+    transform: translateX(-3%) translateY(-5px) skewY(-0.5deg);
   }
 }
 </style>
 
 ---
 layout: default
+name: solution
 ---
 
 Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico
@@ -56,12 +127,51 @@ Una piattaforma digitale per terapeuti e pazienti
 - Dati clinici ordinati e consultabili nel tempo
 
 
-<img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10" />
+<img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" />
 
-<img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+<style>
+.logo-animation {
+  animation: logo-entry 0.8s ease-out forwards;
+}
+
+@keyframes logo-entry {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.computer-image {
+  animation: slide-in-right 1s ease-out forwards 0.3s; /* Added delay to sync with logo */
+}
+</style>
+
+<img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" />
+
+<style>
+.computer-image {
+  animation: slide-in-right 1s ease-out forwards;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translate(100%, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+</style>
 
 ---
 layout: default
+name: project
 ---
 
 # Il progetto
@@ -79,6 +189,7 @@ Prevenzione e Identificazione Precoce
 
 ---
 layout: default
+name: system
 ---
 
 # tutto in un unico sistema
@@ -87,6 +198,7 @@ Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amminist
 
 ---
 layout: default
+name: activities
 ---
 
 # Attività tra le sedute
@@ -96,6 +208,7 @@ layout: default
 
 ---
 layout: default
+name: insights
 ---
 
 # Insight leggibile
@@ -104,6 +217,7 @@ layout: default
 
 ---
 layout: default
+name: ai
 ---
 
 # AI & Analytics
@@ -112,6 +226,7 @@ Scrivere qualcosa
 
 ---
 layout: default
+name: competitors
 ---
 
 # Competitors
@@ -120,6 +235,7 @@ Tesi
 
 ---
 layout: default
+name: business
 ---
 
 # Modello di business
@@ -128,16 +244,56 @@ Marco
 
 ---
 layout: default
+name: spinoff
+class: bg-[#4F46E5] text-white
 ---
 
-# Spinoff
+<div class="w-full h-full flex flex-col items-center justify-center p-12">
+  <div class="text-3xl font-light mb-12 text-center max-w-2xl leading-relaxed">
+    Arianne è un prodotto <span class="highlight">Whattadata</span>, spin off dell’<span class="highlight">Università degli Studi di Milano Bicocca</span>
+  </div>
+  <img src="/img/whattadata-logo.svg" class="h-48" />
+</div>
 
-Marco
+<style scoped>
+.highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
+  /* Create a stacking context so z-index -1 stays within the span */
+  z-index: 1;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 45%;
+  background-color: #A3E635;
+  /* Stay behind the text but inside the .highlight stacking context */
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: highlight-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.5s;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(163, 230, 53, 0.3);
+}
+
+@keyframes highlight-draw {
+  to {
+    transform: scaleX(1);
+  }
+}
+</style>
 
 ---
 layout: default
+name: conclusion
 ---
 
-# Sldie conclusiva
+# Slide conclusiva
 
 Marco
