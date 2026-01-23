@@ -68,7 +68,7 @@ fonts:
   background: #ea580c;
   bottom: 120px;
   height: 50px;
-  animation: ribbon-wave 18s ease-in-out infinite;
+  animation: ribbon-wave 15s ease-in-out infinite;
 }
 
 /* Ribbon 2 - orange-700 */
@@ -76,7 +76,7 @@ fonts:
   background: #c2410c;
   bottom: 80px;
   height: 55px;
-  animation: ribbon-wave 22s ease-in-out infinite -3s;
+  animation: ribbon-wave 18s ease-in-out infinite -3s;
 }
 
 /* Ribbon 3 - orange-800 */
@@ -84,7 +84,7 @@ fonts:
   background: #9a3412;
   bottom: 40px;
   height: 60px;
-  animation: ribbon-wave 20s ease-in-out infinite -5s;
+  animation: ribbon-wave 16s ease-in-out infinite -5s;
 }
 
 /* Ribbon 4 - orange-900 */
@@ -92,7 +92,7 @@ fonts:
   background: #7c2d12;
   bottom: 0;
   height: 65px;
-  animation: ribbon-wave 16s ease-in-out infinite -2s;
+  animation: ribbon-wave 13s ease-in-out infinite -2s;
 }
 
 @keyframes ribbon-wave {
@@ -112,9 +112,12 @@ fonts:
 </style>
 
 ---
-layout: default
 name: solution
 ---
+
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+
+<div class="px-14 py-10">
 
 Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico
 
@@ -126,6 +129,7 @@ Una piattaforma digitale per terapeuti e pazienti
 - Sistemi per guidare i pazienti tra le sedute
 - Dati clinici ordinati e consultabili nel tempo
 
+</div>
 
 <img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" />
 
@@ -146,7 +150,7 @@ Una piattaforma digitale per terapeuti e pazienti
 }
 
 .computer-image {
-  animation: slide-in-right 1s ease-out forwards 0.3s; /* Added delay to sync with logo */
+  animation: slide-in-right 1s ease-out forwards 0.3s;
 }
 </style>
 
@@ -168,6 +172,8 @@ Una piattaforma digitale per terapeuti e pazienti
   }
 }
 </style>
+
+</div>
 
 ---
 layout: default
@@ -196,24 +202,57 @@ name: system
 
 Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amministrativo, più cura
 
+<img src="/img/platform.png" class="absolute top-80 -translate-y-1/2 drop-shadow-2xl rounded-xl " />
+
 ---
 layout: default
-name: activities
+name: activities-pro
 ---
 
-# Attività tra le sedute
+# Attività tra le sedute - professionisti
 
-<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
+All’interno della piattaforma, il professionista dispone di un’area dedicata per progettare e monitorare le attività terapeutiche
 
+- Assegnazione di compiti personalizzati (diari, esercizi, questionari)
+- Definizione degli obiettivi terapeutici tra una seduta e l’altra
+- Monitoraggio strutturato dei progressi del paziente nel tempo
+
+Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
+<img src="/img/therapist.png" class="absolute right-60 top-90 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
+
+---
+layout: default
+name: activities-patient
+---
+
+# Attività tra le sedute - pazienti
+
+Il paziente ha accesso a un’area dedicata in cui può svolgere le attività assegnate dal terapeuta in modo semplice e guidato
+
+- Compilazione di diari ed esercizi direttamente in piattaforma
+- Somministrazione di questionari e test clinici
+- Continuità del percorso terapeutico anche tra le sedute
+
+Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
+
+<img src="/img/patient.png" class="absolute right-60 top-90 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
 
 ---
 layout: default
 name: insights
 ---
 
-# Insight leggibile
 
-<!-- ividere la slide in due con parte per pazienti e parte per terapeuti-->
+# Questionari con insight leggibili
+Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
+
+- Risultati strutturati, confrontabili ed esportabili
+- Scoring automatico e visualizzazione dei trend nel tempo
+- Supporto concreto a follow-up, prevenzione e decisioni cliniche
+
+L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
+
+<img src="/img/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" />
 
 ---
 layout: default
