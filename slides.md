@@ -1,10 +1,10 @@
 ---
 name: intro
-layout: cover
-class: text-center relative
+layout: default
+class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 flex flex-col items-center justify-center animated-bg overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg overflow-hidden">
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
@@ -14,8 +14,8 @@ class: text-center relative
   <div class="absolute top-6 right-6 z-20">
     <img src="/img/1/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
-  <div class="flex flex-col items-center z-10">
-    <img src="/img/1/arianne-logo.png" class="h-48 mb-8" alt="Arianne" />
+  <div class="absolute top-[40px] left-[54px] z-10 text-left">
+    <img src="/img/1/arianne-logo.png" class="h-32 mb-8" alt="Arianne" />
     <div class="text-white text-3xl font-light tracking-wide" mdc>
       L'ecosistema digitale per la salute mentale
     </div>
@@ -106,10 +106,10 @@ class: text-center relative
 ---
 name: solution
 layout: default
-class: relative overflow-hidden
+class: relative overflow-hidden p-0
 ---
 
-<img src="/img/2/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" alt="Logo Arianne" />
+<img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
 
 <div class="px-14 py-10">
 
@@ -125,7 +125,7 @@ Una piattaforma digitale per terapeuti e pazienti
 
 </div>
 
-<img src="/img/2/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" alt="Schermata home Arianne" />
+<img src="/img/2/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl computer-image" alt="Schermata home Arianne" />
 
 <style scoped>
 .logo-animation {
@@ -227,7 +227,7 @@ All’interno della piattaforma, il professionista dispone di un’area dedicata
 - Monitoraggio strutturato dei progressi del paziente nel tempo
 
 Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
-<img src="/img/5/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area terapeuta" />
+<img src="/img/5/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl" alt="Schermata area terapeuta" />
 
 ---
 layout: default
@@ -245,7 +245,7 @@ Il paziente ha accesso a un’area dedicata in cui può svolgere le attività as
 
 Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
 
-<img src="/img/6/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area paziente" />
+<img src="/img/6/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl" alt="Schermata area paziente" />
 
 ---
 layout: default
@@ -263,7 +263,7 @@ Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
 
 L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
 
-<img src="/img/7/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata questionari" />
+<img src="/img/7/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl" alt="Schermata questionari" />
 
 ---
 layout: default
