@@ -163,6 +163,7 @@ Una piattaforma digitale per terapeuti e pazienti
 ---
 layout: default
 name: project
+class: relative
 ---
 
 # Il progetto
@@ -178,7 +179,23 @@ Supporto continuo
 Prevenzione e Identificazione Precoce
 - Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
 
-<img src="/img/3/anna-rita-pc.jpg" class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px]" alt="Anna Rita" />
+<!-- Dummy v-click to register a step so nav.clicks increments -->
+<div v-click class="hidden"></div>
+
+<div class="absolute inset-0 z-50 flex pointer-events-none">
+  <img 
+    src="/img/3/enzo-pc.png" 
+    class="w-1/2 h-full object-cover transition-transform duration-1000 ease-in-out"
+    :class="$slidev.nav.clicks > 0 ? '-translate-x-full' : 'translate-x-0'"
+    alt="Enzo"
+  />
+  <img 
+    src="/img/3/anna-rita-pc.jpg" 
+    class="w-1/2 h-full object-cover transition-transform duration-1000 ease-in-out"
+    :class="$slidev.nav.clicks > 0 ? 'translate-x-full' : 'translate-x-0'"
+    alt="Anna Rita"
+  />
+</div>
 
 ---
 layout: default
