@@ -12,10 +12,10 @@ class: text-center relative
     <div class="ribbon ribbon-4"></div>
   </div>
   <div class="absolute top-6 right-6 z-20">
-    <img src="/img/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
+    <img src="/img/1/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
   <div class="flex flex-col items-center z-10">
-    <img src="/img/arianne-logo.png" class="h-48 mb-8" alt="Arianne" />
+    <img src="/img/1/arianne-logo.png" class="h-48 mb-8" alt="Arianne" />
     <div class="text-white text-3xl font-light tracking-wide" mdc>
       L'ecosistema digitale per la salute mentale
     </div>
@@ -109,7 +109,7 @@ layout: default
 class: relative overflow-hidden
 ---
 
-<img src="/img/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" alt="Logo Arianne" />
+<img src="/img/2/arianne-logo-orange.svg" class="absolute top-8 left-8 h-10 logo-animation" alt="Logo Arianne" />
 
 <div class="px-14 py-10">
 
@@ -125,7 +125,7 @@ Una piattaforma digitale per terapeuti e pazienti
 
 </div>
 
-<img src="/img/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" alt="Schermata home Arianne" />
+<img src="/img/2/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50 computer-image" alt="Schermata home Arianne" />
 
 <style scoped>
 .logo-animation {
@@ -178,7 +178,7 @@ Supporto continuo
 Prevenzione e Identificazione Precoce
 - Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
 
-<img src="/img/anna-rita.jpg" class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px]" alt="Anna Rita" />
+<img src="/img/3/anna-rita-pc.jpg" class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px]" alt="Anna Rita" />
 
 ---
 layout: default
@@ -205,7 +205,7 @@ All’interno della piattaforma, il professionista dispone di un’area dedicata
 - Monitoraggio strutturato dei progressi del paziente nel tempo
 
 Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
-<img src="/img/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area terapeuta" />
+<img src="/img/5/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area terapeuta" />
 
 ---
 layout: default
@@ -223,7 +223,7 @@ Il paziente ha accesso a un’area dedicata in cui può svolgere le attività as
 
 Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
 
-<img src="/img/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area paziente" />
+<img src="/img/6/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata area paziente" />
 
 ---
 layout: default
@@ -241,7 +241,7 @@ Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
 
 L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
 
-<img src="/img/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata questionari" />
+<img src="/img/7/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl rounded-xl border-4 border-white/50" alt="Schermata questionari" />
 
 ---
 layout: default
@@ -280,7 +280,7 @@ class: bg-[#4F46E5] text-white
   <div class="text-3xl font-light mb-12 text-center max-w-2xl leading-relaxed">
     Arianne è un prodotto <span class="highlight">Whattadata</span>, spin off dell’<span class="highlight">Università degli Studi di Milano Bicocca</span>
   </div>
-  <img src="/img/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />
+  <img src="/img/11/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />
 </div>
 
 <style scoped>
