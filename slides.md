@@ -113,7 +113,7 @@ class: relative overflow-hidden p-0
 
 <div class="px-14 pt-32 pb-10">
 
-<div class="text-xl font-medium leading-relaxed mb-6 text-gray-600">
+<div class="text-xl font-medium leading-relaxed mb-6 text-gray-600 dark:text-gray-200">
   Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico.
   <br />
   <span class="text-orange-600 font-bold">Una piattaforma digitale per terapeuti e pazienti.</span>
@@ -122,23 +122,23 @@ class: relative overflow-hidden p-0
 <ul class="space-y-3">
   <li class="flex items-center">
     <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700">Un sistema per la gestione dei pazienti</span>
+    <span class="text-lg text-gray-700 dark:text-gray-200">Un sistema per la gestione dei pazienti</span>
   </li>
   <li class="flex items-center">
     <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700">Possibilità di effettuare sedute on-line</span>
+    <span class="text-lg text-gray-700 dark:text-gray-200">Possibilità di effettuare sedute on-line</span>
   </li>
   <li class="flex items-center">
     <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700">Possibilità di assegnare compiti</span>
+    <span class="text-lg text-gray-700 dark:text-gray-200">Possibilità di assegnare compiti</span>
   </li>
   <li class="flex items-center">
     <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700">Sistemi per guidare i pazienti tra le sedute</span>
+    <span class="text-lg text-gray-700 dark:text-gray-200">Sistemi per guidare i pazienti tra le sedute</span>
   </li>
   <li class="flex items-center">
     <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700">Dati clinici ordinati e consultabili nel tempo</span>
+    <span class="text-lg text-gray-700 dark:text-gray-200">Dati clinici ordinati e consultabili nel tempo</span>
   </li>
 </ul>
 
