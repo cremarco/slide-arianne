@@ -1,0 +1,4 @@
+/* Global styles */
+.slidev-layout {
+  @apply bg-gray-50;
+}

@@ -170,14 +170,19 @@ class: relative
 
 La piattaforma è sviluppata per terapeuti e pazienti 
 
-Collaborazione Terapeuta-Paziente
-- Sistema progettato per facilitare la collaborazione tra il terapeuta e il paziente con interfacce dedicate
+<div class="grid grid-cols-3 gap-6 mt-12 text-left">
+  <ProjectCard title="Collaborazione Terapeuta-Paziente" icon="i-heroicons-users">
+    Sistema progettato per facilitare la collaborazione tra il terapeuta e il paziente con interfacce dedicate
+  </ProjectCard>
 
-Supporto continuo
-- funzionalità per supportare il paziente tra le sedute attraverso compiti e test
+  <ProjectCard title="Supporto continuo" icon="i-heroicons-chart-bar">
+    funzionalità per supportare il paziente tra le sedute attraverso compiti e test
+  </ProjectCard>
 
-Prevenzione e Identificazione Precoce
-- Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
+  <ProjectCard title="Prevenzione e Identificazione Precoce" icon="i-heroicons-shield-check">
+    Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
+  </ProjectCard>
+</div>
 
 <!-- Dummy v-click to register a step so nav.clicks increments -->
 <div v-click class="hidden"></div>
