@@ -111,17 +111,36 @@ class: relative overflow-hidden p-0
 
 <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
 
-<div class="px-14 py-10">
+<div class="px-14 pt-32 pb-10">
 
-Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico
+<div class="text-xl font-medium leading-relaxed mb-6 text-gray-600">
+  Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico.
+  <br />
+  <span class="text-orange-600 font-bold">Una piattaforma digitale per terapeuti e pazienti.</span>
+</div>
 
-Una piattaforma digitale per terapeuti e pazienti
-
-- Un sistema per la gestione dei pazienti
-- Possibilità di effettuare sedute on-line
-- Possibilità di assegnare compiti
-- Sistemi per guidare i pazienti tra le sedute
-- Dati clinici ordinati e consultabili nel tempo
+<ul class="space-y-3">
+  <li class="flex items-center">
+    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
+    <span class="text-lg text-gray-700">Un sistema per la gestione dei pazienti</span>
+  </li>
+  <li class="flex items-center">
+    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
+    <span class="text-lg text-gray-700">Possibilità di effettuare sedute on-line</span>
+  </li>
+  <li class="flex items-center">
+    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
+    <span class="text-lg text-gray-700">Possibilità di assegnare compiti</span>
+  </li>
+  <li class="flex items-center">
+    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
+    <span class="text-lg text-gray-700">Sistemi per guidare i pazienti tra le sedute</span>
+  </li>
+  <li class="flex items-center">
+    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
+    <span class="text-lg text-gray-700">Dati clinici ordinati e consultabili nel tempo</span>
+  </li>
+</ul>
 
 </div>
 
