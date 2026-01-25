@@ -131,7 +131,12 @@ class: relative overflow-hidden p-0
   <div class="w-2/5 relative flex items-center justify-start h-full">
     <!-- Image wrapper shifted right to be partially off-screen -->
     <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[150px]">
-      <img src="/img/2/home.png" class="w-full relative z-10" alt="Schermata home Arianne" />
+      <div class="relative w-full z-10">
+        <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
+        <div class="absolute top-[2.8%] left-[2.6%] w-[92.5%] h-[64%] overflow-hidden z-30">
+          <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top" alt="Schermata home Arianne" />
+        </div>
+      </div>
       <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
     </div>
   </div>
