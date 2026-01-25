@@ -183,12 +183,33 @@ class: relative
 
 La piattaforma è sviluppata per terapeuti e pazienti 
 
+<!-- Dummy v-click to register a step so nav.clicks increments (Curtain open) -->
+<div v-click class="hidden"></div>
+
 <div class="grid grid-cols-3 gap-6 mt-12 text-left">
   <ProjectCard
     v-for="card in projectCards"
     :key="card.title"
     :title="card.title"
     :icon="card.icon"
+    v-click
+    :v-motion="{
+      initial: { 
+        y: 50, 
+        opacity: 0, 
+        scale: 0.9 
+      },
+      enter: { 
+        y: 0, 
+        opacity: 1, 
+        scale: 1, 
+        transition: { 
+          type: 'spring', 
+          stiffness: 250, 
+          damping: 20 
+        } 
+      }
+    }"
   >
     {{ card.description }}
   </ProjectCard>
@@ -216,9 +237,6 @@ const projectCards = [
   },
 ]
 </script>
-
-<!-- Dummy v-click to register a step so nav.clicks increments -->
-<div v-click class="hidden"></div>
 
 <div class="absolute inset-0 z-50 flex pointer-events-none">
   <img 
