@@ -263,6 +263,36 @@ class: relative
 
 Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amministrativo, più cura
 
+<div class="relative mt-8 flex justify-center items-center gap-6">
+  <img 
+    src="/img/4/desktop-1.png" 
+    class="w-[45%]"
+    v-click
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+  />
+  <img 
+    src="/img/4/desktop-2.png" 
+    class="w-[45%]"
+    v-click
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+  />
+  
+  <div class="absolute inset-0 flex justify-center items-center z-10 pointer-events-none">
+    <img 
+      src="/img/4/tablet.png" 
+      class="w-[30%]"
+      v-click
+      v-motion
+      :initial="{ y: 110, opacity: 0, scale: 0.9 }"
+      :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    />
+  </div>
+</div>
+
 ---
 layout: default
 name: activities-pro
