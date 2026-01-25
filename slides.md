@@ -176,7 +176,7 @@ const solutionFeatures = [
 ---
 layout: default
 name: project
-class: relative
+class: relative h-full flex flex-col
 ---
 
 # Il progetto
@@ -186,7 +186,7 @@ La piattaforma è sviluppata per terapeuti e pazienti
 <!-- Dummy v-click to register a step so nav.clicks increments (Curtain open) -->
 <div v-click class="hidden"></div>
 
-<div class="grid grid-cols-3 gap-6 mt-12 text-left">
+<div class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
     v-for="card in projectCards"
     :key="card.title"
