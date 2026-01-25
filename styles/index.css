@@ -89,7 +89,7 @@
   width: 1.2em;
   height: 1.2em;
   @apply i-heroicons-check;
-  background-color: currentColor;
+  background-color: #006279;
 }
 
 /* Use for HTML blocks that must match the default markdown body text. */
