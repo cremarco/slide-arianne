@@ -66,10 +66,30 @@
   margin: 0 0 var(--slide-body-spacing) 0;
 }
 
-.slidev-layout ul,
 .slidev-layout ol {
   margin: 0 0 var(--slide-body-spacing) 0;
   padding-left: 1.25rem;
+}
+
+.slidev-layout ul {
+  margin: 0 0 var(--slide-body-spacing) 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.slidev-layout ul li {
+  position: relative;
+}
+
+.slidev-layout ul:not(.feature-list) li::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.2em;
+  width: 1.2em;
+  height: 1.2em;
+  @apply i-heroicons-check;
+  background-color: currentColor;
 }
 
 /* Use for HTML blocks that must match the default markdown body text. */

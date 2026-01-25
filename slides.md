@@ -119,9 +119,8 @@ class: relative overflow-hidden p-0
       <br />
       <strong>Una piattaforma digitale per terapeuti e pazienti.</strong>
     </div>
-    <ul class="feature-list">
-      <li v-for="feature in solutionFeatures" :key="feature" class="feature-item">
-        <div class="i-heroicons-check-circle feature-icon"></div>
+    <ul class="space-y-3">
+      <li v-for="feature in solutionFeatures" :key="feature">
         <span>{{ feature }}</span>
       </li>
     </ul>
@@ -133,8 +132,8 @@ class: relative overflow-hidden p-0
     <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[150px]">
       <div class="relative w-full z-10">
         <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
-        <div class="absolute top-[2.8%] left-[2.6%] w-[92.5%] h-[64%] overflow-hidden z-30">
-          <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top" alt="Schermata home Arianne" />
+        <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+          <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top scrolling-image" alt="Schermata home Arianne" />
         </div>
       </div>
       <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
@@ -160,6 +159,22 @@ const solutionFeatures = [
 .computer-image {
   opacity: 0;
   animation: slide-in-right 1s ease-out forwards 0.3s;
+}
+
+.scrolling-image {
+  animation: scroll-vertical 40s ease-in-out infinite alternate;
+}
+
+@keyframes scroll-vertical {
+  0% {
+    object-position: top;
+  }
+  15% {
+    object-position: top;
+  }
+  100% {
+    object-position: bottom;
+  }
 }
 
 @keyframes logo-entry {
