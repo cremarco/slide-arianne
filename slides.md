@@ -119,32 +119,26 @@ class: relative overflow-hidden p-0
   <span class="text-orange-600 font-bold">Una piattaforma digitale per terapeuti e pazienti.</span>
 </div>
 
-<ul class="space-y-3">
-  <li class="flex items-center">
-    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700 dark:text-gray-200">Un sistema per la gestione dei pazienti</span>
-  </li>
-  <li class="flex items-center">
-    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700 dark:text-gray-200">Possibilità di effettuare sedute on-line</span>
-  </li>
-  <li class="flex items-center">
-    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700 dark:text-gray-200">Possibilità di assegnare compiti</span>
-  </li>
-  <li class="flex items-center">
-    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700 dark:text-gray-200">Sistemi per guidare i pazienti tra le sedute</span>
-  </li>
-  <li class="flex items-center">
-    <div class="i-heroicons-check-circle-20-solid text-orange-500 mr-3 text-2xl flex-shrink-0"></div>
-    <span class="text-lg text-gray-700 dark:text-gray-200">Dati clinici ordinati e consultabili nel tempo</span>
+<ul class="feature-list">
+  <li v-for="feature in solutionFeatures" :key="feature" class="feature-item">
+    <div class="i-heroicons-check-circle-20-solid feature-icon"></div>
+    <span>{{ feature }}</span>
   </li>
 </ul>
 
 </div>
 
-<img src="/img/2/home.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl computer-image" alt="Schermata home Arianne" />
+<img src="/img/2/home.png" class="slide-image-right-lg computer-image" alt="Schermata home Arianne" />
+
+<script setup lang="ts">
+const solutionFeatures = [
+  'Un sistema per la gestione dei pazienti',
+  'Possibilità di effettuare sedute on-line',
+  'Possibilità di assegnare compiti',
+  'Sistemi per guidare i pazienti tra le sedute',
+  'Dati clinici ordinati e consultabili nel tempo',
+]
+</script>
 
 <style scoped>
 .logo-animation {
@@ -190,18 +184,38 @@ class: relative
 La piattaforma è sviluppata per terapeuti e pazienti 
 
 <div class="grid grid-cols-3 gap-6 mt-12 text-left">
-  <ProjectCard title="Collaborazione Terapeuta-Paziente" icon="i-heroicons-users">
-    Sistema progettato per facilitare la collaborazione tra il terapeuta e il paziente con interfacce dedicate
-  </ProjectCard>
-
-  <ProjectCard title="Supporto continuo" icon="i-heroicons-chart-bar">
-    funzionalità per supportare il paziente tra le sedute attraverso compiti e test
-  </ProjectCard>
-
-  <ProjectCard title="Prevenzione e Identificazione Precoce" icon="i-heroicons-shield-check">
-    Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto
+  <ProjectCard
+    v-for="card in projectCards"
+    :key="card.title"
+    :title="card.title"
+    :icon="card.icon"
+  >
+    {{ card.description }}
   </ProjectCard>
 </div>
+
+<script setup lang="ts">
+const projectCards = [
+  {
+    title: 'Collaborazione Terapeuta-Paziente',
+    icon: 'i-heroicons-users',
+    description:
+      'Sistema progettato per facilitare la collaborazione tra il terapeuta e il paziente con interfacce dedicate',
+  },
+  {
+    title: 'Supporto continuo',
+    icon: 'i-heroicons-chart-bar',
+    description:
+      'funzionalità per supportare il paziente tra le sedute attraverso compiti e test',
+  },
+  {
+    title: 'Prevenzione e Identificazione Precoce',
+    icon: 'i-heroicons-shield-check',
+    description:
+      'Particolare attenzione alla prevenzione e al tracciamento del piano terapeutico più adatto',
+  },
+]
+</script>
 
 <!-- Dummy v-click to register a step so nav.clicks increments -->
 <div v-click class="hidden"></div>
@@ -246,7 +260,7 @@ All’interno della piattaforma, il professionista dispone di un’area dedicata
 - Monitoraggio strutturato dei progressi del paziente nel tempo
 
 Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
-<img src="/img/5/therapist.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl" alt="Schermata area terapeuta" />
+<img src="/img/5/therapist.png" class="slide-image-right-md" alt="Schermata area terapeuta" />
 
 ---
 layout: default
@@ -264,7 +278,7 @@ Il paziente ha accesso a un’area dedicata in cui può svolgere le attività as
 
 Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
 
-<img src="/img/6/patient.png" class="absolute right-60 top-1/2 -translate-y-1/2 w-[600px] drop-shadow-2xl" alt="Schermata area paziente" />
+<img src="/img/6/patient.png" class="slide-image-right-md" alt="Schermata area paziente" />
 
 ---
 layout: default
@@ -282,7 +296,7 @@ Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
 
 L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
 
-<img src="/img/7/iMac.png" class="absolute -right-36 top-1/2 -translate-y-1/2 w-[650px] drop-shadow-2xl" alt="Schermata questionari" />
+<img src="/img/7/iMac.png" class="slide-image-right-lg" alt="Schermata questionari" />
 
 ---
 layout: default

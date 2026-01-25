@@ -1,4 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Global styles */
 .slidev-layout {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+}
+
+.feature-list {
+  @apply space-y-3 text-lg text-gray-700 dark:text-gray-200;
+}
+
+.feature-item {
+  @apply flex items-center;
+}
+
+.feature-icon {
+  @apply mr-3 flex-shrink-0 text-2xl text-orange-500;
+}
+
+.slide-image-right-lg {
+  @apply absolute -right-36 top-1/2 w-[650px] -translate-y-1/2 drop-shadow-2xl;
+}
+
+.slide-image-right-md {
+  @apply absolute right-60 top-1/2 w-[600px] -translate-y-1/2 drop-shadow-2xl;
 }
