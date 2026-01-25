@@ -16,7 +16,8 @@ class: relative p-0
   </div>
   <div class="absolute top-[40px] left-[54px] z-10 text-left">
     <img src="/img/1/arianne-logo.png" class="h-32 mb-8" alt="Arianne" />
-    <div class="text-white text-3xl font-light tracking-wide" mdc>
+    <!-- Body copy uses slide-text for consistent sizing and rhythm. -->
+    <div class="slide-text text-white" mdc>
       L'ecosistema digitale per la salute mentale
     </div>
   </div>
@@ -109,26 +110,32 @@ layout: default
 class: relative overflow-hidden p-0
 ---
 
-<img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
+<div class="flex h-full">
+  <!-- Text Column (3/5) -->
+  <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
+    <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
+    <div class="slide-text mb-6">
+      Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico.
+      <br />
+      <strong>Una piattaforma digitale per terapeuti e pazienti.</strong>
+    </div>
+    <ul class="feature-list">
+      <li v-for="feature in solutionFeatures" :key="feature" class="feature-item">
+        <div class="i-heroicons-check-circle feature-icon"></div>
+        <span>{{ feature }}</span>
+      </li>
+    </ul>
+  </div>
 
-<div class="px-14 pt-32 pb-10">
-
-<div class="text-xl font-medium leading-relaxed mb-6 text-gray-600 dark:text-gray-200">
-  Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico.
-  <br />
-  <span class="text-orange-600 font-bold">Una piattaforma digitale per terapeuti e pazienti.</span>
+  <!-- Image Column (2/5) -->
+  <div class="w-2/5 relative flex items-center justify-start h-full">
+    <!-- Image wrapper shifted right to be partially off-screen -->
+    <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[150px]">
+      <img src="/img/2/home.png" class="w-full relative z-10" alt="Schermata home Arianne" />
+      <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
+    </div>
+  </div>
 </div>
-
-<ul class="feature-list">
-  <li v-for="feature in solutionFeatures" :key="feature" class="feature-item">
-    <div class="i-heroicons-check-circle-20-solid feature-icon"></div>
-    <span>{{ feature }}</span>
-  </li>
-</ul>
-
-</div>
-
-<img src="/img/2/home.png" class="slide-image-right-lg computer-image" alt="Schermata home Arianne" />
 
 <script setup lang="ts">
 const solutionFeatures = [
@@ -163,11 +170,11 @@ const solutionFeatures = [
 
 @keyframes slide-in-right {
   from {
-    transform: translate(100%, -50%);
+    transform: translateX(100%);
     opacity: 0;
   }
   to {
-    transform: translate(0, -50%);
+    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -186,6 +193,7 @@ La piattaforma è sviluppata per terapeuti e pazienti
 <!-- Dummy v-click to register a step so nav.clicks increments (Curtain open) -->
 <div v-click class="hidden"></div>
 
+<!-- ProjectCard inherits slide text styles; avoid per-card typography overrides. -->
 <div class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
     v-for="card in projectCards"
@@ -383,11 +391,12 @@ Marco
 ---
 layout: default
 name: spinoff
-class: bg-[#4F46E5] text-white
+class: bg-[#4F46E5] slide-theme-invert
 ---
 
+<!-- Use slide-theme-invert for dark backgrounds so text stays consistent. -->
 <div class="w-full h-full flex flex-col items-center justify-center p-12">
-  <div class="text-3xl font-light mb-12 text-center max-w-2xl leading-relaxed">
+  <div class="slide-text mb-12 text-center max-w-2xl">
     Arianne è un prodotto <span class="highlight">Whattadata</span>, spin off dell’<span class="highlight">Università degli Studi di Milano Bicocca</span>
   </div>
   <img src="/img/11/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />

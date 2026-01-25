@@ -15,10 +15,10 @@ defineProps<{
     
     <!-- Content -->
     <div class="relative z-10 w-full">
-      <div class="mb-4 leading-tight font-semibold text-xl text-gray-900 dark:text-gray-100 min-h-[3.5rem]">
+      <div class="mb-4 min-h-[3.5rem] slide-card-title">
         {{ title }}
       </div>
-      <div class="leading-relaxed text-left text-sm text-gray-600 dark:text-gray-300">
+      <div class="slide-text text-left">
         <slot />
       </div>
     </div>

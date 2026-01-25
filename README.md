@@ -9,3 +9,31 @@ To start the slide show:
 Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
+
+## Regole tipografiche per le slide
+
+- Titoli: usare sempre `#` (h1). Non aggiungere classi `text-*`, `font-*`, `tracking-*`, `leading-*` o colori ai titoli.
+- Testo: usare lo stile base. Per blocchi HTML usare `class="slide-text"` ed evitare classi che cambiano dimensione, font, peso, line-height o colore.
+- Enfasi: usare `<strong>`; niente colori custom.
+- Card: usare `ProjectCard` senza sovrascrivere dimensioni/colore; il testo segue lo stile base.
+- Eccezioni: per slide a fondo scuro usare `slide-theme-invert` sul contenitore mantenendo `slide-text` per dimensioni e line-height.
+- Aggiornamenti: se serve cambiare lo stile globale, modificare solo `styles/index.css` (variabili `--slide-*`).
+
+## Slide 2 come prototipo
+
+La slide "solution" (slide 2) e' il riferimento per le slide di contenuto con testo + lista + immagine a destra. Per crearne una nuova:
+
+- Usa `layout: default` e `class: relative overflow-hidden p-0`.
+- Contenuto principale dentro un wrapper con padding (`px-14 pt-32 pb-10`).
+- Testo a sisnistra con `class="slide-text"`.
+- Immagine a destra con `slide-image-right-lg` o `slide-image-right-md`.
+
+## Slide 3 come prototipo
+
+La slide "project" (slide 3) e' il riferimento per le slide con titolo + griglia di card:
+
+- Usa `layout: default` e `class: relative h-full flex flex-col`.
+- Titolo con `#` (h1) senza classi tipografiche custom.
+- Griglia card con `grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center`.
+- Card realizzate con `ProjectCard` e contenuto via `v-for` su un array locale.
+- Testo nelle card: usa solo `ProjectCard` (gia' uniformato).

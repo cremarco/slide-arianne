@@ -3,15 +3,107 @@
 /* Global styles */
 .slidev-layout {
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+  @apply bg-gray-50 dark:bg-gray-950;
+  /* Typography tokens shared by titles, body text, and cards. */
+  --slide-title-size: 2.75rem;
+  --slide-title-line-height: 1.1;
+  --slide-title-weight: 400;
+  --slide-title-color: #0f172a;
+  --slide-title-letter-spacing: -0.02em;
+  --slide-title-margin-bottom: 1.25rem;
+  --slide-body-size: 1.05rem;
+  --slide-body-line-height: 1.6;
+  --slide-body-weight: 300;
+  --slide-body-color: #334155;
+  --slide-body-spacing: 0.9rem;
+  font-size: var(--slide-body-size);
+  line-height: var(--slide-body-line-height);
+  font-weight: var(--slide-body-weight);
+  color: var(--slide-body-color);
+  padding: 2.75rem 3.5rem;
+}
+
+/* Allow full-bleed layouts to opt out of default padding. */
+.slidev-layout.p-0 {
+  padding: 0;
+}
+
+.dark .slidev-layout {
+  --slide-title-color: #f8fafc;
+  --slide-body-color: #e2e8f0;
+}
+
+/* Apply when the slide background is dark but layout stays default. */
+.slidev-layout.slide-theme-invert {
+  --slide-title-color: #f8fafc;
+  --slide-body-color: #f8fafc;
+  color: var(--slide-body-color);
+}
+
+.slidev-layout h1 {
+  font-size: var(--slide-title-size);
+  line-height: var(--slide-title-line-height);
+  font-weight: var(--slide-title-weight);
+  color: var(--slide-title-color);
+  letter-spacing: var(--slide-title-letter-spacing);
+  margin: 0 0 var(--slide-title-margin-bottom) 0;
+  text-align: left;
+}
+
+.slidev-layout h1 + p {
+  margin-top: 0;
+  opacity: 1;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  font-size: var(--slide-body-size);
+  line-height: var(--slide-body-line-height);
+  font-weight: var(--slide-body-weight);
+}
+
+.slidev-layout p {
+  margin: 0 0 var(--slide-body-spacing) 0;
+}
+
+.slidev-layout ul,
+.slidev-layout ol {
+  margin: 0 0 var(--slide-body-spacing) 0;
+  padding-left: 1.25rem;
+}
+
+/* Use for HTML blocks that must match the default markdown body text. */
+.slide-text {
+  font-size: var(--slide-body-size);
+  line-height: var(--slide-body-line-height);
+  font-weight: var(--slide-body-weight);
+}
+
+.slide-text strong {
+  font-weight: 600;
+}
+
+.slide-card-title {
+  font-size: var(--slide-body-size);
+  line-height: var(--slide-body-line-height);
+  font-weight: 600;
+  color: var(--slide-title-color);
 }
 
 .feature-list {
-  @apply space-y-3 text-lg text-gray-700 dark:text-gray-200;
+  @apply space-y-3;
+  list-style: none;
+  margin: 0 0 var(--slide-body-spacing) 0;
+  padding-left: 0;
 }
 
 .feature-item {
   @apply flex items-center;
+}
+
+.feature-list li {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .feature-icon {
