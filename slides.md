@@ -343,8 +343,15 @@ All’interno della piattaforma, il professionista dispone di un’area dedicata
 - Monitoraggio strutturato dei progressi del paziente nel tempo
 
 Tutto avviene all’interno di Arianne, senza l’utilizzo di strumenti esterni
-<img src="/img/5/therapist.png" class="slide-image-right-md" alt="Schermata area terapeuta" />
-
+ <div 
+    class="relative top-60 flex left-20 justify-center"
+    v-click="1"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 20 } }"
+  >
+<img src="/img/5/therapist.png" class="slide-image-right-md w-[65%]" alt="Schermata area terapeuta" />
+</div>
 ---
 layout: default
 name: activities-patient
@@ -361,8 +368,16 @@ Il paziente ha accesso a un’area dedicata in cui può svolgere le attività as
 
 Questo approccio favorisce una terapia più completa, efficace e costantemente seguita
 
-<img src="/img/6/patient.png" class="slide-image-right-md" alt="Schermata area paziente" />
+ <div 
+    class="relative top-60 flex left-20 justify-center"
+    v-click="1"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 20 } }"
+  >
 
+<img src="/img/6/patient.png" class="slide-image-right-md " alt="Schermata area paziente" />
+</div>
 ---
 layout: default
 name: insights
@@ -379,8 +394,15 @@ Questionari e test digitali, assegnabili e compilabili in seduta o da remoto
 
 L’outcome monitoring rende visibile l’efficacia del percorso terapeutico, riducendo la complessità organizzativa.
 
-<img src="/img/7/iMac.png" class="slide-image-right-lg" alt="Schermata questionari" />
-
+ <div 
+    class="relative top flex left-20 justify-center w-70%"
+    v-click="1"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 20 } }"
+  >
+<img src="/img/7/iMac.png" class="" alt="Schermata questionari" />
+</div>
 ---
 layout: default
 name: ai
