@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" role="img" aria-label="Sant'Agostino">
+  <title>Sant'Agostino Psiche</title>
+  <circle cx="18" cy="24" r="8" fill="#ef4444" />
+  <text
+    x="34"
+    y="24"
+    dominant-baseline="middle"
+    font-family="Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="18"
+    font-weight="650"
+    fill="#0f172a"
+  >
+    Sant'Agostino
+  </text>
+</svg>

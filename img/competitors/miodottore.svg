@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" role="img" aria-label="MioDottore">
+  <title>MioDottore</title>
+  <circle cx="18" cy="24" r="8" fill="#2563eb" />
+  <text
+    x="34"
+    y="24"
+    dominant-baseline="middle"
+    font-family="Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="22"
+    font-weight="650"
+    fill="#0f172a"
+  >
+    MioDottore
+  </text>
+</svg>
