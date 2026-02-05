@@ -4,7 +4,7 @@ layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover overflow-hidden">
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
@@ -58,7 +58,7 @@ class: relative overflow-hidden p-0
           <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top scrolling-image" alt="Schermata home Arianne" />
         </div>
       </div>
-      <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
+      <div class="device-shadow"></div>
     </div>
   </div>
 </div>
@@ -334,7 +334,7 @@ Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amminist
        <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
       </div>
     </div>
-    <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
+    <div class="device-shadow"></div>
   </div>
 
   <!-- iMac 2 -->
@@ -351,7 +351,7 @@ Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amminist
         <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
       </div>
     </div>
-    <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
+    <div class="device-shadow"></div>
   </div>
   
   <!-- iPad -->
@@ -398,7 +398,7 @@ class: relative p-0
       </div>
     </div>
     <!-- Reflection/Shadow effect -->
-    <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%] left-[10%]"></div>
+    <div class="device-shadow device-shadow--soft"></div>
   </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">

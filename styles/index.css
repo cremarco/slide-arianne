@@ -138,6 +138,26 @@
   @apply absolute right-60 top-1/2 w-[600px] -translate-y-1/2 drop-shadow-2xl;
 }
 
+/* Softer, more realistic device shadow. */
+.device-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -26px;
+  width: 78%;
+  height: 24px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.18) 45%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(10px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.device-shadow--soft {
+  height: 20px;
+  opacity: 0.6;
+  filter: blur(12px);
+}
+
 /* Shared ribbon/gradient backdrop utilities for intro slides. */
 .ribbon-theme {
   --bg-1: #f97316;
@@ -148,6 +168,17 @@
   --ribbon-2: #006279;
   --ribbon-3: #9a3412;
   --ribbon-4: #003542;
+}
+
+.ribbon-theme--cover {
+  --bg-1: #f97316;
+  --bg-2: #006279;
+  --bg-3: #f97316;
+  --bg-4: #006279;
+  --ribbon-1: rgba(249, 115, 22, 0.92);
+  --ribbon-2: rgba(0, 98, 121, 0.92);
+  --ribbon-3: rgba(249, 115, 22, 0.75);
+  --ribbon-4: rgba(0, 98, 121, 0.75);
 }
 
 .ribbon-theme--teal {
@@ -177,6 +208,24 @@
   background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-4));
   background-size: 400% 400%;
   animation: gradient-shift 8s ease infinite;
+}
+
+.ribbon-theme--cover.animated-bg,
+.ribbon-theme--cover .animated-bg {
+  background-size: 320% 320%;
+  animation: gradient-sweep 12s ease-in-out infinite;
+}
+
+.ribbon-theme--cover.animated-bg::before,
+.ribbon-theme--cover .animated-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(ellipse at 82% 88%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 60%);
+  opacity: 0.75;
+  pointer-events: none;
 }
 
 .ribbon-theme .ribbons-container {
@@ -228,6 +277,12 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes gradient-sweep {
+  0% { background-position: 0% 45%; }
+  50% { background-position: 100% 55%; }
+  100% { background-position: 0% 45%; }
 }
 
 @keyframes ribbon-wave {
