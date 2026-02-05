@@ -115,15 +115,13 @@ class: relative overflow-hidden p-0
   <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
     <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
     <div class="slide-text mb-6">
-      Arianne non è solo un gestionale, ma una soluzione completa per il benessere psicologico.
+      Arianne è un <strong>ecosistema</strong> per la salute mentale.
       <br />
-      <strong>Una piattaforma digitale per terapeuti e pazienti.</strong>
+      <br />
+      Una piattaforma digitale
+      che unisce <strong>ricerca clinica e innovazione tecnologica</strong> per rendere la psicoterapia online e in presenza accessibile
+      e <strong>incentrata sui bisogni di pazienti e terapeuti</strong>.
     </div>
-    <ul class="space-y-3">
-      <li v-for="feature in solutionFeatures" :key="feature">
-        <span>{{ feature }}</span>
-      </li>
-    </ul>
   </div>
 
   <!-- Image Column (2/5) -->
@@ -140,16 +138,6 @@ class: relative overflow-hidden p-0
     </div>
   </div>
 </div>
-
-<script setup lang="ts">
-const solutionFeatures = [
-  'Un sistema per la gestione dei pazienti',
-  'Possibilità di effettuare sedute on-line',
-  'Possibilità di assegnare compiti',
-  'Sistemi per guidare i pazienti tra le sedute',
-  'Dati clinici ordinati e consultabili nel tempo',
-]
-</script>
 
 <style scoped>
 .logo-animation {
