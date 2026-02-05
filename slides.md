@@ -1,10 +1,10 @@
 ---
-name: intro
+name: cover
 layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme overflow-hidden">
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
@@ -23,94 +23,13 @@ class: relative p-0
   </div>
 </div>
 
-<style scoped>
-.animated-bg {
-  background: linear-gradient(-45deg, #f97316, #00819c, #ea580c, #005063);
-  background-size: 400% 400%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Ribbons Container */
-.ribbons-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 45%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Base ribbon style */
-.ribbon {
-  position: absolute;
-  left: -10%;
-  width: 120%;
-  height: 60px;
-  border-radius: 30px 30px 0 0;
-}
-
-/* Ribbon 1 - Orange */
-.ribbon-1 {
-  background: #ea580c;
-  bottom: 120px;
-  height: 50px;
-  animation: ribbon-wave 15s ease-in-out infinite;
-}
-
-/* Ribbon 2 - Teal */
-.ribbon-2 {
-  background: #006279;
-  bottom: 80px;
-  height: 55px;
-  animation: ribbon-wave 18s ease-in-out infinite -3s;
-}
-
-/* Ribbon 3 - Orange Darker */
-.ribbon-3 {
-  background: #9a3412;
-  bottom: 40px;
-  height: 60px;
-  animation: ribbon-wave 16s ease-in-out infinite -5s;
-}
-
-/* Ribbon 4 - Teal Darker */
-.ribbon-4 {
-  background: #003542;
-  bottom: 0;
-  height: 65px;
-  animation: ribbon-wave 13s ease-in-out infinite -2s;
-}
-
-@keyframes ribbon-wave {
-  0%, 100% { 
-    transform: translateX(0) translateY(0) skewY(-1deg);
-  }
-  25% { 
-    transform: translateX(3%) translateY(-8px) skewY(0.5deg);
-  }
-  50% { 
-    transform: translateX(0) translateY(0) skewY(1deg);
-  }
-  75% { 
-    transform: translateX(-3%) translateY(-5px) skewY(-0.5deg);
-  }
-}
-</style>
-
 <!--
 Arianne nasce dall’incontro tra ricerca e innovazione tecnologica.
 Una piattaforma pensata per rendere la psicoterapia più efficace, accessibile e continua.
 -->
 
 ---
-name: solution
+name: product-vision
 layout: default
 class: relative overflow-hidden p-0
 ---
@@ -197,7 +116,7 @@ Due ambienti dedicati, uno per il professionista della salute mentale e uno per 
 
 ---
 layout: default
-name: project
+name: project-overview
 class: relative h-full flex flex-col
 ---
 
@@ -214,29 +133,31 @@ La piattaforma è sviluppata per terapeuti e pazienti
     :title="card.title"
     :icon="card.icon"
     v-click
-    :v-motion="{
-      initial: { 
-        y: 50, 
-        opacity: 0, 
-        scale: 0.9 
-      },
-      enter: { 
-        y: 0, 
-        opacity: 1, 
-        scale: 1, 
-        transition: { 
-          type: 'spring', 
-          stiffness: 250, 
-          damping: 20 
-        } 
-      }
-    }"
+    :v-motion="cardMotion"
   >
     {{ card.description }}
   </ProjectCard>
 </div>
 
 <script setup lang="ts">
+const cardMotion = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    scale: 0.9,
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 250,
+      damping: 20,
+    },
+  },
+}
+
 const projectCards = [
   {
     title: 'Collaborazione',
@@ -304,7 +225,7 @@ Arianne offre un supporto continuo e pone grande attenzione alla prevenzione e a
 
 ---
 layout: default
-name: system
+name: target-users
 class: relative
 ---
 
@@ -322,29 +243,31 @@ La piattaforma è sviluppata per professionisti del benessere mentale e pazienti
     :title="card.title"
     :icon="card.icon"
     v-click
-    :v-motion="{
-      initial: { 
-        y: 50, 
-        opacity: 0, 
-        scale: 0.9 
-      },
-      enter: { 
-        y: 0, 
-        opacity: 1, 
-        scale: 1, 
-        transition: { 
-          type: 'spring', 
-          stiffness: 250, 
-          damping: 20 
-        } 
-      }
-    }"
+    :v-motion="cardMotion"
   >
     {{ card.description }}
   </ProjectCard>
 </div>
 
 <script setup lang="ts">
+const cardMotion = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    scale: 0.9,
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 250,
+      damping: 20,
+    },
+  },
+}
+
 const projectCards = [
   {
     title: 'Psicologi, psicoterapeuti e professionisti del benessere mentale',
@@ -369,16 +292,16 @@ Offre inoltre un percorso guidato e sicuro a utenti che si avvicinano per la pri
 
 ---
 layout: default
-name: professionista-intro
+name: professional-intro
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg-teal overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--teal overflow-hidden">
   <div class="ribbons-container">
-    <div class="ribbon ribbon-teal-1"></div>
-    <div class="ribbon ribbon-teal-2"></div>
-    <div class="ribbon ribbon-teal-3"></div>
-    <div class="ribbon ribbon-teal-4"></div>
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
   </div>
   
   <div class="absolute inset-0 flex items-center justify-center z-10 text-center">
@@ -386,90 +309,9 @@ class: relative p-0
   </div>
 </div>
 
-<style scoped>
-.animated-bg-teal {
-  background: linear-gradient(-45deg, #006279, #00819c, #005063, #003542);
-  background-size: 400% 400%;
-  animation: gradient-shift-teal 8s ease infinite;
-}
-
-@keyframes gradient-shift-teal {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Ribbons Container */
-.ribbons-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 45%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Base ribbon style */
-.ribbon {
-  position: absolute;
-  left: -10%;
-  width: 120%;
-  height: 60px;
-  border-radius: 30px 30px 0 0;
-}
-
-/* Ribbon 1 */
-.ribbon-teal-1 {
-  background: #00819c;
-  bottom: 120px;
-  height: 50px;
-  animation: ribbon-wave-teal 15s ease-in-out infinite;
-}
-
-/* Ribbon 2 */
-.ribbon-teal-2 {
-  background: #006279;
-  bottom: 80px;
-  height: 55px;
-  animation: ribbon-wave-teal 18s ease-in-out infinite -3s;
-}
-
-/* Ribbon 3 */
-.ribbon-teal-3 {
-  background: #005063;
-  bottom: 40px;
-  height: 60px;
-  animation: ribbon-wave-teal 16s ease-in-out infinite -5s;
-}
-
-/* Ribbon 4 */
-.ribbon-teal-4 {
-  background: #003542;
-  bottom: 0;
-  height: 65px;
-  animation: ribbon-wave-teal 13s ease-in-out infinite -2s;
-}
-
-@keyframes ribbon-wave-teal {
-  0%, 100% { 
-    transform: translateX(0) translateY(0) skewY(-1deg);
-  }
-  25% { 
-    transform: translateX(3%) translateY(-8px) skewY(0.5deg);
-  }
-  50% { 
-    transform: translateX(0) translateY(0) skewY(1deg);
-  }
-  75% { 
-    transform: translateX(-3%) translateY(-5px) skewY(-0.5deg);
-  }
-}
-</style>
-
 ---
 layout: default
-name: system
+name: dashboard-overview
 class: relative
 ---
 
@@ -536,7 +378,7 @@ Ogni elemento è progettato per semplificare l’organizzazione quotidiana del p
 
 ---
 layout: default
-name: system
+name: clinical-records
 class: relative p-0
 ---
 
@@ -571,7 +413,7 @@ Offre un accesso rapido allo stato del percorso.
 
 ---
 layout: default
-name: compiti
+name: assignments
 class: relative overflow-hidden
 ---
 # Attività tra le sedute
@@ -592,7 +434,7 @@ Attualmente la piattaforma integra 29 questionari psicometrici. L'obiettivo dell
 
 ---
 layout: default
-name: note e agenda
+name: agenda-and-notes
 class: relative overflow-hidden
 ---
 # Agenda e note
@@ -612,7 +454,7 @@ La sezione Note consente al terapeuta di registrare appunti personalizzati e di 
 
 ---
 layout: default
-name: metriche
+name: insights
 class: relative overflow-hidden
 ---
 # Insight leggibili
@@ -625,11 +467,11 @@ Ogni diario, questionario, attività e strumento diagnostico dispone di analisi 
 
 ---
 layout: default
-name: utente-intro
+name: patient-intro
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--orange overflow-hidden">
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
@@ -642,90 +484,9 @@ class: relative p-0
   </div>
 </div>
 
-<style scoped>
-.animated-bg {
-  background: linear-gradient(-45deg, #f97316, #fb923c, #ea580c, #c2410c);
-  background-size: 400% 400%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Ribbons Container */
-.ribbons-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 45%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Base ribbon style */
-.ribbon {
-  position: absolute;
-  left: -10%;
-  width: 120%;
-  height: 60px;
-  border-radius: 30px 30px 0 0;
-}
-
-/* Ribbon 1 - orange-600 */
-.ribbon-1 {
-  background: #ea580c;
-  bottom: 120px;
-  height: 50px;
-  animation: ribbon-wave 15s ease-in-out infinite;
-}
-
-/* Ribbon 2 - orange-700 */
-.ribbon-2 {
-  background: #c2410c;
-  bottom: 80px;
-  height: 55px;
-  animation: ribbon-wave 18s ease-in-out infinite -3s;
-}
-
-/* Ribbon 3 - orange-800 */
-.ribbon-3 {
-  background: #9a3412;
-  bottom: 40px;
-  height: 60px;
-  animation: ribbon-wave 16s ease-in-out infinite -5s;
-}
-
-/* Ribbon 4 - orange-900 */
-.ribbon-4 {
-  background: #7c2d12;
-  bottom: 0;
-  height: 65px;
-  animation: ribbon-wave 13s ease-in-out infinite -2s;
-}
-
-@keyframes ribbon-wave {
-  0%, 100% { 
-    transform: translateX(0) translateY(0) skewY(-1deg);
-  }
-  25% { 
-    transform: translateX(3%) translateY(-8px) skewY(0.5deg);
-  }
-  50% { 
-    transform: translateX(0) translateY(0) skewY(1deg);
-  }
-  75% { 
-    transform: translateX(-3%) translateY(-5px) skewY(-0.5deg);
-  }
-}
-</style>
-
 ---
 layout: default
-name: spinoff
+name: unimib-spinoff
 class: bg-[#4F46E5] slide-theme-invert
 ---
 
@@ -770,12 +531,3 @@ class: bg-[#4F46E5] slide-theme-invert
   }
 }
 </style>
-
----
-layout: default
-name: conclusion
----
-
-# Slide conclusiva
-
-Marco.
