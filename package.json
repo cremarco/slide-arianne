@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open",
+    "dev": "slidev --open --remote",
     "export": "slidev export"
   },
   "dependencies": {
@@ -14,6 +14,7 @@
     "vue": "^3.5.26"
   },
   "devDependencies": {
-    "@iconify-json/heroicons": "^1.2.3"
+    "@iconify-json/heroicons": "^1.2.3",
+    "unocss": "^66.6.0"
   }
 }
