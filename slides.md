@@ -25,7 +25,7 @@ class: relative p-0
 
 <style scoped>
 .animated-bg {
-  background: linear-gradient(-45deg, #f97316, #fb923c, #ea580c, #c2410c);
+  background: linear-gradient(-45deg, #f97316, #00819c, #ea580c, #005063);
   background-size: 400% 400%;
   animation: gradient-shift 8s ease infinite;
 }
@@ -56,7 +56,7 @@ class: relative p-0
   border-radius: 30px 30px 0 0;
 }
 
-/* Ribbon 1 - orange-600 */
+/* Ribbon 1 - Orange */
 .ribbon-1 {
   background: #ea580c;
   bottom: 120px;
@@ -64,15 +64,15 @@ class: relative p-0
   animation: ribbon-wave 15s ease-in-out infinite;
 }
 
-/* Ribbon 2 - orange-700 */
+/* Ribbon 2 - Teal */
 .ribbon-2 {
-  background: #c2410c;
+  background: #006279;
   bottom: 80px;
   height: 55px;
   animation: ribbon-wave 18s ease-in-out infinite -3s;
 }
 
-/* Ribbon 3 - orange-800 */
+/* Ribbon 3 - Orange Darker */
 .ribbon-3 {
   background: #9a3412;
   bottom: 40px;
@@ -80,9 +80,9 @@ class: relative p-0
   animation: ribbon-wave 16s ease-in-out infinite -5s;
 }
 
-/* Ribbon 4 - orange-900 */
+/* Ribbon 4 - Teal Darker */
 .ribbon-4 {
-  background: #7c2d12;
+  background: #003542;
   bottom: 0;
   height: 65px;
   animation: ribbon-wave 13s ease-in-out infinite -2s;
