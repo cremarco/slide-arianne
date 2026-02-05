@@ -300,7 +300,12 @@ Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amminist
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
     :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
   >
-    <img src="/img/imac.png" class="w-full relative z-10" />
+    <div class="relative w-full z-10">
+      <img src="/img/imac.png" class="w-full relative z-20" />
+      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+        <img src="/img/4/dashboard-1.png" class="w-full h-full object-cover" />
+      </div>
+    </div>
     <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
   </div>
 
@@ -312,19 +317,28 @@ Panoramica immediata su pazienti, attività e comunicazioni: meno tempo amminist
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
     :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
   >
-    <img src="/img/imac.png" class="w-full relative z-10" />
+    <div class="relative w-full z-10">
+      <img src="/img/imac.png" class="w-full relative z-20" />
+      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+        <img src="/img/4/dashboard-2.png" class="w-full h-full object-cover" />
+      </div>
+    </div>
     <div class="absolute -bottom-6 w-[80%] h-8 bg-black/30 blur-xl rounded-[100%]"></div>
   </div>
   
   <div class="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
-    <img 
-      src="/img/tablet.png" 
-      class="w-[30%]"
+    <div 
+      class="relative w-[30%]"
       v-click="2"
       v-motion
       :initial="{ y: 110, opacity: 0, scale: 0.9 }"
       :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
-    />
+    >
+      <img src="/img/ipad.png" class="w-full relative z-20" />
+      <div class="absolute top-[4.9%] left-[3.8%] w-[92.6%] h-[90.3%] z-30 overflow-hidden flex items-center justify-center">
+        <img src="/img/4/dashboard-3.png" class="w-full h-full object-contain" />
+      </div>
+    </div>
   </div>
 </div>
 
