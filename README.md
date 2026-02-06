@@ -10,6 +10,21 @@ Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
 
+## Deploy su GitHub Pages
+
+Il progetto include il workflow `/.github/workflows/deploy-pages.yml` che pubblica automaticamente la cartella `dist` su GitHub Pages quando fai push su `main` o `master`.
+
+Passaggi:
+
+- Pusha la repository su GitHub.
+- Vai su `Settings > Pages`.
+- In `Build and deployment`, imposta `Source: GitHub Actions`.
+- Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
+
+URL finale:
+
+- `https://<username>.github.io/<nome-repo>/`
+
 ## Regole tipografiche per le slide
 
 - Titoli: usare sempre `#` (h1). Non aggiungere classi `text-*`, `font-*`, `tracking-*`, `leading-*` o colori ai titoli.
