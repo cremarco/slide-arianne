@@ -1,20 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+
+/*
+#006279[ottanio]
+#ff8c42[arancio]
+*/
+:root {
+  --colore-ottanio: #006279;
+  --colore-arancio: #ff8c42;
+  --tono-ottanio-profondo: color-mix(in oklab, var(--colore-ottanio) 90%, var(--colore-arancio) 10%);
+  --tono-ottanio-medio: color-mix(in oklab, var(--colore-ottanio) 78%, var(--colore-arancio) 22%);
+  --tono-ottanio-chiaro: color-mix(in oklab, var(--colore-ottanio) 64%, var(--colore-arancio) 36%);
+  --tono-arancio-profondo: color-mix(in oklab, var(--colore-arancio) 88%, var(--colore-ottanio) 12%);
+  --tono-arancio-medio: color-mix(in oklab, var(--colore-arancio) 74%, var(--colore-ottanio) 26%);
+  --tono-arancio-chiaro: color-mix(in oklab, var(--colore-arancio) 60%, var(--colore-ottanio) 40%);
+  --tono-mix-freddo: color-mix(in oklab, var(--colore-ottanio) 58%, var(--colore-arancio) 42%);
+  --tono-mix-caldo: color-mix(in oklab, var(--colore-arancio) 58%, var(--colore-ottanio) 42%);
+  --tono-mix-bilanciato: color-mix(in oklab, var(--colore-ottanio) 50%, var(--colore-arancio) 50%);
+  --ombra-forte: color-mix(in oklab, var(--tono-ottanio-profondo) 72%, var(--tono-arancio-profondo) 28%);
+  --ombra-morbida: color-mix(in oklab, var(--tono-ottanio-medio) 68%, var(--tono-arancio-medio) 32%);
+}
+
 /* Global styles */
 .slidev-layout {
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  @apply bg-gray-50 dark:bg-gray-950;
+  /* Light mode background */
+  background-color: #f3f4f6;
   /* Typography tokens shared by titles, body text, and cards. */
   --slide-title-size: 2.75rem;
   --slide-title-line-height: 1.1;
   --slide-title-weight: 400;
-  --slide-title-color: #0f172a;
+  --slide-title-color: #181818;
   --slide-title-letter-spacing: -0.02em;
   --slide-title-margin-bottom: 1.25rem;
+  --slide-title-block-height: 3.35rem;
   --slide-body-size: 1.05rem;
   --slide-body-line-height: 1.6;
   --slide-body-weight: 300;
-  --slide-body-color: #334155;
+  --slide-body-color: #181818;
   --slide-body-spacing: 0.9rem;
   font-size: var(--slide-body-size);
   line-height: var(--slide-body-line-height);
@@ -29,14 +52,16 @@
 }
 
 .dark .slidev-layout {
-  --slide-title-color: #f8fafc;
-  --slide-body-color: #e2e8f0;
+  /* Slidev default colors (dark): bg-main + text-main */
+  background-color: #121212;
+  --slide-title-color: #ddd;
+  --slide-body-color: #ddd;
 }
 
 /* Apply when the slide background is dark but layout stays default. */
 .slidev-layout.slide-theme-invert {
-  --slide-title-color: #f8fafc;
-  --slide-body-color: #f8fafc;
+  --slide-title-color: #ddd;
+  --slide-body-color: #ddd;
   color: var(--slide-body-color);
 }
 
@@ -46,11 +71,12 @@
   font-weight: var(--slide-title-weight);
   color: var(--slide-title-color);
   letter-spacing: var(--slide-title-letter-spacing);
+  min-height: var(--slide-title-block-height);
   margin: 0 0 var(--slide-title-margin-bottom) 0;
   text-align: left;
 }
 
-.slidev-layout h1 + p {
+.slidev-layout h1+p {
   margin-top: 0;
   opacity: 1;
 }
@@ -60,6 +86,10 @@
   font-size: var(--slide-body-size);
   line-height: var(--slide-body-line-height);
   font-weight: var(--slide-body-weight);
+}
+
+.slidev-layout strong {
+  font-weight: 600;
 }
 
 .slidev-layout p {
@@ -89,7 +119,7 @@
   width: 1.2em;
   height: 1.2em;
   @apply i-heroicons-check;
-  background-color: #006279;
+  background-color: var(--tono-ottanio-profondo);
 }
 
 /* Use for HTML blocks that must match the default markdown body text. */
@@ -101,6 +131,35 @@
 
 .slide-text strong {
   font-weight: 600;
+}
+
+.slide-text--lead {
+  max-width: 48rem;
+}
+
+.slide-device-stage {
+  position: relative;
+  width: min(700px, 88%);
+  margin: 2rem auto 0;
+}
+
+.device-screen {
+  border: 1px solid color-mix(in srgb, var(--colore-ottanio) 24%, #fff);
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb, var(--colore-ottanio) 8%, #fff) 0%,
+      color-mix(in srgb, var(--colore-arancio) 7%, #fff) 100%);
+}
+
+.section-splash-title {
+  margin: 0;
+  min-height: auto;
+  font-size: clamp(2.45rem, 4.8vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 700;
+  color: #fff !important;
+  text-align: center !important;
+  letter-spacing: -0.015em;
 }
 
 .slide-card-title {
@@ -127,7 +186,8 @@
 }
 
 .feature-icon {
-  @apply mr-3 flex-shrink-0 text-2xl text-orange-500;
+  @apply mr-3 flex-shrink-0 text-2xl;
+  color: var(--tono-arancio-profondo);
 }
 
 .slide-image-right-lg {
@@ -146,7 +206,10 @@
   width: 78%;
   height: 24px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.18) 45%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(ellipse at center,
+      color-mix(in srgb, var(--ombra-forte) 35%, transparent) 0%,
+      color-mix(in srgb, var(--ombra-morbida) 18%, transparent) 45%,
+      transparent 70%);
   filter: blur(10px);
   opacity: 0.7;
   pointer-events: none;
@@ -160,47 +223,58 @@
 
 /* Shared ribbon/gradient backdrop utilities for intro slides. */
 .ribbon-theme {
-  --bg-1: #f97316;
-  --bg-2: #00819c;
-  --bg-3: #ea580c;
-  --bg-4: #005063;
-  --ribbon-1: #ea580c;
-  --ribbon-2: #006279;
-  --ribbon-3: #9a3412;
-  --ribbon-4: #003542;
+  --bg-1: var(--tono-arancio-profondo);
+  --bg-2: var(--tono-ottanio-chiaro);
+  --bg-3: var(--tono-arancio-medio);
+  --bg-4: var(--tono-ottanio-profondo);
+  --ribbon-1: var(--tono-arancio-medio);
+  --ribbon-2: var(--colore-ottanio);
+  --ribbon-3: color-mix(in oklab, var(--tono-arancio-profondo) 72%, var(--tono-ottanio-profondo) 28%);
+  --ribbon-4: color-mix(in oklab, var(--tono-ottanio-profondo) 84%, var(--tono-arancio-profondo) 16%);
 }
 
 .ribbon-theme--cover {
-  --bg-1: #f97316;
-  --bg-2: #006279;
-  --bg-3: #f97316;
-  --bg-4: #006279;
-  --ribbon-1: rgba(249, 115, 22, 0.92);
-  --ribbon-2: rgba(0, 98, 121, 0.92);
-  --ribbon-3: rgba(249, 115, 22, 0.75);
-  --ribbon-4: rgba(0, 98, 121, 0.75);
+  --bg-1: var(--tono-arancio-profondo);
+  --bg-2: var(--colore-ottanio);
+  --bg-3: var(--tono-arancio-medio);
+  --bg-4: var(--tono-ottanio-medio);
+  --ribbon-1: color-mix(in srgb, var(--tono-arancio-profondo) 92%, transparent);
+  --ribbon-2: color-mix(in srgb, var(--colore-ottanio) 92%, transparent);
+  --ribbon-3: color-mix(in srgb, var(--tono-arancio-medio) 75%, transparent);
+  --ribbon-4: color-mix(in srgb, var(--tono-ottanio-medio) 75%, transparent);
+}
+
+.ribbon-theme--cover-hero {
+  --bg-1: color-mix(in srgb, var(--colore-arancio) 68%, black);
+  --bg-2: color-mix(in srgb, var(--colore-ottanio) 82%, black);
+  --bg-3: color-mix(in srgb, var(--colore-arancio) 56%, black);
+  --bg-4: color-mix(in srgb, var(--colore-ottanio) 70%, black);
+  --ribbon-1: color-mix(in srgb, var(--colore-arancio) 88%, black);
+  --ribbon-2: color-mix(in srgb, var(--colore-ottanio) 90%, black);
+  --ribbon-3: color-mix(in srgb, var(--colore-arancio) 76%, black);
+  --ribbon-4: color-mix(in srgb, var(--colore-ottanio) 76%, black);
 }
 
 .ribbon-theme--teal {
-  --bg-1: #006279;
-  --bg-2: #00819c;
-  --bg-3: #005063;
-  --bg-4: #003542;
-  --ribbon-1: #00819c;
-  --ribbon-2: #006279;
-  --ribbon-3: #005063;
-  --ribbon-4: #003542;
+  --bg-1: color-mix(in srgb, var(--colore-ottanio) 88%, black);
+  --bg-2: color-mix(in srgb, var(--colore-ottanio) 76%, black);
+  --bg-3: color-mix(in srgb, var(--colore-ottanio) 64%, black);
+  --bg-4: color-mix(in srgb, var(--colore-ottanio) 52%, black);
+  --ribbon-1: color-mix(in srgb, var(--colore-ottanio) 92%, black);
+  --ribbon-2: color-mix(in srgb, var(--colore-ottanio) 82%, black);
+  --ribbon-3: color-mix(in srgb, var(--colore-ottanio) 72%, black);
+  --ribbon-4: color-mix(in srgb, var(--colore-ottanio) 62%, black);
 }
 
 .ribbon-theme--orange {
-  --bg-1: #f97316;
-  --bg-2: #fb923c;
-  --bg-3: #ea580c;
-  --bg-4: #c2410c;
-  --ribbon-1: #ea580c;
-  --ribbon-2: #c2410c;
-  --ribbon-3: #9a3412;
-  --ribbon-4: #7c2d12;
+  --bg-1: color-mix(in srgb, var(--colore-arancio) 70%, black);
+  --bg-2: color-mix(in srgb, var(--colore-arancio) 58%, black);
+  --bg-3: color-mix(in srgb, var(--colore-arancio) 46%, black);
+  --bg-4: color-mix(in srgb, var(--colore-arancio) 34%, black);
+  --ribbon-1: color-mix(in srgb, var(--colore-arancio) 86%, black);
+  --ribbon-2: color-mix(in srgb, var(--colore-arancio) 74%, black);
+  --ribbon-3: color-mix(in srgb, var(--colore-arancio) 62%, black);
+  --ribbon-4: color-mix(in srgb, var(--colore-arancio) 50%, black);
 }
 
 .ribbon-theme.animated-bg,
@@ -216,16 +290,82 @@
   animation: gradient-sweep 12s ease-in-out infinite;
 }
 
+.ribbon-theme--cover-hero.animated-bg,
+.ribbon-theme--cover-hero .animated-bg {
+  background-size: 360% 360%;
+  animation: gradient-sweep 14s ease-in-out infinite;
+}
+
 .ribbon-theme--cover.animated-bg::before,
 .ribbon-theme--cover .animated-bg::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 18% 12%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 55%),
-    radial-gradient(ellipse at 82% 88%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 60%);
+    radial-gradient(ellipse at 18% 12%,
+      color-mix(in srgb, var(--tono-arancio-chiaro) 28%, transparent) 0%,
+      transparent 55%),
+    radial-gradient(ellipse at 82% 88%,
+      color-mix(in srgb, var(--tono-ottanio-profondo) 22%, transparent) 0%,
+      transparent 60%);
   opacity: 0.75;
   pointer-events: none;
+}
+
+.ribbon-theme--cover-hero.animated-bg::before,
+.ribbon-theme--cover-hero .animated-bg::before {
+  background:
+    radial-gradient(ellipse at 18% 12%,
+      color-mix(in srgb, var(--colore-arancio) 24%, transparent) 0%,
+      transparent 56%),
+    radial-gradient(ellipse at 82% 88%,
+      color-mix(in srgb, var(--colore-ottanio) 22%, transparent) 0%,
+      transparent 60%),
+    linear-gradient(145deg,
+      color-mix(in srgb, black 34%, transparent) 0%,
+      transparent 42%,
+      color-mix(in srgb, black 48%, transparent) 100%);
+  opacity: 0.82;
+}
+
+.cover-slide {
+  isolation: isolate;
+}
+
+.cover-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 20%,
+      color-mix(in srgb, var(--colore-arancio) 14%, transparent) 0%,
+      transparent 46%),
+    radial-gradient(circle at 78% 84%,
+      color-mix(in srgb, var(--colore-ottanio) 16%, transparent) 0%,
+      transparent 54%);
+}
+
+.cover-partner {
+  z-index: 12;
+  animation: cover-fade-in 0.8s ease-out both 0.15s;
+}
+
+.cover-content {
+  z-index: 12;
+  animation: cover-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cover-logo {
+  filter: drop-shadow(0 10px 24px color-mix(in srgb, black 30%, transparent));
+}
+
+.cover-tagline {
+  max-width: 34rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  line-height: 1.35;
+  font-weight: 400;
+  text-shadow: 0 10px 32px color-mix(in srgb, black 38%, transparent);
 }
 
 .ribbon-theme .ribbons-container {
@@ -273,28 +413,73 @@
   animation: ribbon-wave 13s ease-in-out infinite -2s;
 }
 
+@keyframes cover-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cover-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradient-sweep {
-  0% { background-position: 0% 45%; }
-  50% { background-position: 100% 55%; }
-  100% { background-position: 0% 45%; }
+  0% {
+    background-position: 0% 45%;
+  }
+
+  50% {
+    background-position: 100% 55%;
+  }
+
+  100% {
+    background-position: 0% 45%;
+  }
 }
 
 @keyframes ribbon-wave {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0) translateY(0) skewY(-1deg);
   }
+
   25% {
     transform: translateX(3%) translateY(-8px) skewY(0.5deg);
   }
+
   50% {
     transform: translateX(0) translateY(0) skewY(1deg);
   }
+
   75% {
     transform: translateX(-3%) translateY(-5px) skewY(-0.5deg);
   }
@@ -309,12 +494,10 @@
   position: absolute;
   inset: -40%;
   z-index: 0;
-  background: conic-gradient(
-    from 90deg,
-    rgba(249, 115, 22, 0.22),
-    rgba(0, 98, 121, 0.22),
-    rgba(249, 115, 22, 0.22)
-  );
+  background: conic-gradient(from 90deg,
+      color-mix(in srgb, var(--tono-arancio-profondo) 22%, transparent),
+      color-mix(in srgb, var(--colore-ottanio) 22%, transparent),
+      color-mix(in srgb, var(--tono-arancio-profondo) 22%, transparent));
   filter: blur(60px);
   opacity: 0.9;
   pointer-events: none;
@@ -343,13 +526,11 @@
   position: absolute;
   inset: -30%;
   border-radius: 999px;
-  background: conic-gradient(
-    from 0deg,
-    rgba(249, 115, 22, 0),
-    rgba(249, 115, 22, 0.35),
-    rgba(0, 98, 121, 0.35),
-    rgba(0, 98, 121, 0)
-  );
+  background: conic-gradient(from 0deg,
+      transparent,
+      color-mix(in srgb, var(--tono-arancio-profondo) 35%, transparent),
+      color-mix(in srgb, var(--colore-ottanio) 35%, transparent),
+      transparent);
   opacity: 0.35;
   filter: blur(18px);
   animation: outro-sheen 8s linear infinite;
@@ -362,8 +543,12 @@
   inset: clamp(-52px, -8vw, -84px);
   border-radius: 999px;
   background:
-    radial-gradient(circle at 32% 38%, rgba(249, 115, 22, 0.5) 0%, rgba(249, 115, 22, 0) 58%),
-    radial-gradient(circle at 70% 62%, rgba(0, 98, 121, 0.5) 0%, rgba(0, 98, 121, 0) 60%);
+    radial-gradient(circle at 32% 38%,
+      color-mix(in srgb, var(--tono-arancio-profondo) 50%, transparent) 0%,
+      transparent 58%),
+    radial-gradient(circle at 70% 62%,
+      color-mix(in srgb, var(--colore-ottanio) 50%, transparent) 0%,
+      transparent 60%);
   filter: blur(22px);
   opacity: 0.85;
   pointer-events: none;
@@ -374,7 +559,7 @@
 .outro-logo {
   width: min(520px, 72vw);
   height: auto;
-  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.32));
+  filter: drop-shadow(0 18px 40px color-mix(in srgb, var(--ombra-forte) 32%, transparent));
   animation: outro-float 6.5s ease-in-out infinite, outro-tilt 9s ease-in-out infinite;
 }
 
@@ -383,10 +568,12 @@
     transform: rotate(0deg) scale(1);
     opacity: 0.85;
   }
+
   50% {
     transform: rotate(180deg) scale(1.06);
     opacity: 1;
   }
+
   100% {
     transform: rotate(360deg) scale(1);
     opacity: 0.85;
@@ -398,6 +585,7 @@
     opacity: 0;
     transform: translateY(18px) scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -405,10 +593,13 @@
 }
 
 @keyframes halo-breathe {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.72;
     transform: scale(0.96);
   }
+
   50% {
     opacity: 0.92;
     transform: scale(1.06);
@@ -416,18 +607,24 @@
 }
 
 @keyframes outro-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
   }
 }
 
 @keyframes outro-tilt {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(-1.2deg);
   }
@@ -437,6 +634,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

@@ -4,28 +4,29 @@ layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover overflow-hidden">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover ribbon-theme--cover-hero overflow-hidden cover-slide">
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
     <div class="ribbon ribbon-3"></div>
     <div class="ribbon ribbon-4"></div>
   </div>
-  <div class="absolute top-6 right-6 z-20">
+  <div class="cover-vignette"></div>
+  <div class="absolute top-6 right-6 z-20 cover-partner">
     <img src="/img/1/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
-  <div class="absolute top-[40px] left-[54px] z-10 text-left">
-    <img src="/img/1/arianne-logo.png" class="h-32 mb-8" alt="Arianne" />
+  <div class="absolute top-[40px] left-[54px] z-10 text-left cover-content">
+    <img src="/img/1/arianne-logo.png" class="h-32 mb-8 cover-logo" alt="Arianne" />
     <!-- Body copy uses slide-text for consistent sizing and rhythm. -->
-    <div class="slide-text text-white" mdc>
+    <div class="slide-text text-white cover-tagline" mdc>
       L’<strong>ecosistema digitale</strong> per la <strong>salute mentale</strong>
     </div>
   </div>
 </div>
 
 <!--
-Arianne nasce dall’incontro tra **ricerca clinica** e **innovazione tecnologica**.
-Un ecosistema digitale per rendere la **psicoterapia** più **accessibile**, **continua** e **misurabile**, a beneficio di **pazienti** e **professionisti**.
+Apertura: Arianne nasce dall’incontro tra **ricerca clinica** e **innovazione tecnologica**.
+Messaggio iniziale: rendere la **psicoterapia** più **accessibile**, **continua** e **misurabile** per **pazienti** e **professionisti**.
 -->
 
 ---
@@ -42,17 +43,17 @@ class: relative overflow-hidden p-0
       Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale</strong>
       <br />
       <br />
-      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong>—online e in presenza—più accessibile, continua e <strong>centrata sui bisogni di pazienti e terapeuti</strong>
+      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>
     </div>
   </div>
 
   <!-- Image Column (2/5) -->
   <div class="w-2/5 relative flex items-center justify-start h-full">
-    <!-- Image wrapper shifted right to be partially off-screen -->
-    <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[150px]">
+    <!-- Image wrapper offset to balance text and visual weight -->
+    <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[88px]">
       <div class="relative w-full z-10">
         <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
-        <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+        <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
           <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top scrolling-image" alt="Schermata home Arianne" />
         </div>
       </div>
@@ -108,8 +109,8 @@ class: relative overflow-hidden p-0
 </style>
 
 <!--
-Arianne connette **pazienti** e **terapeuti** lungo tutto il percorso: dalla **presa in carico** alla **continuità** tra una seduta e l’altra.
-Due ambienti dedicati—**professionista** e **paziente**—integrano strumenti per **comunicare**, **assegnare attività** e **monitorare i progressi** in modo strutturato.
+Arianne mette in relazione **pazienti** e **terapeuti** lungo l’intero percorso, dalla **presa in carico** alla **continuità** tra le sedute.
+Messaggio chiave: due ambienti dedicati, un unico flusso con strumenti per **comunicare**, **assegnare attività** e **monitorare i progressi**.
 -->
 
 ---
@@ -217,14 +218,14 @@ const projectCards = [
 </div>
 
 <!--
-Il sistema rende più semplice la **collaborazione** tra professionista e paziente, con due interfacce dedicate ma un flusso condiviso.
-Tra una seduta e l’altra Arianne garantisce **continuità** con **compiti** e **monitoraggio**, aiutando anche a intercettare **segnali precoci** e variazioni nel percorso.
+Questa slide introduce la struttura del prodotto: due ambienti distinti, un solo **percorso terapeutico** condiviso.
+Evidenzia i tre pilastri: **collaborazione**, **supporto continuo** e **prevenzione precoce**.
 -->
 
 ---
 layout: default
 name: target-users
-class: relative
+class: relative h-full flex flex-col
 ---
 
 # A chi si rivolge
@@ -283,9 +284,8 @@ const projectCards = [
 </script>
 
 <!--
-Arianne si rivolge a due gruppi principali.
-Per i professionisti: più **organizzazione**, meno tempo **amministrativo** e **continuità** tra una seduta e l’altra, con un canale per **nuove richieste**.
-Per i pazienti: un’esperienza **guidata**, **sicura** e **flessibile**, che integra la terapia in presenza o supporta il **primo accesso** alla psicoterapia.
+Segmentazione chiara: **professionisti** e **pazienti**, con bisogni diversi ma un’esperienza coerente.
+Per i professionisti il valore è più **efficienza clinica**; per i pazienti è un accesso **guidato**, **sicuro** e **flessibile**.
 -->
 
 ---
@@ -303,13 +303,13 @@ class: relative p-0
   </div>
   
   <div class="absolute inset-0 flex items-center justify-center z-10 text-center">
-    <h1 class="text-white text-5xl font-bold text-center" style="color: white !important; text-align: center;">La piattaforma <br/> per il professionista</h1>
+    <h1 class="section-splash-title">La piattaforma <br /> per il professionista</h1>
   </div>
 </div>
 
 <!--
-Da qui entriamo nella **vista del professionista**: **dashboard**, **cartella clinica**, **compiti** e strumenti di lettura.
-L’obiettivo è ridurre il tempo **amministrativo** e aumentare **continuità** e qualità della **presa in carico**.
+Da qui inizia il blocco dedicato al **professionista**: dashboard, cartella clinica, compiti e lettura dati.
+Obiettivo narrativo: mostrare come la piattaforma riduca il **carico amministrativo** e migliori la **qualità clinica**.
 -->
 
 ---
@@ -333,7 +333,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
         <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
       </div>
     </div>
@@ -350,7 +350,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
         <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
       </div>
     </div>
@@ -367,7 +367,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
       :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
     >
       <img src="/img/ipad.png" class="w-full relative z-20" />
-      <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-center justify-center rounded-[4px]">
+      <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-center justify-center rounded-[4px] device-screen">
         <!-- <img src="/img/6/dashboard-3.png" class="w-full h-full object-contain" /> -->
       </div>
     </div>
@@ -375,8 +375,8 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 </div>
 
 <!--
-La dashboard offre una **vista d’insieme** su **pazienti**, **appuntamenti**, **assegnazioni** e **messaggi**.
-In pochi secondi il professionista capisce cosa richiede attenzione e può dare priorità alla **cura**, riducendo il carico **amministrativo**.
+La dashboard è il punto di controllo operativo: **pazienti**, **attività** e **comunicazioni** in un’unica vista.
+In pochi secondi il professionista individua le priorità e dedica più tempo alla **cura**.
 -->
 
 ---
@@ -386,7 +386,7 @@ class: relative p-0
 ---
 
 <div class="h-full w-full relative">
-  <div class="w-[65%] h-full pl-14 pt-14 pr-4 relative z-10 flex flex-col justify-between pb-10">
+  <div class="w-[65%] h-full pl-14 pt-11 pr-4 relative z-10 flex flex-col justify-between pb-10">
     <div>
       <h1 class="mb-4">La cartella clinica</h1>
       <div class="slide-text opacity-90">
@@ -397,7 +397,7 @@ class: relative p-0
   <div class="relative w-[70%] self-center mt-4">
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
-      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       </div>
     </div>
     <!-- Reflection/Shadow effect -->
@@ -405,13 +405,13 @@ class: relative p-0
   </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
-    <video src="/img/6/anna-rita-scrive.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
+    <video src="/img/6/anna-rita-scrive-2.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
   </div>
 </div>
 
 <!--
-La **cartella clinica digitale** raccoglie in un unico luogo **anamnesi**, **note**, **referti** e **attività assegnate**.
-Lo **storico** è sempre accessibile e consultabile rapidamente, così il professionista può preparare e condurre la seduta con più **continuità**.
+La cartella clinica diventa il riferimento unico per **anamnesi**, **note**, **referti** e **attività assegnate**.
+Sottolinea il vantaggio: uno **storico strutturato** sempre disponibile prima, durante e dopo la seduta.
 -->
 
 ---
@@ -421,20 +421,20 @@ class: relative overflow-hidden
 ---
 # Attività tra le sedute
 
-Nella sezione **Compiti** il terapeuta assegna attività tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
+Nella sezione **Compiti** il terapeuta assegna **attività personalizzate** tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
 
-<div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
+<div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
-    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
     </div>
   </div>
 </div>
 
 <!--
-Qui entra in gioco la **continuità** tra le sedute: il terapeuta assegna **compiti personalizzati** e raccoglie le risposte in modo strutturato.
-Diari e questionari generano **analisi** e **scoring** che aiutano a leggere l’**andamento nel tempo** e a preparare la seduta.
-Oggi la piattaforma integra **30 questionari psicometrici**; la roadmap prevede un’**estensione progressiva** per coprire un numero sempre maggiore di casistiche.
+Qui si gioca la **continuità** tra le sedute: il terapeuta assegna compiti e riceve risposte in modo strutturato.
+Diari e questionari producono **analisi longitudinali** utili per leggere l’andamento clinico e preparare la seduta successiva.
+Valore da evidenziare: libreria già ampia, con **estensione progressiva** in roadmap.
 -->
 
 ---
@@ -444,21 +444,19 @@ class: relative overflow-hidden
 ---
 # Agenda e note
 
-Agenda **sincronizzabile** con calendari digitali: **appuntamenti** ed **eventi** sempre sotto controllo.
-<br />
-**Note** e **appunti clinici** organizzati, sempre disponibili.
+Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unico flusso: **appuntamenti**, **eventi** e **appunti** sempre disponibili.
 
-<div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
+<div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
-    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
     </div>
   </div>
 </div>
 
 <!-- 
-L’**agenda integrata** permette di gestire appuntamenti ed eventi con una vista chiara, filtri e **sincronizzazione** con i calendari digitali.
-Le **Note** aiutano a registrare **appunti clinici** e informazioni rilevanti, e a ritrovarli rapidamente quando serve.
+Questa vista riduce la frammentazione operativa: agenda e note nello stesso ambiente.
+Parole chiave in presentazione: **sincronizzazione**, **tracciabilità** e **recupero rapido** delle informazioni cliniche.
 -->
 
 ---
@@ -470,17 +468,17 @@ class: relative overflow-hidden
 
 Ogni diario, questionario e attività genera **analisi automatiche** e **metriche chiare** per monitorare l’andamento del **percorso terapeutico**.
 
-<div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
+<div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
-    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
     </div>
   </div>
 </div>
 
 <!--
-Gli insight trasformano i dati raccolti in una lettura immediata: **trend**, **progressi** e possibili **segnali di attenzione**.
-L’obiettivo è supportare decisioni più **informate** e una **personalizzazione continua** del percorso.
+Gli insight trasformano dati grezzi in segnali leggibili: **trend**, **progressi** e possibili **segnali di attenzione**.
+Chiusura del messaggio: decisioni più **informate** e terapia più **personalizzata**.
 -->
 
 ---
@@ -498,13 +496,13 @@ class: relative p-0
   </div>
   
   <div class="absolute inset-0 flex items-center justify-center z-10 text-center">
-    <h1 class="text-white text-5xl font-bold text-center" style="color: white !important; text-align: center;">La piattaforma <br/> per il paziente</h1>
+    <h1 class="section-splash-title">La piattaforma <br /> per il paziente</h1>
   </div>
 </div>
 
 <!--
-Passiamo ora alla **vista paziente**: **accesso semplice**, attività tra le sedute e una lettura chiara dei **progressi**.
-L’esperienza è progettata per aumentare **ingaggio** e **continuità**, senza appesantire il percorso.
+Da qui passiamo alla vista **paziente**, pensata per essere semplice e guidata.
+Obiettivo: aumentare **aderenza**, **ingaggio** e **continuità** senza aggiungere complessità.
 -->
 
 ---
@@ -515,29 +513,29 @@ class: relative
 
 # Onboarding e abbinamento guidato
 
-Questionario iniziale e preferenze: il percorso parte con le informazioni giuste
-<div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
+Questionario iniziale e preferenze: il percorso parte dalle informazioni **clinicamente rilevanti**.
+<div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
-    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
     </div>
   </div>
 </div>
 
 <!--
-L’iscrizione del paziente avviene in pochi passaggi: anagrafica, questionario iniziale, preferenze terapeutiche e disponibilità.
-Al termine, il sistema propone una lista di terapeuti compatibili, da cui selezionare il professionista più adatto.
+L’onboarding avviene in pochi passaggi con raccolta di **bisogni**, **preferenze** e **disponibilità**.
+Al termine, il matching propone terapeuti compatibili e riduce il tempo di attivazione del percorso.
 -->
 
 ---
 layout: default
-name: project-overview
+name: patient-web-overview
 class: relative h-full flex flex-col
 ---
 
-# App dell'utente
+# Applicazione web dell'utente
 
-Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeuta, promemoria e azioni rapide, strumenti sempre disponibili
+Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **promemoria** e **azioni rapide** sempre disponibili.
 
 <div class="relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
@@ -550,7 +548,7 @@ Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeu
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
        <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
       </div>
     </div>
@@ -567,7 +565,7 @@ Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeu
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
         <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
       </div>
     </div>
@@ -576,9 +574,89 @@ Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeu
 </div>
 
 <!--
-Nella homepage il paziente trova tutte le attività programmate: compiti, diari e appuntamenti.
-Un calendario intuitivo mostra impegni e sedute, in modalità settimanale o mensile.
-La chat permette di mantenere un dialogo costante e di pianificare con facilità ogni incontro.
+Questa homepage funziona come cockpit operativo del paziente.
+Compiti, sedute e messaggi nello stesso punto migliorano **engagement** e continuità del percorso.
+-->
+
+---
+layout: default
+name: secure-call-system
+class: relative p-0
+---
+
+<div class="h-full w-full relative">
+  <div class="w-[58%] h-full pl-14 pt-9 pr-12 relative z-10 flex flex-col pb-16">
+    <h1 class="mb-4">Sistema di call sicuro</h1>
+    <div class="slide-text opacity-90 mb-6 max-w-[38rem]">
+      <strong>Videochiamate cliniche integrate</strong>, completamente <strong>sicure</strong> e senza passare da piattaforme terze.
+    </div>
+    <div class="grid grid-cols-1 gap-4 max-w-[44rem]">
+      <ProjectCard
+        class="secure-call-card !p-5"
+        title="Sicurezza"
+        icon="i-heroicons-shield-check"
+      >
+        <strong>Connessioni protette</strong> e sessioni private, progettate per garantire la massima tutela durante la call.
+      </ProjectCard>
+      <ProjectCard
+        class="secure-call-card !p-5"
+        title="Nessun intermediario"
+        icon="i-heroicons-lock-closed"
+      >
+        Il traffico non passa da servizi esterni di terze parti: tutto resta nel <strong>perimetro della piattaforma</strong>.
+      </ProjectCard>
+    </div>
+  </div>
+  <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
+    <video src="/img/14/call.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
+  </div>
+</div>
+
+<style scoped>
+.secure-call-card :deep(.slide-card-title) {
+  min-height: 2.8rem;
+  margin-bottom: 0.65rem;
+}
+
+.secure-call-card :deep(.slide-text) {
+  line-height: 1.45;
+}
+</style>
+
+<!--
+Le call sono progettate per il contesto clinico, non come semplice add-on.
+Valore chiave: **sicurezza**, **privacy** e controllo end-to-end dell’esperienza.
+-->
+
+---
+layout: default
+name: user-mobile-app
+class: relative h-full flex flex-col
+---
+
+# App mobile dell'utente
+
+Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
+
+<div class="relative mt-8 flex justify-center items-end gap-8">
+  <div
+    class="relative w-[19%] flex justify-center"
+    v-click="1"
+    v-motion
+    :initial="{ y: 40, opacity: 0, scale: 0.9 }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22 } }"
+  >
+    <div class="relative w-full z-10">
+      <img src="/img/iphone.png" class="w-full relative z-20" />
+      <div class="absolute top-[2%] left-[4.6%] w-[90%] h-[96.1%] z-30 rounded-[1.2rem] device-screen overflow-hidden"></div>
+    </div>
+    <div class="device-shadow device-shadow--soft"></div>
+  </div>
+</div>
+
+<!--
+La componente mobile mantiene il paziente attivo tra una seduta e l’altra.
+Reminder e micro-interazioni aumentano **aderenza** e **completamento delle attività**.
 -->
 
 ---
@@ -589,7 +667,7 @@ name: implementations
 # Implementazioni
 
 <div class="slide-text opacity-90 mb-8">
-  29 questionari integrati, diario cognitivo, comportamentale, del sonno, del mattino e molto altro.
+  <strong>29 questionari integrati</strong>, diario cognitivo, comportamentale, del sonno, del mattino e molto altro.
 </div>
 
 <div class="implementations-grid grid grid-cols-2 lg:grid-cols-3 gap-4 text-left mt-4">
@@ -632,8 +710,8 @@ name: implementations
 </style>
 
 <!--
-Una vasta libreria di test validati già digitalizzati e pronti all'uso.
-Tutto integrato nel flusso di lavoro: assegnazione, compilazione e scoring automatico.
+Questa slide quantifica la profondità clinica del prodotto: test validati e diari strutturati già pronti.
+Sottolinea il flusso unico: **assegnazione**, **compilazione** e **scoring automatico**.
 -->
 
 ---
@@ -642,279 +720,258 @@ name: competitor-analysis
 class: relative
 ---
 
-<div class="h-full flex flex-col items-center justify-center gap-1">
-  <div class="w-full max-w-[95%] bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 overflow-hidden">
+<div class="relative h-[calc(100%-7rem)] flex flex-col items-center justify-start px-4 pt-0.5 pb-0 gap-0.5">
+  <div class="flex-1 min-h-0 w-full max-w-[95%] bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 overflow-hidden">
     <div class="comparison-scale">
-      <table class="w-full table-fixed comparison-matrix">
-      <thead class="bg-slate-50/80 dark:bg-slate-800/60">
+      <table class="w-full h-full table-fixed comparison-matrix border-collapse">
+      <colgroup>
+        <col class="w-[18%]">
+        <col class="w-[22.5%]">
+        <col class="w-[8.5%]" v-for="i in 7" :key="i">
+      </colgroup>
+      <thead class="bg-slate-100 dark:bg-slate-800">
         <tr>
-          <th class="px-2 py-1 text-left text-[0.58rem] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-200 w-[16%]">
+          <th class="px-2 py-1 text-left text-[0.58rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Ambito
           </th>
-          <th class="px-2 py-1 text-left text-[0.58rem] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-200 w-[24%]">
+          <th class="px-2 py-1 text-left text-[0.58rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Feature
           </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <img src="/img/2/arianne-logo-orange.svg" class="h-3.5 w-auto max-w-[92px] object-contain" alt="Arianne" />
-            </div>
+          <th class="px-1 py-1 text-center border-b border-orange-500/10">
+            <img src="/img/2/arianne-logo-orange.svg" class="h-3.5 mx-auto object-contain" alt="Arianne" />
           </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">Serenis</span>
-            </div>
-          </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">UnoBravo</span>
-            </div>
-          </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">MyMentis</span>
-            </div>
-          </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">Terapeuta.it</span>
-            </div>
-          </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">Sant'Agostino</span>
-            </div>
-          </th>
-          <th class="px-2 py-1 text-center w-[8.6%]">
-            <div class="flex justify-center">
-                <span class="header-text">MioDottore</span>
-            </div>
-          </th>
+          <th class="px-1 py-1 text-center"><span class="header-text">Serenis</span></th>
+          <th class="px-1 py-1 text-center"><span class="header-text">UnoBravo</span></th>
+          <th class="px-1 py-1 text-center"><span class="header-text">MyMentis</span></th>
+          <th class="px-1 py-1 text-center"><span class="header-text">Terapeuta.it</span></th>
+          <th class="px-1 py-1 text-center"><span class="header-text">Sant'Agostino</span></th>
+          <th class="px-1 py-1 text-center"><span class="header-text">MioDottore</span></th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.62rem]">
+      <tbody class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.55rem]">
       <tr>
         <td rowspan="7" class="cat-cell">
           <div class="cat-badge">
-            <span class="cat-icon i-heroicons-user-plus"></span>
+            <span class="cat-icon i-heroicons-magnifying-glass-circle"></span>
             <span>Accesso & matching</span>
           </div>
         </td>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Questionario iniziale</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Questionario iniziale</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Matching guidato</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Matching guidato</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Scelta manuale terapeuta</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Scelta manuale terapeuta</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Filtri ricerca terapeuta</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Filtri ricerca terapeuta</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Profilo strutturato</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Profilo strutturato</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Recensioni / reputazione</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Recensioni / reputazione</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Cambio terapeuta</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Cambio terapeuta</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
         <td rowspan="4" class="cat-cell">
           <div class="cat-badge">
-            <span class="cat-icon i-heroicons-video-camera"></span>
+            <span class="cat-icon i-heroicons-chat-bubble-left-right"></span>
             <span>Seduta & comunicazione</span>
           </div>
         </td>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Videoseduta integrata</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Videoseduta integrata</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Chat asincrona</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Chat asincrona</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Allegati / materiali</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Allegati / materiali</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Reminder appuntamenti</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Reminder appuntamenti</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
         <td rowspan="5" class="cat-cell">
           <div class="cat-badge">
-            <span class="cat-icon i-heroicons-clipboard-document-check"></span>
+            <span class="cat-icon i-heroicons-chart-bar-square"></span>
             <span>Strumenti clinici</span>
           </div>
         </td>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Test / questionari</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Test / questionari</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Mood tracker</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Mood tracker</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Diario / journaling</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Diario / journaling</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Compiti strutturati</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Compiti strutturati</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Psicoeducazione</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Psicoeducazione</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
         <td rowspan="4" class="cat-cell">
           <div class="cat-badge">
-            <span class="cat-icon i-heroicons-credit-card"></span>
+            <span class="cat-icon i-heroicons-briefcase"></span>
             <span>Amministrazione</span>
           </div>
         </td>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Pagamenti</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Pagamenti</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Ricevute automatiche</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Ricevute automatiche</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Booking / slot reali</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Booking / slot reali</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Disdetta / spostamento</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Disdetta / spostamento</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
         <td rowspan="4" class="cat-cell">
@@ -923,61 +980,61 @@ class: relative
             <span>Sicurezza & accessibilità</span>
           </div>
         </td>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Privacy / GDPR</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Privacy / GDPR</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Verifica professionisti</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Verifica professionisti</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">App mobile nativa</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">App mobile nativa</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
       </tr>
       <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100">Emergenze / limiti</td>
-        <td class="px-2 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-2 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Emergenze / limiti</td>
+        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
+        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       </tbody>
       </table>
     </div>
   </div>
 
-  <div class="slide-text opacity-75 flex items-center gap-4 flex-wrap text-[0.66rem]">
-    <div class="flex items-center gap-2">
-      <span class="status i-heroicons-check-circle"></span>
+  <div class="slide-text opacity-75 flex items-center justify-center gap-2.5 text-[0.44rem] leading-none shrink-0">
+    <div class="flex items-center gap-1">
+      <span class="status i-heroicons-check-circle !text-[0.62rem]"></span>
       <span>Presente</span>
     </div>
-    <div class="flex items-center gap-2">
-      <span class="status status--partial i-heroicons-minus-circle"></span>
+    <div class="flex items-center gap-1">
+      <span class="status status--partial i-heroicons-minus-circle !text-[0.62rem]"></span>
       <span>Parziale</span>
     </div>
-    <div class="flex items-center gap-2">
-      <span class="status status--no i-heroicons-x-circle"></span>
+    <div class="flex items-center gap-1">
+      <span class="status status--no i-heroicons-x-circle !text-[0.62rem]"></span>
       <span>Assente</span>
     </div>
   </div>
@@ -985,16 +1042,36 @@ class: relative
 
 <style scoped>
 .comparison-scale {
-  zoom: 0.84;
   width: 100%;
+  height: 100%;
+}
+
+.comparison-matrix {
+  width: 100%;
+  height: 100%;
 }
 
 .comparison-matrix th,
 .comparison-matrix td {
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+  padding-top: 0.05rem;
+  padding-bottom: 0.05rem;
   vertical-align: middle;
-  line-height: 1.1;
+  line-height: 1.02;
+}
+
+.comparison-matrix thead th {
+  height: 1.6rem;
+  vertical-align: middle;
+}
+
+.comparison-matrix tbody td {
+  /* Keep rows readable without forcing a fixed height that can clip lines. */
+  padding-top: clamp(0.02rem, 0.06vh, 0.05rem) !important;
+  padding-bottom: clamp(0.02rem, 0.06vh, 0.05rem) !important;
+}
+
+.comparison-matrix tbody td:not(.cat-cell):not(.text-center) {
+  white-space: nowrap;
 }
 
 .header-pill {
@@ -1002,15 +1079,25 @@ class: relative
 }
 
 .header-text {
-  @apply inline-flex items-center justify-center rounded-md px-1.5 py-0.5 text-[0.54rem] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-200;
+  @apply inline-flex w-full min-h-[1rem] items-center justify-center rounded-md px-1 py-0 text-center text-[0.49rem] font-semibold uppercase tracking-wide leading-tight text-slate-600 dark:text-slate-200;
+  white-space: nowrap;
 }
 
 .cat-cell {
-  @apply px-2 py-1 align-middle;
+  @apply px-2 py-1 align-top;
+  overflow: hidden;
 }
 
 .cat-badge {
-  @apply inline-flex items-center gap-2 text-[0.56rem] font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200;
+  @apply grid grid-cols-[auto,1fr] items-start gap-1.5 text-[0.52rem] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.05;
+}
+
+.cat-badge > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cat-icon {
@@ -1021,12 +1108,17 @@ class: relative
   @apply inline-flex items-center justify-center text-sm leading-none text-emerald-600 dark:text-emerald-500;
 }
 
-.comparison-matrix td.text-center > span,
-.comparison-matrix td.text-center > div,
-.comparison-matrix th.text-center > div {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.comparison-matrix tbody td.text-center {
+  text-align: center;
+  vertical-align: middle;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.comparison-matrix tbody td.text-center .status {
+  margin: 0 auto;
+  width: 0.85rem;
+  height: 0.85rem;
 }
 
 .status--partial {
@@ -1039,8 +1131,8 @@ class: relative
 </style>
 
 <!--
-Sintesi ispirata alla Benchmark Feature Matrix della tesi: l'obiettivo è mostrare, in modo immediato,
-le principali differenze tra i modelli (end-to-end, marketplace, seduta-centrico) e il posizionamento di Arianne.
+Usa la matrice come sintesi visiva, senza leggerla riga per riga.
+Conclusione da portare: Arianne combina meglio **strumenti clinici** e **continuità di percorso** rispetto ai modelli solo marketplace.
 -->
 
 ---
@@ -1052,43 +1144,47 @@ class: relative
 # Come funziona Arianne
 
 <div class="slide-text opacity-80">
-  A differenza delle altre piattaforme, paghi sempre la stessa cifra
+  A differenza delle altre piattaforme, il costo resta <strong>trasparente</strong> e <strong>prevedibile</strong>.
 </div>
 
 <div class="grid grid-cols-2 gap-6 mt-10 text-left flex-1 content-center">
   <ProjectCard title="Prova gratuita" icon="i-heroicons-sparkles">
-    <div class="mb-4 text-sm opacity-70">14 giorni per testare tutto</div>
+    <div class="mb-4 text-sm opacity-70"><strong>14 giorni</strong> per testare tutto</div>
     <ul class="feature-list">
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
-        <span>Accesso completo</span>
+        <span><strong>Accesso completo</strong></span>
       </li>
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
-        <span>Nessun pagamento</span>
+        <span><strong>Nessun pagamento</strong></span>
       </li>
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
-        <span>Disdici senza nessun costo</span>
+        <span><strong>Disdetta senza costi</strong></span>
       </li>
     </ul>
   </ProjectCard>
 
   <ProjectCard title="Piano mensile" icon="i-heroicons-calendar-days">
-    <div class="mb-4">
-    </div>
+    <div class="mb-4 text-sm opacity-70"><strong>Canone fisso</strong> in base al numero di pazienti</div>
     <ul class="feature-list">
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
-        <span>Tariffa per numero di pazienti</span>
+        <span><strong>Tariffa per numero di pazienti</strong></span>
       </li>
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
-        <span>Disdici quando vuoi</span>
+        <span><strong>Disdici quando vuoi</strong></span>
       </li>
     </ul>
       </ProjectCard>
 </div>
+
+<!--
+Messaggio economico semplice: pricing **trasparente** e senza sorprese.
+La prova gratuita riduce il rischio iniziale, mentre il piano mensile mantiene la gestione **flessibile**.
+-->
 
 ---
 layout: default
@@ -1139,8 +1235,8 @@ class: bg-[#4F46E5] slide-theme-invert
 </style>
 
 <!--
-Arianne è un prodotto di Whattadata. Whattadata nasce come **spin-off universitario**: portiamo sul mercato competenze di **ricerca e sviluppo** maturate in ambito accademico.
-Questo si traduce in un **approccio scientifico**, attenzione alla **validazione** e **miglioramento continuo** del prodotto.
+Arianne è un prodotto Whattadata, spin-off universitario: questo rafforza la credibilità del progetto.
+Evidenzia tre parole chiave: **approccio scientifico**, **validazione** e **miglioramento continuo**.
 -->
 
 ---
@@ -1161,5 +1257,5 @@ class: relative p-0
 </div>
 
 <!--
-Chiusura: lasciare la slide in pausa per domande o ringraziamenti.
+Slide di chiusura per Q&A: lasciare in pausa durante domande e ringraziamenti.
 -->

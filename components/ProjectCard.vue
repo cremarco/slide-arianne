@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 p-6 flex flex-col items-start h-full relative overflow-hidden">
+  <div class="bg-white dark:bg-[#1b1b1b] dark:border dark:border-white/8 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/50 p-6 flex flex-col items-start h-full relative overflow-hidden">
     <!-- Decorative Icon Background -->
     <div 
       :class="icon" 
