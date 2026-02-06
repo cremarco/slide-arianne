@@ -9,14 +9,17 @@ layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover ribbon-theme--cover-hero overflow-hidden cover-slide">
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover overflow-hidden cover-slide outro-bg">
+  <div class="outro-aurora" aria-hidden="true"></div>
+  <div class="outro-grid" aria-hidden="true"></div>
+  <div class="outro-sparkle" aria-hidden="true"></div>
+  <div class="outro-swirl" aria-hidden="true"></div>
   <div class="ribbons-container">
     <div class="ribbon ribbon-1"></div>
     <div class="ribbon ribbon-2"></div>
     <div class="ribbon ribbon-3"></div>
     <div class="ribbon ribbon-4"></div>
   </div>
-  <div class="cover-vignette"></div>
   <div class="absolute top-6 right-6 z-20 cover-partner">
     <img src="/img/1/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
@@ -48,7 +51,7 @@ class: relative overflow-hidden p-0
       Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale</strong>
       <br />
       <br />
-      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>
+      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>.
     </div>
   </div>
 
@@ -290,7 +293,7 @@ const projectCards = [
 
 <!--
 Segmentazione chiara: **professionisti** e **pazienti**, con bisogni diversi ma un’esperienza coerente.
-Per i professionisti il valore è più **efficienza clinica**; per i pazienti è un accesso **guidato**, **sicuro** e **flessibile**.
+Per i professionisti, il valore è più **efficienza clinica**; per i pazienti è un accesso **guidato**, **sicuro** e **flessibile**.
 -->
 
 ---
@@ -327,10 +330,10 @@ class: relative
 
 Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno amministrazione**, **più tempo per la cura**.
 
-<div class="relative mt-8 flex justify-center items-center gap-6">
+<div class="dashboard-showcase relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
   <div 
-    class="relative w-[45%] flex justify-center"
+    class="dashboard-shell relative flex justify-center"
     v-click="1"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
@@ -339,7 +342,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
       <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
-        <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
+        <img src="/img/7/therapist-dashboard.png" alt="Dashboard terapeuta 1" class="dashboard-shot dashboard-shot--left" />
       </div>
     </div>
     <div class="device-shadow"></div>
@@ -347,7 +350,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 
   <!-- iMac 2 -->
   <div 
-    class="relative w-[45%] flex justify-center"
+    class="dashboard-shell relative flex justify-center"
     v-click="2"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
@@ -356,7 +359,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
       <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
-        <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
+        <img src="/img/7/therapist-dashboard-2.png" alt="Dashboard terapeuta 2" class="dashboard-shot dashboard-shot--right" />
       </div>
     </div>
     <div class="device-shadow"></div>
@@ -365,19 +368,56 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   <!-- iPad -->
   <div class="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
     <div 
-      class="relative w-[30%]"
+      class="dashboard-tablet relative"
       v-click="3"
       v-motion
       :initial="{ y: 110, opacity: 0, scale: 0.9 }"
       :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
     >
       <img src="/img/ipad.png" class="w-full relative z-20" />
-      <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-center justify-center rounded-[4px] device-screen">
-        <!-- <img src="/img/6/dashboard-3.png" class="w-full h-full object-contain" /> -->
+      <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-start justify-start rounded-[4px] device-screen bg-white">
+        <img src="/img/7/therapist-dashboard-3.png" alt="Dashboard terapeuta 3" class="dashboard-shot dashboard-shot--tablet" />
       </div>
     </div>
   </div>
 </div>
+
+<style scoped>
+.dashboard-showcase {
+  margin-top: 1.25rem;
+  gap: 1rem;
+}
+
+.dashboard-shell {
+  width: 46%;
+}
+
+.dashboard-tablet {
+  width: 33%;
+}
+
+.dashboard-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: auto;
+  transform: none;
+}
+
+.dashboard-shot--left {
+  object-position: top left;
+}
+
+.dashboard-shot--right {
+  object-position: top right;
+}
+
+.dashboard-shot--tablet {
+  object-fit: contain;
+  object-position: top center;
+}
+</style>
 
 <!--
 La dashboard è il punto di controllo operativo: **pazienti**, **attività** e **comunicazioni** in un’unica vista.
@@ -403,6 +443,7 @@ class: relative p-0
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
       <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
+        <img src="/img/8/clinical-record.png" alt="Cartella clinica" class="w-full h-full object-cover object-top" />
       </div>
     </div>
     <!-- Reflection/Shadow effect -->
@@ -426,15 +467,66 @@ class: relative overflow-hidden
 ---
 # Attività tra le sedute
 
-Nella sezione **Compiti** il terapeuta assegna **attività personalizzate** tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
+Nella sezione **Compiti**, il terapeuta assegna **attività personalizzate** tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
+
+<div v-click="1" class="hidden"></div>
+<div v-click="2" class="hidden"></div>
+<div v-click="3" class="hidden"></div>
+<div v-click="4" class="hidden"></div>
+<div v-click="5" class="hidden"></div>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
+      <img
+        v-show="$slidev.nav.clicks === 0"
+        src="/img/9/01-therapist-diaries.png"
+        alt="Compiti - diari"
+        class="assignments-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks === 1"
+        src="/img/9/02-open-therapist-diary.png"
+        alt="Compiti - dettaglio diario"
+        class="assignments-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks === 2"
+        src="/img/9/03-therapist-exercises-to-assign-list.png"
+        alt="Compiti - lista esercizi"
+        class="assignments-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks === 3"
+        src="/img/9/04-assessments.png"
+        alt="Compiti - valutazioni"
+        class="assignments-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks === 4"
+        src="/img/9/05-bipolar-disorders.png"
+        alt="Compiti - questionario specifico"
+        class="assignments-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks >= 5"
+        src="/img/9/06-therapist-assessment-questions-and-answers.png"
+        alt="Compiti - domande e risposte"
+        class="assignments-shot"
+      />
     </div>
   </div>
 </div>
+
+<style scoped>
+.assignments-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+</style>
 
 <!--
 Qui si gioca la **continuità** tra le sedute: il terapeuta assegna compiti e riceve risposte in modo strutturato.
@@ -451,13 +543,36 @@ class: relative overflow-hidden
 
 Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unico flusso: **appuntamenti**, **eventi** e **appunti** sempre disponibili.
 
+<div v-click="1" class="hidden"></div>
+
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
+      <img
+        v-show="$slidev.nav.clicks === 0"
+        src="/img/10/01-therapist-agenda.png"
+        alt="Agenda terapeuta"
+        class="agenda-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks >= 1"
+        src="/img/10/02-therapist-notes.png"
+        alt="Note terapeuta"
+        class="agenda-shot"
+      />
     </div>
   </div>
 </div>
+
+<style scoped>
+.agenda-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+</style>
 
 <!-- 
 Questa vista riduce la frammentazione operativa: agenda e note nello stesso ambiente.
@@ -477,9 +592,23 @@ Ogni diario, questionario e attività genera **analisi automatiche** e **metrich
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
+      <img
+        src="/img/11/01-assessment-metrics.png"
+        alt="Insight e metriche cliniche"
+        class="insights-shot"
+      />
     </div>
   </div>
 </div>
+
+<style scoped>
+.insights-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+</style>
 
 <!--
 Gli insight trasformano dati grezzi in segnali leggibili: **trend**, **progressi** e possibili **segnali di attenzione**.
@@ -519,13 +648,37 @@ class: relative
 # Onboarding e abbinamento guidato
 
 Questionario iniziale e preferenze: il percorso parte dalle informazioni **clinicamente rilevanti**.
+
+<div v-click="1" class="hidden"></div>
+
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
+      <img
+        v-show="$slidev.nav.clicks === 0"
+        src="/img/13/01-question.png"
+        alt="Onboarding - questionario iniziale"
+        class="matching-shot"
+      />
+      <img
+        v-show="$slidev.nav.clicks >= 1"
+        src="/img/13/02-question.png"
+        alt="Onboarding - domanda successiva"
+        class="matching-shot"
+      />
     </div>
   </div>
 </div>
+
+<style scoped>
+.matching-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+</style>
 
 <!--
 L’onboarding avviene in pochi passaggi con raccolta di **bisogni**, **preferenze** e **disponibilità**.
@@ -554,7 +707,7 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
       <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
-       <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
+        <img src="/img/14/patient-dashboard-home.png" alt="Dashboard paziente" class="w-full h-full object-cover object-top" />
       </div>
     </div>
     <div class="device-shadow"></div>
@@ -571,7 +724,7 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
       <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
-        <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
+        <img src="/img/14/patient-calendar.png" alt="Calendario paziente" class="w-full h-full object-cover object-top" />
       </div>
     </div>
     <div class="device-shadow"></div>
@@ -613,7 +766,7 @@ class: relative p-0
     </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
-    <video src="/img/14/call.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
+    <video src="/img/15/call.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
   </div>
 </div>
 
@@ -643,21 +796,38 @@ class: relative h-full flex flex-col
 
 Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
 
-<div class="relative mt-8 flex justify-center items-end gap-8">
+<div class="relative mt-6 flex justify-center items-end gap-3">
   <div
-    class="relative w-[19%] flex justify-center"
-    v-click="1"
+    v-for="(screen, idx) in [
+      { src: '/img/16/01-home.png', alt: 'App mobile - Home' },
+      { src: '/img/16/02-diary.png', alt: 'App mobile - Diario 1' },
+      { src: '/img/16/04-psycoeducation.png', alt: 'App mobile - Psicoeducazione' },
+      { src: '/img/16/05-exercises.png', alt: 'App mobile - Esercizi' },
+    ]"
+    :key="screen.src"
+    class="relative w-[17%] flex justify-center"
     v-motion
     :initial="{ y: 40, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * 80 } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/iphone.png" class="w-full relative z-20" />
-      <div class="absolute top-[2%] left-[4.6%] w-[90%] h-[96.1%] z-30 rounded-[1.2rem] device-screen overflow-hidden"></div>
+      <div class="absolute top-[2%] left-[4.6%] w-[90%] h-[96.1%] z-30 rounded-[1.2rem] device-screen overflow-hidden">
+        <img :src="screen.src" :alt="screen.alt" class="mobile-shot" />
+      </div>
     </div>
     <div class="device-shadow device-shadow--soft"></div>
   </div>
 </div>
+
+<style scoped>
+.mobile-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+</style>
 
 <!--
 La componente mobile mantiene il paziente attivo tra una seduta e l’altra.
@@ -725,7 +895,7 @@ name: competitor-analysis
 class: relative
 ---
 
-<div class="relative h-[calc(100%-7rem)] flex flex-col items-center justify-start px-4 pt-0.5 pb-0 gap-0.5">
+<div class="relative h-full min-h-0 flex flex-col items-center justify-start px-4 pt-0.5 pb-0 gap-0.5">
   <div class="flex-1 min-h-0 w-full max-w-[95%] bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 overflow-hidden">
     <div class="comparison-scale">
       <table class="w-full h-full table-fixed comparison-matrix border-collapse">
@@ -1202,7 +1372,7 @@ class: bg-[#4F46E5] slide-theme-invert
   <div class="slide-text mb-12 text-center max-w-2xl">
     Arianne è un prodotto di <span class="highlight"><strong>Whattadata</strong></span>, <strong>spin-off</strong> dell’<span class="highlight"><strong>Università degli Studi di Milano Bicocca</strong></span>.
   </div>
-  <img src="/img/11/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />
+  <img src="/img/20/whattadata-logo.svg" class="h-48" alt="Logo Whattadata" />
 </div>
 
 <style scoped>
@@ -1251,6 +1421,9 @@ class: relative p-0
 ---
 
 <div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover outro-bg overflow-hidden">
+  <div class="outro-aurora" aria-hidden="true"></div>
+  <div class="outro-grid" aria-hidden="true"></div>
+  <div class="outro-sparkle" aria-hidden="true"></div>
   <div class="outro-swirl" aria-hidden="true"></div>
 
   <div class="outro-stage">
