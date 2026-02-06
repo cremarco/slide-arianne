@@ -52,7 +52,7 @@ class: relative overflow-hidden p-0
     <div class="w-[600px] flex-shrink-0 computer-image flex justify-center relative translate-x-[150px]">
       <div class="relative w-full z-10">
         <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
-        <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+        <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
           <img src="/img/2/home.jpeg" class="w-full h-full object-cover object-top scrolling-image" alt="Schermata home Arianne" />
         </div>
       </div>
@@ -333,8 +333,8 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
-       <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+        <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
       </div>
     </div>
     <div class="device-shadow"></div>
@@ -350,7 +350,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
         <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
       </div>
     </div>
@@ -367,7 +367,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
       :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
     >
       <img src="/img/ipad.png" class="w-full relative z-20" />
-      <div class="absolute top-[4.9%] left-[3.8%] w-[92.6%] h-[90.3%] z-30 overflow-hidden flex items-center justify-center">
+      <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-center justify-center rounded-[4px]">
         <!-- <img src="/img/6/dashboard-3.png" class="w-full h-full object-contain" /> -->
       </div>
     </div>
@@ -397,7 +397,7 @@ class: relative p-0
   <div class="relative w-[70%] self-center mt-4">
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20 pointer-events-none" alt="iMac" />
-      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
       </div>
     </div>
     <!-- Reflection/Shadow effect -->
@@ -424,7 +424,11 @@ class: relative overflow-hidden
 Nella sezione **Compiti** il terapeuta assegna attività tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
 
 <div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
-  <img src="/img/imac.png" alt="iMac" class="w-full" />
+  <div class="relative w-full z-10">
+    <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    </div>
+  </div>
 </div>
 
 <!--
@@ -445,7 +449,11 @@ Agenda **sincronizzabile** con calendari digitali: **appuntamenti** ed **eventi*
 **Note** e **appunti clinici** organizzati, sempre disponibili.
 
 <div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
-  <img src="/img/imac.png" alt="iMac" class="w-full" />
+  <div class="relative w-full z-10">
+    <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    </div>
+  </div>
 </div>
 
 <!-- 
@@ -463,7 +471,11 @@ class: relative overflow-hidden
 Ogni diario, questionario e attività genera **analisi automatiche** e **metriche chiare** per monitorare l’andamento del **percorso terapeutico**.
 
 <div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
-  <img src="/img/imac.png" alt="iMac" class="w-full" />
+  <div class="relative w-full z-10">
+    <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    </div>
+  </div>
 </div>
 
 <!--
@@ -505,7 +517,11 @@ class: relative
 
 Questionario iniziale e preferenze: il percorso parte con le informazioni giuste
 <div class="absolute -bottom-60 left-1/2 -translate-x-1/2 w-[700px]">
-  <img src="/img/imac.png" alt="iMac" class="w-full" />
+  <div class="relative w-full z-10">
+    <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
+    <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
+    </div>
+  </div>
 </div>
 
 <!--
@@ -534,7 +550,7 @@ Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeu
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
        <!-- <img src="/img/6/dashboard-1.png" class="w-full h-full object-cover" />-->
       </div>
     </div>
@@ -551,7 +567,7 @@ Compiti, sedute e reminder in un’unica vista: attività assegnate dal terapeu
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
-      <div class="absolute top-[2.8%] left-[2.6%] w-[94.8%] h-[64%] overflow-hidden z-30">
+      <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 border-2 border-red-500">
         <!-- <img src="/img/6/dashboard-2.png" class="w-full h-full object-cover" /> -->
       </div>
     </div>
