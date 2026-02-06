@@ -1,4 +1,9 @@
 ---
+title: Arianne - L'ecosistema digitale per la salute mentale
+titleTemplate: '%s - Arianne'
+---
+
+---
 name: cover
 layout: default
 class: relative p-0
