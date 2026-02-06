@@ -1,6 +1,6 @@
 ---
 title: Arianne - L'ecosistema digitale per la salute mentale
-titleTemplate: '%s - Arianne'
+titleTemplate: '%s'
 ---
 
 ---
