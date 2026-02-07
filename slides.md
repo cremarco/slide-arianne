@@ -9,28 +9,261 @@ layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover overflow-hidden cover-slide outro-bg">
-  <div class="outro-aurora" aria-hidden="true"></div>
-  <div class="outro-grid" aria-hidden="true"></div>
-  <div class="outro-sparkle" aria-hidden="true"></div>
-  <div class="outro-swirl" aria-hidden="true"></div>
-  <div class="ribbons-container">
-    <div class="ribbon ribbon-1"></div>
-    <div class="ribbon ribbon-2"></div>
-    <div class="ribbon ribbon-3"></div>
-    <div class="ribbon ribbon-4"></div>
+<div class="w-full h-full relative cover-animated">
+  <div class="cover-animated__bg" aria-hidden="true">
+    <svg class="cover-animated__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1080" preserveAspectRatio="none">
+      <defs>
+        <g id="cover-lines-set">
+          <path class="cover-line line-1" d="M0 760 C 300 640 620 860 920 740 C 1220 620 1520 820 1820 720 C 2080 640 2260 730 2400 700" />
+          <path class="cover-line line-2" d="M0 690 C 280 560 600 800 900 700 C 1200 600 1500 820 1800 720 C 2050 640 2250 730 2400 700" />
+          <path class="cover-line line-3" d="M0 620 C 260 500 560 740 860 660 C 1160 580 1460 780 1760 700 C 2020 630 2240 730 2400 700" />
+          <path class="cover-line line-4" d="M0 840 C 320 720 640 920 940 820 C 1240 720 1540 900 1840 800 C 2080 730 2260 860 2400 820" />
+          <path class="cover-line line-5" d="M0 900 C 320 780 620 980 920 880 C 1220 780 1520 980 1820 900 C 2060 840 2240 940 2400 920" />
+          <path class="cover-line line-6" d="M0 560 C 260 450 560 660 860 600 C 1160 540 1460 700 1760 660 C 2020 620 2240 720 2400 700" />
+          <path class="cover-line line-7" d="M0 500 C 300 400 620 620 920 560 C 1220 500 1520 680 1820 640 C 2080 600 2260 700 2400 680" />
+        </g>
+      </defs>
+      <g class="cover-lines-track">
+        <use href="#cover-lines-set" class="cover-lines cover-lines--a" />
+        <use href="#cover-lines-set" class="cover-lines cover-lines--b" x="2400" />
+      </g>
+    </svg>
   </div>
-  <div class="absolute top-6 right-6 z-20 cover-partner">
+  <div class="absolute top-6 right-6 z-10 cover-partner">
     <img src="/img/1/whattadata-unimib-logo.png" class="h-16" alt="Whattadata Unimib" />
   </div>
-  <div class="absolute top-[40px] left-[54px] z-10 text-left cover-content">
+  <div class="absolute top-[40px] left-[54px] z-10 text-left cover-animated__content">
     <img src="/img/1/arianne-logo.png" class="h-32 mb-8 cover-logo" alt="Arianne" />
     <!-- Body copy uses slide-text for consistent sizing and rhythm. -->
-    <div class="slide-text text-white cover-tagline" mdc>
+    <div class="slide-text cover-tagline" mdc>
       L’<strong>ecosistema digitale</strong> per la <strong>salute mentale</strong>
     </div>
   </div>
 </div>
+
+<style scoped>
+.cover-animated {
+  background: oklch(64.6% 0.222 41.116);
+  overflow: hidden;
+}
+
+.cover-animated__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cover-animated__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 80%,
+      color-mix(in srgb, var(--colore-arancio) 18%, transparent) 0%,
+      transparent 58%);
+  opacity: 0.7;
+}
+
+.cover-animated__svg {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 115%;
+  opacity: 0.82;
+}
+
+.cover-lines-track {
+  animation: cover-lines-scroll 15s linear infinite;
+}
+
+.cover-lines {
+  animation: cover-lines-breathe 16s ease-in-out infinite;
+  transform-origin: center;
+  --cluster-shift: -10px;
+  --cluster-tilt: 0.35deg;
+}
+
+.cover-lines--a {
+  animation-delay: 0s;
+}
+
+.cover-lines--b {
+  animation-delay: 0s;
+}
+
+.cover-line {
+  fill: none;
+  stroke: var(--line-color, oklch(75% 0.2 45));
+  stroke-linecap: butt;
+  stroke-width: var(--line-width, 9);
+  opacity: var(--line-opacity, 0.55);
+  filter: drop-shadow(0 10px 18px color-mix(in srgb, var(--line-color) 30%, transparent));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    cover-line-float var(--float-duration, 14s) ease-in-out infinite,
+    cover-line-pulse var(--pulse-duration, 8s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s), var(--pulse-delay, 0s);
+}
+
+.line-1 {
+  --line-color: oklch(89% 0.12 72);
+  --line-width: 17;
+  --line-opacity: 0.72;
+  --line-opacity-peak: 0.88;
+  --float-duration: 11s;
+  --float-shift: -24px;
+  --float-tilt: 1.6deg;
+  --pulse-duration: 7s;
+}
+
+.line-2 {
+  --line-color: oklch(51% 0.17 38);
+  --line-width: 6;
+  --line-opacity: 0.52;
+  --line-opacity-peak: 0.67;
+  --float-duration: 19s;
+  --float-shift: 12px;
+  --float-tilt: -1deg;
+  --float-delay: -5s;
+  --pulse-duration: 9s;
+  --pulse-delay: -2s;
+}
+
+.line-3 {
+  --line-color: oklch(77% 0.18 58);
+  --line-width: 11;
+  --line-opacity: 0.5;
+  --line-opacity-peak: 0.66;
+  --float-duration: 14s;
+  --float-shift: -18px;
+  --float-tilt: 0.9deg;
+  --float-delay: -2.5s;
+  --pulse-duration: 8s;
+  --pulse-delay: -3s;
+}
+
+.line-4 {
+  --line-color: oklch(45% 0.16 34);
+  --line-width: 20;
+  --line-opacity: 0.33;
+  --line-opacity-peak: 0.47;
+  --float-duration: 23s;
+  --float-shift: 20px;
+  --float-tilt: -1.4deg;
+  --float-delay: -7s;
+  --pulse-duration: 12s;
+  --pulse-delay: -6s;
+}
+
+.line-5 {
+  --line-color: oklch(94% 0.07 80);
+  --line-width: 5;
+  --line-opacity: 0.42;
+  --line-opacity-peak: 0.58;
+  --float-duration: 17s;
+  --float-shift: -10px;
+  --float-tilt: 1.2deg;
+  --float-delay: -3.5s;
+  --pulse-duration: 6.5s;
+  --pulse-delay: -1.5s;
+}
+
+.line-6 {
+  --line-color: oklch(60% 0.19 46);
+  --line-width: 8;
+  --line-opacity: 0.3;
+  --line-opacity-peak: 0.45;
+  --float-duration: 27s;
+  --float-shift: 8px;
+  --float-tilt: -0.85deg;
+  --float-delay: -8s;
+  --pulse-duration: 11s;
+  --pulse-delay: -4s;
+}
+
+.line-7 {
+  --line-color: oklch(70% 0.23 41);
+  --line-width: 13;
+  --line-opacity: 0.4;
+  --line-opacity-peak: 0.56;
+  --float-duration: 15s;
+  --float-shift: -16px;
+  --float-tilt: 1.3deg;
+  --float-delay: -5.5s;
+  --pulse-duration: 9.5s;
+  --pulse-delay: -2.5s;
+}
+
+.cover-animated__content .slide-text {
+  color: #1b1b1b;
+  text-shadow: none;
+}
+
+.cover-animated__content .cover-logo {
+  filter: none;
+}
+
+@keyframes cover-lines-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes cover-lines-breathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(var(--cluster-shift, -12px)) rotate(var(--cluster-tilt, 0deg));
+  }
+}
+
+@keyframes cover-line-float {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) rotate(0deg);
+  }
+
+  50% {
+    transform:
+      translateY(var(--float-shift, -12px))
+      scaleX(var(--float-scale, 1.03))
+      rotate(var(--float-tilt, 0deg));
+  }
+}
+
+@keyframes cover-line-pulse {
+  0%,
+  100% {
+    opacity: var(--line-opacity, 0.55);
+  }
+
+  50% {
+    opacity: var(--line-opacity-peak, 0.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-lines-track {
+    animation: none;
+  }
+
+  .cover-lines {
+    animation: none;
+  }
+
+  .cover-line {
+    animation: none;
+  }
+}
+</style>
 
 <!--
 Apertura: Arianne nasce dall’incontro tra **ricerca clinica** e **innovazione tecnologica**.
