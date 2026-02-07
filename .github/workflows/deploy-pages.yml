@@ -45,6 +45,10 @@ jobs:
             BASE="/${{ github.event.repository.name }}/"
           fi
           pnpm slidev build --base "$BASE"
+          if [ -d img ]; then
+            rm -rf dist/img
+            cp -R img dist/img
+          fi
 
       - name: Disable Jekyll
         run: touch dist/.nojekyll

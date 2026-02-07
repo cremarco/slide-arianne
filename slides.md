@@ -1,10 +1,7 @@
 ---
 title: Arianne - L'ecosistema digitale per la salute mentale
 titleTemplate: '%s'
----
-
----
-name: cover
+name: info
 layout: default
 class: relative p-0
 ---
@@ -34,7 +31,6 @@ class: relative p-0
   </div>
   <div class="absolute top-[40px] left-[54px] z-10 text-left cover-animated__content">
     <img src="/img/1/arianne-logo.png" class="h-32 mb-8 cover-logo" alt="Arianne" />
-    <!-- Body copy uses slide-text for consistent sizing and rhythm. -->
     <div class="slide-text cover-tagline" mdc>
       L’<strong>ecosistema digitale</strong> per la <strong>salute mentale</strong>
     </div>
@@ -289,6 +285,21 @@ class: relative p-0
 
 .cover-animated__content .cover-logo {
   filter: none;
+}
+
+.cover-animated__content .cover-audio-note {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.95rem;
+  padding: 0.45rem 0.78rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #1b1b1b;
+  background: color-mix(in srgb, white 72%, transparent);
+  border: 1px solid color-mix(in srgb, #1b1b1b 22%, transparent);
+  backdrop-filter: blur(2px);
 }
 
 @keyframes cover-lines-scroll {
