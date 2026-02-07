@@ -369,8 +369,7 @@ class: relative p-0
 </style>
 
 <!--
-Apertura: Arianne nasce dall’incontro tra **ricerca clinica** e **innovazione tecnologica**.
-Messaggio iniziale: rendere la **psicoterapia** più **accessibile**, **continua** e **misurabile** per **pazienti** e **professionisti**.
+Arianne è la piattaforma innovativa per la salute mentale: un ambiente unico che mette ordine nella pratica clinica digitale e riduce la frizione quotidiana. Unifica operatività, dati e monitoring tra le sedute. Un modo più semplice, coerente e sicuro di gestire sedute, dati e continuità terapeutica.
 -->
 
 ---
@@ -453,8 +452,8 @@ class: relative overflow-hidden p-0
 </style>
 
 <!--
-Arianne mette in relazione **pazienti** e **terapeuti** lungo l’intero percorso, dalla **presa in carico** alla **continuità** tra le sedute.
-Messaggio chiave: due ambienti dedicati, un unico flusso con strumenti per **comunicare**, **assegnare attività** e **monitorare i progressi**.
+Pazienti e terapeuti lavorano nello stesso percorso, dalla presa in carico alla continuità tra le sedute.
+Due ambienti dedicati, un unico flusso per comunicare, assegnare attivita e monitorare i progressi.
 -->
 
 ---
@@ -562,8 +561,8 @@ const projectCards = [
 </div>
 
 <!--
-Questa slide introduce la struttura del prodotto: due ambienti distinti, un solo **percorso terapeutico** condiviso.
-Evidenzia i tre pilastri: **collaborazione**, **supporto continuo** e **prevenzione precoce**.
+Due ambienti distinti, ma un solo percorso terapeutico condiviso.
+Collaborazione, supporto continuo e prevenzione precoce sono i tre pilastri del prodotto.
 -->
 
 ---
@@ -628,8 +627,9 @@ const projectCards = [
 </script>
 
 <!--
-Segmentazione chiara: **professionisti** e **pazienti**, con bisogni diversi ma un’esperienza coerente.
-Per i professionisti, il valore è più **efficienza clinica**; per i pazienti è un accesso **guidato**, **sicuro** e **flessibile**.
+Professionisti e pazienti hanno bisogni diversi, ma un'esperienza coerente.
+Per i professionisti, il valore e una maggiore efficienza clinica.
+Per i pazienti, un accesso guidato, sicuro e flessibile.
 -->
 
 ---
@@ -652,8 +652,8 @@ class: relative p-0
 </div>
 
 <!--
-Da qui inizia il blocco dedicato al **professionista**: dashboard, cartella clinica, compiti e lettura dati.
-Obiettivo narrativo: mostrare come la piattaforma riduca il **carico amministrativo** e migliori la **qualità clinica**.
+La piattaforma per il professionista integra dashboard, cartella clinica, compiti e lettura dei dati.
+Riduce il carico amministrativo e migliora la qualita clinica.
 -->
 
 ---
@@ -729,7 +729,7 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 }
 
 .dashboard-tablet {
-  width: 33%;
+  width: 37%;
 }
 
 .dashboard-shot {
@@ -750,14 +750,15 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 }
 
 .dashboard-shot--tablet {
-  object-fit: contain;
-  object-position: top center;
+  object-fit: cover;
+  object-position: top left;
 }
 </style>
 
 <!--
-La dashboard è il punto di controllo operativo: **pazienti**, **attività** e **comunicazioni** in un’unica vista.
-In pochi secondi il professionista individua le priorità e dedica più tempo alla **cura**.
+La dashboard e il punto di controllo operativo.
+Pazienti, attivita e comunicazioni sono in un'unica vista.
+In pochi secondi il professionista individua le priorita e dedica piu tempo alla cura.
 -->
 
 ---
@@ -792,8 +793,8 @@ class: relative p-0
 </div>
 
 <!--
-La cartella clinica diventa il riferimento unico per **anamnesi**, **note**, **referti** e **attività assegnate**.
-Sottolinea il vantaggio: uno **storico strutturato** sempre disponibile prima, durante e dopo la seduta.
+La cartella clinica e il riferimento unico per anamnesi, note, referti e attivita assegnate.
+Offre uno storico strutturato sempre disponibile prima, durante e dopo la seduta.
 -->
 
 ---
@@ -865,9 +866,9 @@ Nella sezione **Compiti**, il terapeuta assegna **attività personalizzate** tra
 </style>
 
 <!--
-Qui si gioca la **continuità** tra le sedute: il terapeuta assegna compiti e riceve risposte in modo strutturato.
-Diari e questionari producono **analisi longitudinali** utili per leggere l’andamento clinico e preparare la seduta successiva.
-Valore da evidenziare: libreria già ampia, con **estensione progressiva** in roadmap.
+Il terapeuta assegna compiti e riceve risposte in modo strutturato, mantenendo continuita tra le sedute.
+Diari e questionari producono analisi longitudinali utili per leggere l'andamento clinico e preparare la seduta successiva.
+La libreria di strumenti psicodiagnostici è già ampia e continua a crescere in roadmap.
 -->
 
 ---
@@ -910,9 +911,9 @@ Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unic
 }
 </style>
 
-<!-- 
-Questa vista riduce la frammentazione operativa: agenda e note nello stesso ambiente.
-Parole chiave in presentazione: **sincronizzazione**, **tracciabilità** e **recupero rapido** delle informazioni cliniche.
+<!--
+Agenda e note stanno nello stesso ambiente, con meno frammentazione operativa.
+Sincronizzazione, tracciabilita e recupero rapido delle informazioni cliniche migliorano il lavoro quotidiano.
 -->
 
 ---
@@ -947,8 +948,9 @@ Ogni diario, questionario e attività genera **analisi automatiche** e **metrich
 </style>
 
 <!--
-Gli insight trasformano dati grezzi in segnali leggibili: **trend**, **progressi** e possibili **segnali di attenzione**.
-Chiusura del messaggio: decisioni più **informate** e terapia più **personalizzata**.
+Gli insight trasformano dati grezzi in segnali leggibili.
+Mostrano trend, progressi e possibili segnali di attenzione.
+Supportano decisioni piu informate e una terapia piu personalizzata.
 -->
 
 ---
@@ -971,8 +973,8 @@ class: relative p-0
 </div>
 
 <!--
-Da qui passiamo alla vista **paziente**, pensata per essere semplice e guidata.
-Obiettivo: aumentare **aderenza**, **ingaggio** e **continuità** senza aggiungere complessità.
+L'esperienza per l'utente è semplice, guidata e senza attrito.
+Aumenta aderenza, ingaggio e continuita senza aggiungere complessita.
 -->
 
 ---
@@ -1017,8 +1019,9 @@ Questionario iniziale e preferenze: il percorso parte dalle informazioni **clini
 </style>
 
 <!--
-L’onboarding avviene in pochi passaggi con raccolta di **bisogni**, **preferenze** e **disponibilità**.
-Al termine, il matching propone terapeuti compatibili e riduce il tempo di attivazione del percorso.
+L'onboarding avviene in pochi passaggi.
+Raccogliamo bisogni, preferenze e disponibilita.
+Alla fine, il matching propone terapeuti compatibili e riduce il tempo di attivazione del percorso.
 -->
 
 ---
@@ -1068,8 +1071,8 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
 </div>
 
 <!--
-Questa homepage funziona come cockpit operativo del paziente.
-Compiti, sedute e messaggi nello stesso punto migliorano **engagement** e continuità del percorso.
+Compiti, sedute e messaggi sono nello stesso punto.
+Questo aumenta l'engagement e la continuita del percorso.
 -->
 
 ---
@@ -1119,7 +1122,7 @@ class: relative p-0
 
 <!--
 Le call sono progettate per il contesto clinico, non come semplice add-on.
-Valore chiave: **sicurezza**, **privacy** e controllo end-to-end dell’esperienza.
+Garantiscono sicurezza, privacy e controllo end-to-end dell'esperienza.
 -->
 
 ---
@@ -1132,7 +1135,7 @@ class: relative h-full flex flex-col
 
 Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
 
-<div class="relative mt-6 flex justify-center items-end gap-3">
+<div class="relative mt-6 flex justify-center items-end gap-2">
   <div
     v-for="(screen, idx) in [
       { src: '/img/16/01-home.png', alt: 'App mobile - Home' },
@@ -1141,7 +1144,7 @@ Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeuti
       { src: '/img/16/05-exercises.png', alt: 'App mobile - Esercizi' },
     ]"
     :key="screen.src"
-    class="relative w-[17%] flex justify-center"
+    class="relative w-[19%] flex justify-center"
     v-motion
     :initial="{ y: 40, opacity: 0, scale: 0.9 }"
     :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * 80 } }"
@@ -1166,8 +1169,8 @@ Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeuti
 </style>
 
 <!--
-La componente mobile mantiene il paziente attivo tra una seduta e l’altra.
-Reminder e micro-interazioni aumentano **aderenza** e **completamento delle attività**.
+La componente mobile mantiene il paziente attivo tra una seduta e l'altra.
+Reminder e micro-interazioni aumentano aderenza e completamento delle attivita.
 -->
 
 ---
@@ -1221,8 +1224,8 @@ name: implementations
 </style>
 
 <!--
-Questa slide quantifica la profondità clinica del prodotto: test validati e diari strutturati già pronti.
-Sottolinea il flusso unico: **assegnazione**, **compilazione** e **scoring automatico**.
+Test validati e diari strutturati sono gia pronti all'uso.
+Il flusso e unico: assegnazione, compilazione e scoring automatico.
 -->
 
 ---
@@ -1642,8 +1645,8 @@ class: relative
 </style>
 
 <!--
-Usa la matrice come sintesi visiva, senza leggerla riga per riga.
-Conclusione da portare: Arianne combina meglio **strumenti clinici** e **continuità di percorso** rispetto ai modelli solo marketplace.
+Arianne combina strumenti clinici e continuita di percorso meglio dei modelli solo marketplace.
+La matrice mette in evidenza questi differenziatori in modo immediato.
 -->
 
 ---
@@ -1693,8 +1696,8 @@ class: relative
 </div>
 
 <!--
-Messaggio economico semplice: pricing **trasparente** e senza sorprese.
-La prova gratuita riduce il rischio iniziale, mentre il piano mensile mantiene la gestione **flessibile**.
+Il pricing e trasparente e senza sorprese.
+La prova gratuita riduce il rischio iniziale, mentre il piano mensile mantiene la gestione flessibile.
 -->
 
 ---
@@ -1746,8 +1749,100 @@ class: bg-[#4F46E5] slide-theme-invert
 </style>
 
 <!--
-Arianne è un prodotto Whattadata, spin-off universitario: questo rafforza la credibilità del progetto.
-Evidenzia tre parole chiave: **approccio scientifico**, **validazione** e **miglioramento continuo**.
+Arianne e un prodotto Whattadata, spin-off universitario.
+Approccio scientifico, validazione e miglioramento continuo rafforzano la credibilita del progetto.
+
+Arianne is a Whattadata product and a university spin-off.
+Scientific approach, validation, and continuous improvement strengthen the project's credibility.
+-->
+
+---
+layout: default
+name: academic-logos
+class: relative p-0
+---
+
+<div class="w-full h-full flex items-center justify-center">
+  <div class="logos-row">
+    <div v-click="1" class="logo-slot">
+      <img
+        src="/img/21/padua/University%20of%20Padova%20UNIPD.svg"
+        alt="Universita di Padova"
+        class="institution-logo"
+      />
+    </div>
+    <div v-click="2" class="logo-slot">
+      <img
+        src="/img/21/psicology/Psicologia-POS.svg"
+        alt="Universita di Milano-Bicocca - Psicologia"
+        class="institution-logo logo-light"
+      />
+      <img
+        src="/img/21/psicology/Psicologia-POS-dark.svg"
+        alt="Universita di Milano-Bicocca - Psicologia"
+        class="institution-logo logo-dark"
+      />
+    </div>
+    <div v-click="2" class="logo-slot">
+      <img
+        src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS.svg"
+        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        class="institution-logo logo-light"
+      />
+      <img
+        src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS-dark.svg"
+        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        class="institution-logo logo-dark"
+      />
+    </div>
+  </div>
+</div>
+
+<style scoped>
+.logos-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 4vw, 3.2rem);
+  width: min(1200px, 100%);
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+.logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(6.5rem, 11vh, 8.5rem);
+}
+
+.institution-logo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: clamp(6.2rem, 10vh, 7.8rem);
+  object-fit: contain;
+  object-position: center;
+}
+
+.logo-dark {
+  display: none;
+}
+
+:global(.dark .logo-light) {
+  display: none;
+}
+
+:global(.dark .logo-dark) {
+  display: block;
+}
+
+</style>
+
+<!--
+Il progetto e sviluppato in collaborazione con il Dipartimento di Psicologia dell'Universita di Padova e con i Dipartimenti di Psicologia e di Informatica, Sistemistica e Comunicazione dell'Universita degli Studi di Milano-Bicocca.
+Queste collaborazioni tengono allineati rigore clinico, metodo scientifico e sviluppo tecnologico.
 -->
 
 ---
@@ -1756,20 +1851,17 @@ layout: default
 class: relative p-0
 ---
 
-<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--cover outro-bg overflow-hidden">
-  <div class="outro-aurora" aria-hidden="true"></div>
-  <div class="outro-grid" aria-hidden="true"></div>
-  <div class="outro-sparkle" aria-hidden="true"></div>
-  <div class="outro-swirl" aria-hidden="true"></div>
-
-  <div class="outro-stage">
-    <div class="outro-logo-wrap">
-      <div class="outro-halo" aria-hidden="true"></div>
-      <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
-    </div>
-  </div>
+<div
+  class="w-full h-full flex items-center justify-center"
+  style="background:#ff8c42; background:oklch(64.6% 0.222 41.116);"
+>
+  <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
 </div>
 
 <!--
-Slide di chiusura per Q&A: lasciare in pausa durante domande e ringraziamenti.
+Grazie per l'attenzione.
+Ora sono disponibile per domande.
+
+Thank you for your attention.
+I am now happy to take questions.
 -->
