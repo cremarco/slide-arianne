@@ -77,18 +77,27 @@ class: relative p-0
 }
 
 .cover-lines {
-  animation: cover-lines-breathe 16s ease-in-out infinite;
+  animation: cover-lines-breathe var(--cluster-duration, 16s) var(--cluster-ease, ease-in-out) infinite;
   transform-origin: center;
-  --cluster-shift: -10px;
+  --cluster-shift-x: 0px;
+  --cluster-shift-y: -10px;
   --cluster-tilt: 0.35deg;
 }
 
 .cover-lines--a {
+  --cluster-duration: 17s;
+  --cluster-shift-x: -18px;
+  --cluster-shift-y: -14px;
+  --cluster-tilt: 0.45deg;
   animation-delay: 0s;
 }
 
 .cover-lines--b {
-  animation-delay: 0s;
+  --cluster-duration: 21s;
+  --cluster-shift-x: 14px;
+  --cluster-shift-y: 11px;
+  --cluster-tilt: -0.4deg;
+  animation-delay: -4s;
 }
 
 .cover-line {
@@ -101,7 +110,7 @@ class: relative p-0
   transform-box: fill-box;
   transform-origin: center;
   animation:
-    cover-line-float var(--float-duration, 14s) ease-in-out infinite,
+    cover-line-drift var(--float-duration, 14s) var(--float-ease, ease-in-out) infinite,
     cover-line-pulse var(--pulse-duration, 8s) ease-in-out infinite;
   animation-delay: var(--float-delay, 0s), var(--pulse-delay, 0s);
 }
@@ -111,10 +120,22 @@ class: relative p-0
   --line-width: 17;
   --line-opacity: 0.72;
   --line-opacity-peak: 0.88;
-  --float-duration: 11s;
-  --float-shift: -24px;
-  --float-tilt: 1.6deg;
-  --pulse-duration: 7s;
+  --float-duration: 10.5s;
+  --float-ease: cubic-bezier(0.36, 0.04, 0.22, 1);
+  --float-x-1: -26px;
+  --float-y-1: -28px;
+  --float-tilt-1: 1.9deg;
+  --float-scale-1: 1.06;
+  --float-x-2: 16px;
+  --float-y-2: 8px;
+  --float-tilt-2: -1.2deg;
+  --float-scale-2: 0.98;
+  --float-x-3: -8px;
+  --float-y-3: -14px;
+  --float-tilt-3: 0.8deg;
+  --float-scale-3: 1.03;
+  --float-delay: -1.2s;
+  --pulse-duration: 6.8s;
 }
 
 .line-2 {
@@ -122,10 +143,21 @@ class: relative p-0
   --line-width: 6;
   --line-opacity: 0.52;
   --line-opacity-peak: 0.67;
-  --float-duration: 19s;
-  --float-shift: 12px;
-  --float-tilt: -1deg;
-  --float-delay: -5s;
+  --float-duration: 20s;
+  --float-ease: cubic-bezier(0.45, 0, 0.2, 1);
+  --float-x-1: 18px;
+  --float-y-1: 10px;
+  --float-tilt-1: -1.1deg;
+  --float-scale-1: 1.01;
+  --float-x-2: -26px;
+  --float-y-2: -6px;
+  --float-tilt-2: 0.7deg;
+  --float-scale-2: 0.97;
+  --float-x-3: 12px;
+  --float-y-3: 14px;
+  --float-tilt-3: -0.5deg;
+  --float-scale-3: 1.02;
+  --float-delay: -6.3s;
   --pulse-duration: 9s;
   --pulse-delay: -2s;
 }
@@ -135,11 +167,22 @@ class: relative p-0
   --line-width: 11;
   --line-opacity: 0.5;
   --line-opacity-peak: 0.66;
-  --float-duration: 14s;
-  --float-shift: -18px;
-  --float-tilt: 0.9deg;
-  --float-delay: -2.5s;
-  --pulse-duration: 8s;
+  --float-duration: 13.5s;
+  --float-ease: cubic-bezier(0.42, 0, 0.19, 1);
+  --float-x-1: -10px;
+  --float-y-1: -20px;
+  --float-tilt-1: 1.1deg;
+  --float-scale-1: 1.04;
+  --float-x-2: 22px;
+  --float-y-2: 5px;
+  --float-tilt-2: -0.6deg;
+  --float-scale-2: 0.99;
+  --float-x-3: -18px;
+  --float-y-3: 12px;
+  --float-tilt-3: 0.7deg;
+  --float-scale-3: 1.02;
+  --float-delay: -3s;
+  --pulse-duration: 8.4s;
   --pulse-delay: -3s;
 }
 
@@ -148,9 +191,20 @@ class: relative p-0
   --line-width: 20;
   --line-opacity: 0.33;
   --line-opacity-peak: 0.47;
-  --float-duration: 23s;
-  --float-shift: 20px;
-  --float-tilt: -1.4deg;
+  --float-duration: 24s;
+  --float-ease: cubic-bezier(0.4, 0.12, 0.22, 1);
+  --float-x-1: 28px;
+  --float-y-1: 18px;
+  --float-tilt-1: -1.8deg;
+  --float-scale-1: 1.04;
+  --float-x-2: -18px;
+  --float-y-2: -12px;
+  --float-tilt-2: 1.2deg;
+  --float-scale-2: 0.96;
+  --float-x-3: 24px;
+  --float-y-3: 8px;
+  --float-tilt-3: -0.9deg;
+  --float-scale-3: 1.01;
   --float-delay: -7s;
   --pulse-duration: 12s;
   --pulse-delay: -6s;
@@ -161,10 +215,21 @@ class: relative p-0
   --line-width: 5;
   --line-opacity: 0.42;
   --line-opacity-peak: 0.58;
-  --float-duration: 17s;
-  --float-shift: -10px;
-  --float-tilt: 1.2deg;
-  --float-delay: -3.5s;
+  --float-duration: 16.5s;
+  --float-ease: cubic-bezier(0.34, 0.18, 0.18, 1);
+  --float-x-1: -14px;
+  --float-y-1: -9px;
+  --float-tilt-1: 1.4deg;
+  --float-scale-1: 1.05;
+  --float-x-2: 9px;
+  --float-y-2: 15px;
+  --float-tilt-2: -1.6deg;
+  --float-scale-2: 0.95;
+  --float-x-3: -22px;
+  --float-y-3: 4px;
+  --float-tilt-3: 0.9deg;
+  --float-scale-3: 1.03;
+  --float-delay: -4.1s;
   --pulse-duration: 6.5s;
   --pulse-delay: -1.5s;
 }
@@ -174,11 +239,22 @@ class: relative p-0
   --line-width: 8;
   --line-opacity: 0.3;
   --line-opacity-peak: 0.45;
-  --float-duration: 27s;
-  --float-shift: 8px;
-  --float-tilt: -0.85deg;
+  --float-duration: 29s;
+  --float-ease: cubic-bezier(0.5, 0, 0.22, 1);
+  --float-x-1: 12px;
+  --float-y-1: 6px;
+  --float-tilt-1: -0.5deg;
+  --float-scale-1: 1.01;
+  --float-x-2: -8px;
+  --float-y-2: -14px;
+  --float-tilt-2: 0.4deg;
+  --float-scale-2: 0.99;
+  --float-x-3: 16px;
+  --float-y-3: -4px;
+  --float-tilt-3: -0.3deg;
+  --float-scale-3: 1.01;
   --float-delay: -8s;
-  --pulse-duration: 11s;
+  --pulse-duration: 12.5s;
   --pulse-delay: -4s;
 }
 
@@ -187,9 +263,20 @@ class: relative p-0
   --line-width: 13;
   --line-opacity: 0.4;
   --line-opacity-peak: 0.56;
-  --float-duration: 15s;
-  --float-shift: -16px;
-  --float-tilt: 1.3deg;
+  --float-duration: 15.5s;
+  --float-ease: cubic-bezier(0.35, 0.08, 0.2, 1);
+  --float-x-1: -20px;
+  --float-y-1: -18px;
+  --float-tilt-1: 1.5deg;
+  --float-scale-1: 1.05;
+  --float-x-2: 14px;
+  --float-y-2: 9px;
+  --float-tilt-2: -1.1deg;
+  --float-scale-2: 0.98;
+  --float-x-3: -6px;
+  --float-y-3: 16px;
+  --float-tilt-3: 0.6deg;
+  --float-scale-3: 1.02;
   --float-delay: -5.5s;
   --pulse-duration: 9.5s;
   --pulse-delay: -2.5s;
@@ -217,25 +304,41 @@ class: relative p-0
 @keyframes cover-lines-breathe {
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(var(--cluster-shift, -12px)) rotate(var(--cluster-tilt, 0deg));
-  }
-}
-
-@keyframes cover-line-float {
-  0%,
-  100% {
-    transform: translateY(0) scaleX(1) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
 
   50% {
     transform:
-      translateY(var(--float-shift, -12px))
-      scaleX(var(--float-scale, 1.03))
-      rotate(var(--float-tilt, 0deg));
+      translate3d(var(--cluster-shift-x, 0px), var(--cluster-shift-y, -12px), 0)
+      rotate(var(--cluster-tilt, 0deg));
+  }
+}
+
+@keyframes cover-line-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate(0deg);
+  }
+
+  22% {
+    transform:
+      translate3d(var(--float-x-1, -10px), var(--float-y-1, -12px), 0)
+      scaleX(var(--float-scale-1, 1.03))
+      rotate(var(--float-tilt-1, 0deg));
+  }
+
+  53% {
+    transform:
+      translate3d(var(--float-x-2, 8px), var(--float-y-2, 10px), 0)
+      scaleX(var(--float-scale-2, 0.98))
+      rotate(var(--float-tilt-2, 0deg));
+  }
+
+  79% {
+    transform:
+      translate3d(var(--float-x-3, -6px), var(--float-y-3, -6px), 0)
+      scaleX(var(--float-scale-3, 1.02))
+      rotate(var(--float-tilt-3, 0deg));
   }
 }
 
