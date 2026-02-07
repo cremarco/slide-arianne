@@ -369,7 +369,16 @@ class: relative p-0
 </style>
 
 <!--
-Arianne è la piattaforma innovativa per la salute mentale: un ambiente unico che mette ordine nella pratica clinica digitale e riduce la frizione quotidiana. Unifica operatività, dati e monitoring tra le sedute. Un modo più semplice, coerente e sicuro di gestire sedute, dati e continuità terapeutica.
+[IT]
+Secondo l'Organizzazione Mondiale della Sanità, una persona su otto nel mondo convive con un disturbo mentale.
+La domanda di supporto cresce, ma l'esperienza digitale spesso è frammentata: videochiamate, chat, documenti e questionari sparsi in strumenti diversi.
+Arianne nasce per rimettere ordine: un ecosistema clinico digitale che rende la psicoterapia, online o in presenza, più accessibile, continua e misurabile.
+Come il filo di Arianna, guida pazienti e terapeuti con un percorso chiaro, seduta dopo seduta.
+[EN-GB]
+According to the World Health Organization, one in eight people worldwide live with a mental health condition.
+The need for support is rising, but the digital journey is often fragmented: video calls, chat, documents and questionnaires scattered across different tools.
+Arianne brings it all together: a clinical digital ecosystem that makes psychotherapy, online or in-person, more accessible, continuous and measurable.
+Like Ariadne's thread, it guides patients and therapists along a clear path, session after session.
 -->
 
 ---
@@ -452,8 +461,14 @@ class: relative overflow-hidden p-0
 </style>
 
 <!--
-Pazienti e terapeuti lavorano nello stesso percorso, dalla presa in carico alla continuità tra le sedute.
-Due ambienti dedicati, un unico flusso per comunicare, assegnare attivita e monitorare i progressi.
+[IT]
+Che la seduta sia online o in studio, pazienti e terapeuti lavorano nello stesso percorso, dalla presa in carico alla continuità tra le sedute.
+Non è solo una videochiamata: è un ecosistema che integra comunicazione sicura, strumenti clinici e monitoraggio tra un incontro e l'altro.
+Così il percorso resta ordinato, più sostenibile nel tempo, e davvero personalizzabile.
+[EN-GB]
+Whether the session is online or in the clinic, patients and therapists follow one shared journey, from intake to continuity between sessions.
+It's not just a video call: it's an ecosystem that combines secure communication, clinical tools and monitoring between appointments.
+So the journey stays organised, sustainable over time, and genuinely tailored.
 -->
 
 ---
@@ -561,8 +576,14 @@ const projectCards = [
 </div>
 
 <!--
-Due ambienti distinti, ma un solo percorso terapeutico condiviso.
-Collaborazione, supporto continuo e prevenzione precoce sono i tre pilastri del prodotto.
+[IT]
+Due ambienti distinti, uno per il terapeuta e uno per il paziente, ma un unico percorso condiviso.
+Il clinico assegna attività e strumenti, il paziente compila e tiene traccia, e tutto resta nello stesso flusso.
+Questo abilita collaborazione, supporto continuo e intercettazione precoce dei segnali lungo il percorso.
+[EN-GB]
+Two distinct environments, one for the therapist and one for the patient, but a single shared journey.
+The clinician assigns activities and tools, the patient completes them and keeps track, and everything stays in the same flow.
+That enables collaboration, continuous support, and spotting early signals along the journey.
 -->
 
 ---
@@ -627,9 +648,16 @@ const projectCards = [
 </script>
 
 <!--
+[IT]
 Professionisti e pazienti hanno bisogni diversi, ma un'esperienza coerente.
-Per i professionisti, il valore e una maggiore efficienza clinica.
-Per i pazienti, un accesso guidato, sicuro e flessibile.
+Per i professionisti il valore è ridurre burocrazia e frammentazione, con strumenti clinici pronti e pazienti sempre sotto controllo.
+Per i pazienti è un accesso guidato, flessibile e rassicurante, con trasparenza su privacy, costi e percorso.
+Funziona sia per terapia online che in presenza: cambia il setting, non cambia il percorso.
+[EN-GB]
+Professionals and patients have different needs, but one coherent experience.
+For professionals, the value is less bureaucracy and less fragmentation, with ready-to-use clinical tools and patients always in view.
+For patients, it's guided access that feels flexible and reassuring, with clarity on privacy, costs and the journey.
+It works for online therapy and for in-person care: the setting changes, the journey doesn't.
 -->
 
 ---
@@ -652,8 +680,14 @@ class: relative p-0
 </div>
 
 <!--
-La piattaforma per il professionista integra dashboard, cartella clinica, compiti e lettura dei dati.
-Riduce il carico amministrativo e migliora la qualita clinica.
+[IT]
+Per il terapeuta, Arianne è un gestionale clinico: centralizza pazienti, agenda, cartelle cliniche e amministrazione.
+Dashboard, note, questionari, diari, pagamenti e ricevute: tutto integrato, senza saltare tra strumenti diversi.
+Così si dedica meno energia all'organizzazione e più tempo alla cura.
+[EN-GB]
+For the therapist, Arianne is a clinical management system: it centralises patients, scheduling, clinical records and administration.
+Dashboard, notes, questionnaires, diaries, payments and receipts: everything is integrated, without jumping between tools.
+So you spend less energy on organisation and more time on care.
 -->
 
 ---
@@ -756,9 +790,14 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 </style>
 
 <!--
-La dashboard e il punto di controllo operativo.
-Pazienti, attivita e comunicazioni sono in un'unica vista.
-In pochi secondi il professionista individua le priorita e dedica piu tempo alla cura.
+[IT]
+La dashboard è il punto di controllo quotidiano.
+In un colpo d'occhio vedi pazienti, appuntamenti, attività e comunicazioni.
+Capisci cosa richiede attenzione e arrivi alla seduta con più contesto e meno frizione.
+[EN-GB]
+The dashboard is your daily control centre.
+At a glance you see patients, appointments, activities and communications.
+You can tell what needs attention, and you go into each session with more context and less friction.
 -->
 
 ---
@@ -793,8 +832,14 @@ class: relative p-0
 </div>
 
 <!--
-La cartella clinica e il riferimento unico per anamnesi, note, referti e attivita assegnate.
-Offre uno storico strutturato sempre disponibile prima, durante e dopo la seduta.
+[IT]
+La cartella clinica è il riferimento unico: anamnesi, note, referti, somministrazioni e materiali.
+Le informazioni non restano disperse in file o chat separate, e diventano sempre recuperabili.
+Questo migliora continuità, qualità della documentazione e sicurezza del dato.
+[EN-GB]
+The clinical record is the single place where everything lives: history, notes, reports, assessments and materials.
+Nothing is scattered across files or separate chats, and everything stays easy to retrieve.
+That improves continuity, the quality of documentation, and data security.
 -->
 
 ---
@@ -866,9 +911,14 @@ Nella sezione **Compiti**, il terapeuta assegna **attività personalizzate** tra
 </style>
 
 <!--
-Il terapeuta assegna compiti e riceve risposte in modo strutturato, mantenendo continuita tra le sedute.
-Diari e questionari producono analisi longitudinali utili per leggere l'andamento clinico e preparare la seduta successiva.
-La libreria di strumenti psicodiagnostici è già ampia e continua a crescere in roadmap.
+[IT]
+La terapia continua anche tra le sedute.
+Il terapeuta assegna diari, esercizi e questionari, e riceve risposte in modo ordinato.
+Le compilazioni diventano dati longitudinali, utili per preparare la seduta e personalizzare il lavoro clinico nel tempo.
+[EN-GB]
+Therapy continues between sessions.
+The therapist assigns diaries, exercises and questionnaires, and receives responses in an organised way.
+Those completions become longitudinal data, useful to prepare the next session and tailor clinical work over time.
 -->
 
 ---
@@ -912,8 +962,14 @@ Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unic
 </style>
 
 <!--
-Agenda e note stanno nello stesso ambiente, con meno frammentazione operativa.
-Sincronizzazione, tracciabilita e recupero rapido delle informazioni cliniche migliorano il lavoro quotidiano.
+[IT]
+Agenda e note cliniche stanno nello stesso flusso.
+Appuntamenti, promemoria e appunti sono sempre disponibili e aggiornati.
+Meno passaggi tra strumenti, più tracciabilità e recupero rapido delle informazioni.
+[EN-GB]
+Your diary and clinical notes live in the same flow.
+Appointments, reminders and notes are always available and up to date.
+Fewer tool switches, more traceability, and faster access to the information you need.
 -->
 
 ---
@@ -948,9 +1004,14 @@ Ogni diario, questionario e attività genera **analisi automatiche** e **metrich
 </style>
 
 <!--
+[IT]
 Gli insight trasformano dati grezzi in segnali leggibili.
-Mostrano trend, progressi e possibili segnali di attenzione.
-Supportano decisioni piu informate e una terapia piu personalizzata.
+Mostrano trend, progressi e segnali che meritano attenzione.
+Supportano decisioni più informate e rendono la terapia più personalizzata.
+[EN-GB]
+Insights turn raw data into clear signals.
+They show trends, progress and signals that deserve attention.
+They support better-informed decisions and make therapy more personalised.
 -->
 
 ---
@@ -973,8 +1034,14 @@ class: relative p-0
 </div>
 
 <!--
-L'esperienza per l'utente è semplice, guidata e senza attrito.
-Aumenta aderenza, ingaggio e continuita senza aggiungere complessita.
+[IT]
+Dal lato paziente l'esperienza è semplice, guidata e senza attrito.
+Riduce ansia e indecisione, e rende chiaro cosa fare e cosa aspettarsi.
+Così aumenta aderenza, coinvolgimento e continuità, senza aggiungere complessità.
+[EN-GB]
+On the patient side, the experience is simple, guided and frictionless.
+It reduces anxiety and hesitation, and makes it clear what to do and what to expect.
+That improves adherence, engagement and continuity, without adding complexity.
 -->
 
 ---
@@ -1019,9 +1086,16 @@ Questionario iniziale e preferenze: il percorso parte dalle informazioni **clini
 </style>
 
 <!--
+[IT]
 L'onboarding avviene in pochi passaggi.
-Raccogliamo bisogni, preferenze e disponibilita.
-Alla fine, il matching propone terapeuti compatibili e riduce il tempo di attivazione del percorso.
+Raccoglie bisogni, preferenze e disponibilità e propone un abbinamento guidato con professionisti qualificati.
+Questo riduce il sovraccarico di scegliere da soli e aumenta la probabilità di trovare la giusta compatibilità terapeutica.
+E fin dall'inizio mette al centro fiducia, trasparenza e tutela della privacy.
+[EN-GB]
+Onboarding takes just a few steps.
+It captures needs, preferences and availability, then provides guided matching with qualified professionals.
+That reduces the burden of choosing alone and increases the chance of finding the right therapeutic match.
+And from day one it prioritises trust, transparency and privacy protection.
 -->
 
 ---
@@ -1071,8 +1145,14 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
 </div>
 
 <!--
-Compiti, sedute e messaggi sono nello stesso punto.
-Questo aumenta l'engagement e la continuita del percorso.
+[IT]
+Compiti, sedute, messaggi e strumenti sono nello stesso punto.
+Il percorso resta visibile e comprensibile, e il paziente non si sente lasciato solo tra un incontro e l'altro.
+Questo aumenta il coinvolgimento e la continuità del percorso.
+[EN-GB]
+Tasks, sessions, messages and tools are all in one place.
+The journey stays visible and understandable, and the patient doesn't feel left alone between sessions.
+That boosts engagement and continuity.
 -->
 
 ---
@@ -1121,8 +1201,14 @@ class: relative p-0
 </style>
 
 <!--
-Le call sono progettate per il contesto clinico, non come semplice add-on.
-Garantiscono sicurezza, privacy e controllo end-to-end dell'esperienza.
+[IT]
+Le videochiamate sono integrate e progettate per il contesto clinico.
+Non devi usare link esterni o piattaforme terze: la sessione resta nel perimetro di Arianne, con connessioni protette.
+Questo migliora privacy e sicurezza, ma anche stabilità ed efficienza, riducendo i punti di rottura del percorso.
+[EN-GB]
+Video calls are built in and designed for clinical use.
+You don't need external links or third-party platforms: the session stays within Arianne, with protected connections.
+That strengthens privacy and security, and also improves stability and efficiency by reducing points of failure along the journey.
 -->
 
 ---
@@ -1169,8 +1255,16 @@ Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeuti
 </style>
 
 <!--
-La componente mobile mantiene il paziente attivo tra una seduta e l'altra.
-Reminder e micro-interazioni aumentano aderenza e completamento delle attivita.
+[IT]
+L'app mobile mantiene il percorso vivo ogni giorno.
+Oltre ai diari, offre contenuti di psicoeducazione ed esercizi guidati: conoscenze e competenze pratiche per lavorare in modo attivo con il terapeuta, tra una seduta e l'altra.
+La ricerca sulle app di salute mentale mostra che psicoeducazione e meccaniche di ingaggio, come progressi visibili e feedback, aumentano l'aderenza, soprattutto nei più giovani.
+Così la continuità terapeutica diventa davvero portatile, senza aumentare lo sforzo.
+[EN-GB]
+The mobile app keeps the journey alive every day.
+Beyond diaries, it offers psychoeducation content and guided exercises: practical knowledge and skills to work actively with your therapist between sessions.
+Research on mental health apps shows that psychoeducation and engagement mechanisms, such as visible progress and feedback, increase adherence, especially for younger users.
+So therapeutic continuity becomes genuinely portable, without adding extra effort.
 -->
 
 ---
@@ -1224,8 +1318,14 @@ name: implementations
 </style>
 
 <!--
-Test validati e diari strutturati sono gia pronti all'uso.
-Il flusso e unico: assegnazione, compilazione e scoring automatico.
+[IT]
+Qui si vede la profondità clinica: 29 questionari integrati e diari strutturati, già pronti all'uso.
+Il flusso è semplice: il clinico assegna, il paziente compila, la piattaforma calcola e organizza i risultati.
+Così la misurazione diventa parte naturale del percorso: non solo monitori, ma misuri anche l'efficacia, confrontando i risultati nel tempo.
+[EN-GB]
+Here you see the clinical depth: 29 integrated questionnaires and structured diaries, ready to use.
+The flow is simple: the clinician assigns, the patient completes, the platform scores and organises the results.
+So measurement becomes part of the journey: you don't just monitor, you also measure effectiveness by comparing results over time.
 -->
 
 ---
@@ -1645,8 +1745,16 @@ class: relative
 </style>
 
 <!--
-Arianne combina strumenti clinici e continuita di percorso meglio dei modelli solo marketplace.
-La matrice mette in evidenza questi differenziatori in modo immediato.
+[IT]
+Nel mercato esistono soluzioni che facilitano l'accesso, ma riducono la terapia a prenotazione e videochiamata.
+Altre usano strumenti generici o pezzi separati: funzionano per parlare, ma lasciano fuori dati clinici, documentazione, pagamenti e lavoro tra le sedute.
+Il risultato è frammentazione, più attrito e meno continuità percepita.
+Arianne unisce accesso, relazione e strumenti clinici in un ecosistema unico, con più misurazione e un percorso più solido per paziente e terapeuta.
+[EN-GB]
+In the market there are solutions that make access easier, but reduce therapy to booking and video calls.
+Others rely on generic tools or disconnected pieces: they let you talk, but they leave out clinical data, documentation, payments and the work between sessions.
+The result is fragmentation, more friction, and less perceived continuity.
+Arianne combines access, the therapeutic relationship and clinical tools in a single ecosystem, with stronger measurement and a more solid journey for both patient and therapist.
 -->
 
 ---
@@ -1696,8 +1804,14 @@ class: relative
 </div>
 
 <!--
-Il pricing e trasparente e senza sorprese.
-La prova gratuita riduce il rischio iniziale, mentre il piano mensile mantiene la gestione flessibile.
+[IT]
+Il modello è semplice e trasparente.
+Ci sono 14 giorni di prova gratuita per testare tutto, senza rischio.
+Poi un canone mensile prevedibile, calibrato sul numero di pazienti, con disdetta quando vuoi.
+[EN-GB]
+The model is simple and transparent.
+You get 14 days of free trial to test everything, with no risk.
+Then a predictable monthly fee, scaled to the number of patients, with the freedom to cancel at any time.
 -->
 
 ---
@@ -1749,11 +1863,14 @@ class: bg-[#4F46E5] slide-theme-invert
 </style>
 
 <!--
-Arianne e un prodotto Whattadata, spin-off universitario.
-Approccio scientifico, validazione e miglioramento continuo rafforzano la credibilita del progetto.
-
-Arianne is a Whattadata product and a university spin-off.
-Scientific approach, validation, and continuous improvement strengthen the project's credibility.
+[IT]
+Arianne è un prodotto di Whattadata, spin-off universitario.
+Questo significa rigore scientifico, validazione e miglioramento continuo.
+Portiamo strumenti clinici validati nella pratica quotidiana, senza complicare la relazione terapeutica.
+[EN-GB]
+Arianne is a Whattadata product, a university spin-out.
+That means scientific rigour, validation and continuous improvement.
+We bring clinically validated tools into everyday practice, without complicating the therapeutic relationship.
 -->
 
 ---
@@ -1841,8 +1958,14 @@ class: relative p-0
 </style>
 
 <!--
-Il progetto e sviluppato in collaborazione con il Dipartimento di Psicologia dell'Universita di Padova e con i Dipartimenti di Psicologia e di Informatica, Sistemistica e Comunicazione dell'Universita degli Studi di Milano-Bicocca.
-Queste collaborazioni tengono allineati rigore clinico, metodo scientifico e sviluppo tecnologico.
+[IT]
+Il progetto è sviluppato con una rete accademica solida.
+Collaboriamo con l'Università di Padova e con l'Università di Milano-Bicocca, tra psicologia e informatica.
+Questo ci permette di far evolvere il prodotto con metodo: clinica, dati e tecnologia nello stesso percorso.
+[EN-GB]
+The project is developed with a strong academic network.
+We collaborate with the University of Padua and the University of Milano-Bicocca, across psychology and computer science.
+That lets the product evolve with method: clinical practice, data and technology in one coherent journey.
 -->
 
 ---
@@ -1859,9 +1982,10 @@ class: relative p-0
 </div>
 
 <!--
-Grazie per l'attenzione.
-Ora sono disponibile per domande.
-
-Thank you for your attention.
-I am now happy to take questions.
+[IT]
+Arianne.
+Tecnologia al servizio del benessere.
+[EN-GB]
+Arianne.
+Technology in the service of wellbeing.
 -->
