@@ -1232,14 +1232,18 @@ class: relative h-full flex flex-col
 
 Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
 
+<script setup>
+const mobileScreens = [
+  { src: `${import.meta.env.BASE_URL}img/16/01-home.png`, alt: 'App mobile - Home' },
+  { src: `${import.meta.env.BASE_URL}img/16/02-diary.png`, alt: 'App mobile - Diario 1' },
+  { src: `${import.meta.env.BASE_URL}img/16/04-psycoeducation.png`, alt: 'App mobile - Psicoeducazione' },
+  { src: `${import.meta.env.BASE_URL}img/16/05-exercises.png`, alt: 'App mobile - Esercizi' },
+]
+</script>
+
 <div class="relative mt-6 flex justify-center items-end gap-2">
   <div
-    v-for="(screen, idx) in [
-      { src: '/img/16/01-home.png', alt: 'App mobile - Home' },
-      { src: '/img/16/02-diary.png', alt: 'App mobile - Diario 1' },
-      { src: '/img/16/04-psycoeducation.png', alt: 'App mobile - Psicoeducazione' },
-      { src: '/img/16/05-exercises.png', alt: 'App mobile - Esercizi' },
-    ]"
+    v-for="(screen, idx) in mobileScreens"
     :key="screen.src"
     class="relative w-[19%] flex justify-center"
     v-motion
