@@ -4,7 +4,7 @@ titleTemplate: '%s'
 name: arianne-cover
 layout: default
 class: relative p-0
-routerMode: hash
+routerMode: history
 ---
 
 <div class="w-full h-full relative cover-animated">

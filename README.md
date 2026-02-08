@@ -1,14 +1,24 @@
 # Welcome to [Slidev](https://github.com/slidevjs/slidev)!
 
+Prerequisiti:
+
+- Node.js 20+
+
 To start the slide show:
 
 - `pnpm install`
 - `pnpm dev`
-- visit <http://localhost:3030>
+- visit <http://localhost:8080>
 
 Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
+
+## Audio per slide
+
+- L'audio viene risolto dal `name` nel frontmatter della slide (API route metadata di Slidev).
+- Path cercati in ordine: `public/audio_test/<name>/audio.mp3`, poi `public/audio/<name>/audio.mp3`.
+- Se cambi `name`, aggiorna anche la cartella audio corrispondente.
 
 ## Deploy su GitHub Pages
 
