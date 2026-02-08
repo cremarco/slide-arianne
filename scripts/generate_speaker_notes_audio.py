@@ -54,11 +54,20 @@ ENGLISH_CONTRACTIONS_RE = re.compile(
     re.IGNORECASE,
 )
 ITALIAN_ACCENTS_RE = re.compile(r"[àèéìòù]", re.IGNORECASE)
+FRONTMATTER_NAME_RE = re.compile(r"^name\s*:\s*(.+?)\s*$", re.IGNORECASE)
+
+
+@dataclass
+class SlideData:
+    slide_number: int
+    name: str | None
+    content: str
 
 
 @dataclass
 class SlideNote:
     slide_number: int
+    slide_name: str
     text: str
 
 
@@ -207,17 +216,43 @@ def normalize_text(text: str) -> str:
     return "\n".join(compact_lines).strip()
 
 
-def strip_headmatter(markdown: str) -> str:
+def parse_frontmatter_name(frontmatter_lines: list[str]) -> str | None:
+    for raw_line in frontmatter_lines:
+        if not raw_line or raw_line[:1].isspace():
+            continue
+
+        stripped = raw_line.strip()
+        if stripped.startswith("#"):
+            continue
+
+        match = FRONTMATTER_NAME_RE.match(stripped)
+        if not match:
+            continue
+
+        value = match.group(1).strip()
+        if not value:
+            return None
+
+        if value[0] in {'"', "'"} and value[-1:] == value[0]:
+            value = value[1:-1].strip()
+        return value or None
+
+    return None
+
+
+def split_headmatter(markdown: str) -> tuple[str | None, str]:
     lines = markdown.splitlines(keepends=True)
     if not lines or lines[0].strip() != SLIDE_SEPARATOR:
-        return markdown
+        return None, markdown
 
     idx = 1
     while idx < len(lines):
         if lines[idx].strip() == SLIDE_SEPARATOR:
-            return "".join(lines[idx + 1 :])
+            headmatter_lines = [line.rstrip("\n") for line in lines[1:idx]]
+            headmatter_name = parse_frontmatter_name(headmatter_lines)
+            return headmatter_name, "".join(lines[idx + 1 :])
         idx += 1
-    return markdown
+    return None, markdown
 
 
 def is_yaml_like_frontmatter_line(line: str) -> bool:
@@ -235,13 +270,16 @@ def is_yaml_like_frontmatter_line(line: str) -> bool:
     return False
 
 
-def consume_slide_frontmatter(lines: list[str], start_idx: int) -> int:
+def consume_slide_frontmatter(
+    lines: list[str],
+    start_idx: int,
+) -> tuple[int, str | None]:
     probe_idx = start_idx
     while probe_idx < len(lines) and not lines[probe_idx].strip():
         probe_idx += 1
 
     if probe_idx >= len(lines):
-        return start_idx
+        return start_idx, None
 
     closing_idx = probe_idx
     while closing_idx < len(lines):
@@ -250,16 +288,16 @@ def consume_slide_frontmatter(lines: list[str], start_idx: int) -> int:
         closing_idx += 1
 
     if closing_idx >= len(lines):
-        return start_idx
+        return start_idx, None
 
     frontmatter_lines = lines[probe_idx:closing_idx]
     if not frontmatter_lines:
-        return start_idx
+        return start_idx, None
 
     has_key = False
     for raw_line in frontmatter_lines:
         if not is_yaml_like_frontmatter_line(raw_line):
-            return start_idx
+            return start_idx, None
         if (
             YAML_TOP_LEVEL_KEY_RE.match(raw_line.strip())
             or YAML_NESTED_KEY_RE.match(raw_line)
@@ -267,15 +305,19 @@ def consume_slide_frontmatter(lines: list[str], start_idx: int) -> int:
             has_key = True
 
     if not has_key:
-        return start_idx
+        return start_idx, None
 
-    return closing_idx + 1
+    name = parse_frontmatter_name([line.rstrip("\n") for line in frontmatter_lines])
+    return closing_idx + 1, name
 
 
-def split_slides(markdown: str) -> list[str]:
-    lines = strip_headmatter(markdown).splitlines(keepends=True)
-    slides: list[str] = []
+def split_slides(markdown: str) -> list[SlideData]:
+    headmatter_name, markdown_without_headmatter = split_headmatter(markdown)
+    lines = markdown_without_headmatter.splitlines(keepends=True)
+    slides: list[SlideData] = []
     current: list[str] = []
+    current_name = headmatter_name
+    slide_number = 0
 
     in_fence = False
     fence_marker = ""
@@ -307,9 +349,20 @@ def split_slides(markdown: str) -> list[str]:
         ):
             slide_content = "".join(current).strip()
             if slide_content:
-                slides.append(slide_content)
+                slide_number += 1
+                slides.append(
+                    SlideData(
+                        slide_number=slide_number,
+                        name=current_name,
+                        content=slide_content,
+                    )
+                )
             current = []
-            maybe_after_frontmatter = consume_slide_frontmatter(lines, index + 1)
+            maybe_after_frontmatter, next_slide_name = consume_slide_frontmatter(
+                lines,
+                index + 1,
+            )
+            current_name = next_slide_name
             index = maybe_after_frontmatter
             continue
 
@@ -318,14 +371,31 @@ def split_slides(markdown: str) -> list[str]:
 
     tail_content = "".join(current).strip()
     if tail_content:
-        slides.append(tail_content)
+        slide_number += 1
+        slides.append(
+            SlideData(
+                slide_number=slide_number,
+                name=current_name,
+                content=tail_content,
+            )
+        )
     return slides
 
 
-def extract_speaker_notes(slides: Iterable[str]) -> list[SlideNote]:
+def sanitize_slide_name(name: str) -> str:
+    compact = re.sub(r"\s+", "-", name.strip().lower())
+    compact = re.sub(r"[^a-z0-9_-]+", "-", compact)
+    compact = re.sub(r"-{2,}", "-", compact)
+    return compact.strip("-_")
+
+
+def extract_speaker_notes(
+    slides: Iterable[SlideData],
+) -> tuple[list[SlideNote], list[int]]:
     notes: list[SlideNote] = []
-    for slide_number, slide_content in enumerate(slides, start=1):
-        matches = list(MULTILINE_NOTE_RE.finditer(slide_content))
+    missing_name_slides: list[int] = []
+    for slide in slides:
+        matches = list(MULTILINE_NOTE_RE.finditer(slide.content))
         if not matches:
             continue
 
@@ -333,8 +403,34 @@ def extract_speaker_notes(slides: Iterable[str]) -> list[SlideNote]:
         if not note_text:
             continue
 
-        notes.append(SlideNote(slide_number=slide_number, text=note_text))
-    return notes
+        if not slide.name:
+            missing_name_slides.append(slide.slide_number)
+            continue
+
+        folder_name = sanitize_slide_name(slide.name)
+        if not folder_name:
+            missing_name_slides.append(slide.slide_number)
+            continue
+
+        notes.append(
+            SlideNote(
+                slide_number=slide.slide_number,
+                slide_name=folder_name,
+                text=note_text,
+            )
+        )
+    return notes, missing_name_slides
+
+
+def find_duplicate_slide_names(notes: Iterable[SlideNote]) -> dict[str, list[int]]:
+    grouped: dict[str, list[int]] = {}
+    for note in notes:
+        grouped.setdefault(note.slide_name, []).append(note.slide_number)
+    return {
+        slide_name: slide_numbers
+        for slide_name, slide_numbers in grouped.items()
+        if len(slide_numbers) > 1
+    }
 
 
 def normalize_language_token(token: str) -> str | None:
@@ -485,8 +581,8 @@ def detect_language(
     return default_language, cleaned_text
 
 
-def build_output_path(audio_dir: Path, slide_number: int) -> Path:
-    return audio_dir / str(slide_number) / "audio.mp3"
+def build_output_path(audio_dir: Path, slide_name: str) -> Path:
+    return audio_dir / slide_name / "audio.mp3"
 
 
 def get_elevenlabs_types() -> tuple[Any, Any]:
@@ -577,11 +673,35 @@ def main() -> int:
 
     markdown = slides_path.read_text(encoding="utf-8")
     slides = split_slides(markdown)
-    notes = extract_speaker_notes(slides)
+    notes, missing_name_slides = extract_speaker_notes(slides)
 
     if not notes:
         print("Nessuna nota relatore trovata.")
         return 0
+
+    if missing_name_slides:
+        missing_values = ", ".join(str(number) for number in missing_name_slides)
+        print(
+            "Errore: alcune slide con note relatore non hanno un campo "
+            f"'name:' valido nel frontmatter (slide: {missing_values}).",
+            file=sys.stderr,
+        )
+        return 1
+
+    duplicate_names = find_duplicate_slide_names(notes)
+    if duplicate_names:
+        print(
+            "Errore: ci sono valori 'name:' duplicati tra le slide con note "
+            "relatore.",
+            file=sys.stderr,
+        )
+        for slide_name, slide_numbers in sorted(duplicate_names.items()):
+            number_list = ", ".join(str(number) for number in slide_numbers)
+            print(
+                f" - {slide_name}: slide {number_list}",
+                file=sys.stderr,
+            )
+        return 1
 
     generated = 0
     skipped = 0
@@ -611,11 +731,11 @@ def main() -> int:
     print(f"Output audio: {audio_dir}")
 
     for item in notes:
-        output_path = build_output_path(audio_dir, item.slide_number)
+        output_path = build_output_path(audio_dir, item.slide_name)
         if output_path.exists() and not args.overwrite:
             print(
-                f"[SKIP] slide {item.slide_number}: audio gia presente "
-                f"({output_path})"
+                f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
+                f"audio gia presente ({output_path})"
             )
             skipped += 1
             continue
@@ -629,7 +749,8 @@ def main() -> int:
 
         if not cleaned_note:
             print(
-                f"[SKIP] slide {item.slide_number}: nota vuota dopo cleaning."
+                f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
+                "nota vuota dopo cleaning."
             )
             skipped += 1
             continue
@@ -639,7 +760,8 @@ def main() -> int:
             if len(preview) > 80:
                 preview = preview[:77] + "..."
             print(
-                f"[DRY-RUN] slide {item.slide_number}: lang={language} "
+                f"[DRY-RUN] slide {item.slide_number} ({item.slide_name}): "
+                f"lang={language} "
                 f"voice={voice_id} -> {output_path} | \"{preview}\""
             )
             continue
@@ -667,13 +789,14 @@ def main() -> int:
                             output_file.write(chunk)
             generated += 1
             print(
-                f"[OK] slide {item.slide_number}: lang={language} "
+                f"[OK] slide {item.slide_number} ({item.slide_name}): "
+                f"lang={language} "
                 f"voice={voice_id} -> {output_path}"
             )
         except Exception as exc:  # noqa: BLE001
             failures += 1
             print(
-                f"[ERROR] slide {item.slide_number}: {exc}",
+                f"[ERROR] slide {item.slide_number} ({item.slide_name}): {exc}",
                 file=sys.stderr,
             )
 

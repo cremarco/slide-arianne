@@ -1,7 +1,7 @@
 ---
 title: Arianne - L'ecosistema digitale per la salute mentale
 titleTemplate: '%s'
-name: info
+name: arianne-cover
 layout: default
 class: relative p-0
 routerMode: hash
@@ -986,7 +986,7 @@ Fewer tool switches, more traceability, and faster access to the information you
 
 ---
 layout: default
-name: insights
+name: clinical-insights
 class: relative overflow-hidden
 ---
 # Insight leggibili
@@ -1058,7 +1058,7 @@ That improves adherence, engagement and continuity, without adding complexity.
 
 ---
 layout: default
-name: matching
+name: onboarding-matching
 class: relative
 ---
 
@@ -1225,7 +1225,7 @@ That strengthens privacy and security, and also improves stability and efficienc
 
 ---
 layout: default
-name: user-mobile-app
+name: patient-mobile-app
 class: relative h-full flex flex-col
 ---
 
@@ -1285,7 +1285,7 @@ So therapeutic continuity becomes genuinely portable, without adding extra effor
 
 ---
 layout: default
-name: implementations
+name: integrated-assessments
 ---
 
 # Implementazioni
@@ -1775,7 +1775,7 @@ Arianne combines access, the therapeutic relationship and clinical tools in a si
 
 ---
 layout: default
-name: business-model
+name: pricing-model
 class: relative
 ---
 
@@ -1985,7 +1985,7 @@ That lets the product evolve with method: clinical practice, data and technology
 -->
 
 ---
-name: outro
+name: arianne-outro
 layout: default
 class: relative p-0
 ---
