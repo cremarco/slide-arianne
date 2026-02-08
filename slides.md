@@ -4,6 +4,7 @@ titleTemplate: '%s'
 name: info
 layout: default
 class: relative p-0
+routerMode: hash
 ---
 
 <div class="w-full h-full relative cover-animated">
