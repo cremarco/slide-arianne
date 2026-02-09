@@ -1,0 +1,78 @@
+DIMENSIONI IMMAGINI PER CLI SLIDE (Larghezza x Altezza in pixel)
+Per evitare sfocature o ridimensionamenti, le immagini dovrebbero avere esattamente queste dimensioni.
+
+-----------------------------------------------------------
+SLIDE 2: Product Vision (iMac)
+-----------------------------------------------------------
+img/2/home.jpeg
+👉 Dimensioni: 1355 x 770 (16:9 approx)
+
+-----------------------------------------------------------
+SLIDE 3: Project Overview (Paziente e Terapeuta a tutta altezza)
+-----------------------------------------------------------
+img/3/enzo-pc.png
+img/3/anna-rita-pc.jpg
+👉 Dimensioni: 960 x 1080 (Metà schermo verticale)
+
+-----------------------------------------------------------
+SLIDE 6: Dashboard Overview (Dashboard Terapeuta)
+-----------------------------------------------------------
+img/7/therapist-dashboard.png   (iMac Sinistra)
+img/7/therapist-dashboard-2.png (iMac Destra)
+👉 Dimensioni: 1355 x 770
+
+img/7/therapist-dashboard-3.png (iPad)
+👉 Dimensioni: 1426 x 1076 (4:3 approx)
+
+-----------------------------------------------------------
+SLIDE 7: Clinical Records (Cartella Clinica)
+-----------------------------------------------------------
+img/8/clinical-record.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 8: Assignments (Compiti e Diari)
+-----------------------------------------------------------
+img/9/01-therapist-diaries.png
+img/9/02-open-therapist-diary.png
+img/9/03-therapist-exercises-to-assign-list.png
+img/9/04-assessments.png
+img/9/05-bipolar-disorders.png
+img/9/06-therapist-assessment-questions-and-answers.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 9: Agenda and Notes (Agenda e Note)
+-----------------------------------------------------------
+img/10/01-therapist-agenda.png
+img/10/02-therapist-notes.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 10: Clinical Insights (Insight e Metriche)
+-----------------------------------------------------------
+img/11/01-assessment-metrics.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 12: Onboarding Matching (Onboarding)
+-----------------------------------------------------------
+img/13/01-question.png
+img/13/02-question.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 13: Patient Web Overview (Web App Paziente)
+-----------------------------------------------------------
+img/14/patient-dashboard-home.png
+img/14/patient-calendar.png
+👉 Dimensioni: 1355 x 770
+
+-----------------------------------------------------------
+SLIDE 15: Patient Mobile App (App Mobile)
+-----------------------------------------------------------
+img/16/01-home.png
+img/16/02-diary.png
+img/16/04-psycoeducation.png
+img/16/05-exercises.png
+👉 Dimensioni: 614 x 1337
