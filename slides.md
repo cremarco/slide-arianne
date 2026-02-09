@@ -404,7 +404,7 @@ class: relative overflow-hidden p-0
   <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
     <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
     <div class="slide-text mb-6">
-      Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale</strong>
+      Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale.</strong>
       <br />
       <br />
       Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>.
@@ -493,39 +493,42 @@ class: relative h-full flex flex-col
 
 **Due ambienti**, un **percorso condiviso**.
 
-<div v-click class="hidden"></div>
+
 
 <div class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
-    v-for="card in projectCards"
+    v-for="(card, index) in projectCards"
     :key="card.title"
     :title="card.title"
     :icon="card.icon"
-    v-click
-    :v-motion="cardMotion"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 250,
+        damping: 20,
+        delay: 16000 + (index * 800)
+      }
+    }"
   >
     <span v-html="card.description"></span>
   </ProjectCard>
 </div>
 
 <script setup lang="ts">
-const cardMotion = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    scale: 0.9,
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 250,
-      damping: 20,
-    },
-  },
-}
+import { ref, onMounted } from 'vue'
+
+const curtainOpen = ref(false)
+
+onMounted(() => {
+  setTimeout(() => {
+    curtainOpen.value = true
+  }, 15000)
+})
 
 const projectCards = [
   {
@@ -553,7 +556,7 @@ const projectCards = [
   <!-- EnzoWrapper -->
   <div 
     class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
-    :class="$slidev.nav.clicks > 0 ? '-translate-x-full' : 'translate-x-0'"
+    :class="curtainOpen ? '-translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
       <div class="bg-[#ff8c42] bg-opacity-100 text-white text-center px-6 py-2 rounded-lg shadow-lg leading-tight">
@@ -571,7 +574,7 @@ const projectCards = [
   <!-- AnnaRitaWrapper -->
   <div 
     class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
-    :class="$slidev.nav.clicks > 0 ? 'translate-x-full' : 'translate-x-0'"
+    :class="curtainOpen ? 'translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
       <div class="bg-[#006279] bg-opacity-100 text-white text-center px-6 py-2 rounded-lg shadow-lg leading-tight">
@@ -608,17 +611,28 @@ class: relative h-full flex flex-col
 
 Pensata per **professionisti della salute mentale** e **pazienti**, in **presenza** o **online**.
 
-<div v-click class="hidden"></div>
+
 
 
 <div class="grid grid-cols-2 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
-    v-for="card in projectCards"
+    v-for="(card, index) in projectCards"
     :key="card.title"
     :title="card.title"
     :icon="card.icon"
-    v-click
-    :v-motion="cardMotion"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 250,
+        damping: 20,
+        delay: 5000 + (index * 8000)
+      }
+    }"
   >
     <span v-html="card.description"></span>
   </ProjectCard>
