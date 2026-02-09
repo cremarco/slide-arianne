@@ -399,7 +399,31 @@ layout: default
 class: relative overflow-hidden p-0
 ---
 
-<div class="flex h-full">
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const audioStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  audioStarted.value = false
+  stopAudioListener = onAudioStartedFor('product-vision', () => {
+    audioStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  audioStarted.value = false
+})
+</script>
+
+<div class="flex h-full" :class="{ 'product-vision--audio-started': audioStarted }">
   <!-- Text Column (3/5) -->
   <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
     <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
@@ -428,16 +452,27 @@ class: relative overflow-hidden p-0
 
 <style scoped>
 .logo-animation {
-  animation: logo-entry 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.product-vision--audio-started .logo-animation {
+  animation: logo-entry v-bind('timings.slide2.logoEntryDuration + "ms"') ease-out forwards;
 }
 
 .computer-image {
   opacity: 0;
-  animation: slide-in-right 1s ease-out forwards 0.3s;
+}
+
+.product-vision--audio-started .computer-image {
+  animation: slide-in-right v-bind('timings.slide2.computerSlideInDuration + "ms"') ease-out forwards v-bind('timings.slide2.computerSlideInDelay + "ms"');
 }
 
 .scrolling-image {
-  animation: scroll-vertical 40s ease-in-out infinite alternate;
+  object-position: top;
+}
+
+.product-vision--audio-started .scrolling-image {
+  animation: scroll-vertical v-bind('timings.slide2.scrollingImageDuration + "ms"') ease-in-out infinite alternate;
 }
 
 @keyframes scroll-vertical {
@@ -495,7 +530,7 @@ class: relative h-full flex flex-col
 
 
 
-<div class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
+<div v-if="contentTimelineStarted" class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
     v-for="(card, index) in projectCards"
     :key="card.title"
@@ -511,7 +546,7 @@ class: relative h-full flex flex-col
         type: 'spring',
         stiffness: 250,
         damping: 20,
-        delay: 16000 + (index * 800)
+        delay: timings.slide3.cardBaseDelay + (index * timings.slide3.cardStagger)
       }
     }"
   >
@@ -520,14 +555,42 @@ class: relative h-full flex flex-col
 </div>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { ref } from 'vue'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
 
 const curtainOpen = ref(false)
+const contentTimelineStarted = ref(false)
+let curtainTimer: ReturnType<typeof setTimeout> | null = null
+let stopAudioListener: (() => void) | null = null
 
-onMounted(() => {
-  setTimeout(() => {
+const startContentTimeline = () => {
+  if (contentTimelineStarted.value) return
+
+  contentTimelineStarted.value = true
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = setTimeout(() => {
     curtainOpen.value = true
-  }, 15000)
+  }, timings.slide3.curtainOpenDelay)
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  curtainOpen.value = false
+  contentTimelineStarted.value = false
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = null
+  stopAudioListener = onAudioStartedFor('project-overview', startContentTimeline, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = null
+  curtainOpen.value = false
+  contentTimelineStarted.value = false
 })
 
 const projectCards = [
@@ -555,7 +618,8 @@ const projectCards = [
 <div class="absolute inset-0 z-50 flex pointer-events-none">
   <!-- EnzoWrapper -->
   <div 
-    class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
+    class="relative w-1/2 h-full transition-transform ease-in-out"
+    :style="{ transitionDuration: timings.slide3.curtainTransitionDuration + 'ms' }"
     :class="curtainOpen ? '-translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
@@ -573,7 +637,8 @@ const projectCards = [
   
   <!-- AnnaRitaWrapper -->
   <div 
-    class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
+    class="relative w-1/2 h-full transition-transform ease-in-out"
+    :style="{ transitionDuration: timings.slide3.curtainTransitionDuration + 'ms' }"
     :class="curtainOpen ? 'translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
@@ -614,7 +679,7 @@ Pensata per **professionisti della salute mentale** e **pazienti**, in **presenz
 
 
 
-<div class="grid grid-cols-2 gap-6 mt-12 text-left flex-1 content-center">
+<div v-if="contentTimelineStarted" class="grid grid-cols-2 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
     v-for="(card, index) in projectCards"
     :key="card.title"
@@ -630,7 +695,7 @@ Pensata per **professionisti della salute mentale** e **pazienti**, in **presenz
         type: 'spring',
         stiffness: 250,
         damping: 20,
-        delay: 5000 + (index * 8000)
+        delay: timings.slide4.cardBaseDelay + (index * timings.slide4.cardStagger)
       }
     }"
   >
@@ -639,23 +704,27 @@ Pensata per **professionisti della salute mentale** e **pazienti**, in **presenz
 </div>
 
 <script setup lang="ts">
-const cardMotion = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    scale: 0.9,
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 250,
-      damping: 20,
-    },
-  },
-}
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('target-users', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
 
 const projectCards = [
   {
@@ -722,18 +791,41 @@ name: dashboard-overview
 class: relative
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('dashboard-overview', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+</script>
+
 # Dashboard
 
 Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno amministrazione**, **più tempo per la cura**.
 
-<div class="dashboard-showcase relative mt-8 flex justify-center items-center gap-6">
+<div v-if="contentTimelineStarted" class="dashboard-showcase relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
   <div 
     class="dashboard-shell relative flex justify-center"
-    v-click="1"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.desktopBaseDelay } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -747,10 +839,9 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   <!-- iMac 2 -->
   <div 
     class="dashboard-shell relative flex justify-center"
-    v-click="2"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.desktopBaseDelay + timings.slide6.desktopStagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -765,10 +856,9 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   <div class="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
     <div 
       class="dashboard-tablet relative"
-      v-click="3"
       v-motion
       :initial="{ y: 110, opacity: 0, scale: 0.9 }"
-      :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+      :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.tabletDelay } }"
     >
       <img src="/img/ipad.png" class="w-full relative z-20" />
       <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-start justify-start rounded-[4px] device-screen bg-white">
@@ -819,10 +909,12 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 [IT]
 La dashboard è il punto di controllo quotidiano.
 In un colpo d'occhio vedi pazienti, appuntamenti, attività e comunicazioni.
+L'interfaccia è semplice e guidata, quindi è utilizzabile con naturalezza anche da chi ha meno dimestichezza con la tecnologia.
 Capisci cosa richiede attenzione e arrivi alla seduta con più contesto e meno frizione.
 [EN-GB]
 The dashboard is your daily control centre.
 At a glance you see patients, appointments, activities and communications.
+The interface is simple and guided, so it feels natural to use even for people with less confidence with technology.
 You can tell what needs attention, and you go into each session with more context and less friction.
 -->
 
@@ -877,48 +969,85 @@ class: relative overflow-hidden
 
 Nella sezione **Compiti**, il terapeuta assegna **attività personalizzate** tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
 
-<div v-click="1" class="hidden"></div>
-<div v-click="2" class="hidden"></div>
-<div v-click="3" class="hidden"></div>
-<div v-click="4" class="hidden"></div>
-<div v-click="5" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimers: ReturnType<typeof setTimeout>[] = []
+
+const clearShotTimers = () => {
+  for (const timer of shotTimers) clearTimeout(timer)
+  shotTimers = []
+}
+
+const scheduleShots = () => {
+  clearShotTimers()
+  activeShotIndex.value = 0
+
+  for (let step = 1; step <= 5; step += 1) {
+    const delay = timings.slide8.shotBaseDelay + ((step - 1) * timings.slide8.shotStagger)
+    const timer = setTimeout(() => {
+      activeShotIndex.value = step
+    }, delay)
+    shotTimers.push(timer)
+  }
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimers()
+  stopAudioListener = onAudioStartedFor('assignments', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimers()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/9/01-therapist-diaries.png"
         alt="Compiti - diari"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 1"
+        v-show="activeShotIndex === 1"
         src="/img/9/02-open-therapist-diary.png"
         alt="Compiti - dettaglio diario"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 2"
+        v-show="activeShotIndex === 2"
         src="/img/9/03-therapist-exercises-to-assign-list.png"
         alt="Compiti - lista esercizi"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 3"
+        v-show="activeShotIndex === 3"
         src="/img/9/04-assessments.png"
         alt="Compiti - valutazioni"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 4"
+        v-show="activeShotIndex === 4"
         src="/img/9/05-bipolar-disorders.png"
         alt="Compiti - questionario specifico"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 5"
+        v-show="activeShotIndex >= 5"
         src="/img/9/06-therapist-assessment-questions-and-answers.png"
         alt="Compiti - domande e risposte"
         class="assignments-shot"
@@ -956,20 +1085,56 @@ class: relative overflow-hidden
 
 Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unico flusso: **appuntamenti**, **eventi** e **appunti** sempre disponibili.
 
-<div v-click="1" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimer: ReturnType<typeof setTimeout> | null = null
+
+const clearShotTimer = () => {
+  if (shotTimer) clearTimeout(shotTimer)
+  shotTimer = null
+}
+
+const scheduleShots = () => {
+  clearShotTimer()
+  activeShotIndex.value = 0
+  shotTimer = setTimeout(() => {
+    activeShotIndex.value = 1
+  }, timings.slide9.shotDelay)
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimer()
+  stopAudioListener = onAudioStartedFor('agenda-and-notes', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimer()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/10/01-therapist-agenda.png"
         alt="Agenda terapeuta"
         class="agenda-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 1"
+        v-show="activeShotIndex >= 1"
         src="/img/10/02-therapist-notes.png"
         alt="Note terapeuta"
         class="agenda-shot"
@@ -1080,20 +1245,56 @@ class: relative
 
 Questionario iniziale e preferenze: il percorso parte dalle informazioni **clinicamente rilevanti**.
 
-<div v-click="1" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimer: ReturnType<typeof setTimeout> | null = null
+
+const clearShotTimer = () => {
+  if (shotTimer) clearTimeout(shotTimer)
+  shotTimer = null
+}
+
+const scheduleShots = () => {
+  clearShotTimer()
+  activeShotIndex.value = 0
+  shotTimer = setTimeout(() => {
+    activeShotIndex.value = 1
+  }, timings.slide12.shotDelay)
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimer()
+  stopAudioListener = onAudioStartedFor('onboarding-matching', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimer()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/13/01-question.png"
         alt="Onboarding - questionario iniziale"
         class="matching-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 1"
+        v-show="activeShotIndex >= 1"
         src="/img/13/02-question.png"
         alt="Onboarding - domanda successiva"
         class="matching-shot"
@@ -1134,14 +1335,37 @@ class: relative h-full flex flex-col
 
 Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **promemoria** e **azioni rapide** sempre disponibili.
 
-<div class="relative mt-8 flex justify-center items-center gap-6">
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('patient-web-overview', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+</script>
+
+<div v-if="contentTimelineStarted" class="relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
   <div 
     class="relative w-[45%] flex justify-center"
-    v-click="1"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide13.desktopBaseDelay } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -1155,10 +1379,9 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
   <!-- iMac 2 -->
   <div 
     class="relative w-[45%] flex justify-center"
-    v-click="2"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide13.desktopBaseDelay + timings.slide13.desktopStagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -1247,7 +1470,29 @@ class: relative h-full flex flex-col
 
 Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
 
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('patient-mobile-app', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+
 const mobileScreens = [
   { src: `${import.meta.env.BASE_URL}img/16/01-home.png`, alt: 'App mobile - Home' },
   { src: `${import.meta.env.BASE_URL}img/16/02-diary.png`, alt: 'App mobile - Diario 1' },
@@ -1256,14 +1501,14 @@ const mobileScreens = [
 ]
 </script>
 
-<div class="relative mt-6 flex justify-center items-end gap-2">
+<div v-if="contentTimelineStarted" class="relative mt-6 flex justify-center items-end gap-2">
   <div
     v-for="(screen, idx) in mobileScreens"
     :key="screen.src"
     class="relative w-[19%] flex justify-center"
     v-motion
     :initial="{ y: 40, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * 80 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * timings.slide16.stagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/iphone.png" class="w-full relative z-20" />
@@ -1909,16 +2154,59 @@ name: academic-logos
 class: relative p-0
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeRevealStep = ref(0)
+let stopAudioListener: (() => void) | null = null
+let revealTimers: ReturnType<typeof setTimeout>[] = []
+
+const clearRevealTimers = () => {
+  for (const timer of revealTimers) clearTimeout(timer)
+  revealTimers = []
+}
+
+const scheduleReveal = () => {
+  clearRevealTimers()
+  activeRevealStep.value = 0
+
+  for (let step = 1; step <= 2; step += 1) {
+    const delay = timings.slide20.revealBaseDelay + ((step - 1) * timings.slide20.revealStagger)
+    const timer = setTimeout(() => {
+      activeRevealStep.value = step
+    }, delay)
+    revealTimers.push(timer)
+  }
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeRevealStep.value = 0
+  clearRevealTimers()
+  stopAudioListener = onAudioStartedFor('academic-logos', scheduleReveal, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearRevealTimers()
+  activeRevealStep.value = 0
+})
+</script>
+
 <div class="w-full h-full flex items-center justify-center">
   <div class="logos-row">
-    <div v-click="1" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 1 }">
       <img
         src="/img/21/padua/University%20of%20Padova%20UNIPD.svg"
         alt="Universita di Padova"
         class="institution-logo"
       />
     </div>
-    <div v-click="2" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/psicology/Psicologia-POS.svg"
         alt="Universita di Milano-Bicocca - Psicologia"
@@ -1930,7 +2218,7 @@ class: relative p-0
         class="institution-logo logo-dark"
       />
     </div>
-    <div v-click="2" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS.svg"
         alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
@@ -1961,6 +2249,14 @@ class: relative p-0
   align-items: center;
   justify-content: center;
   min-height: clamp(6.5rem, 11vh, 8.5rem);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.logo-slot--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .institution-logo {
@@ -1996,6 +2292,50 @@ Questo ci permette di far evolvere il prodotto con metodo: clinica, dati e tecno
 The project is developed with a strong academic network.
 We collaborate with the University of Padua and the University of Milano-Bicocca, across psychology and computer science.
 That lets the product evolve with method: clinical practice, data and technology in one coherent journey.
+-->
+
+---
+layout: default
+name: academic-research-solutions
+class: relative
+---
+
+# Collaborazione accademica e ricerca applicata
+
+<div class="slide-text max-w-5xl opacity-95 mb-8">
+  Insieme all'accademia stiamo costruendo <strong>soluzioni di ricerca</strong> che miglioreranno ulteriormente Arianne:
+  sistemi di <strong>supporto alle decisioni</strong> e sistemi di <strong>IA</strong> progettati per affiancare il professionista.
+</div>
+
+<div class="grid grid-cols-3 gap-4 mt-2">
+  <ProjectCard title="Supporto decisionale" icon="i-heroicons-light-bulb">
+    Analisi strutturata di dati clinici, questionari e diario per evidenziare pattern, priorità e ipotesi da approfondire.
+  </ProjectCard>
+
+  <ProjectCard title="Sistemi IA clinici" icon="i-heroicons-cpu-chip">
+    Approcci RAG su conoscenza validata (ICD-11), per supportare il ragionamento diagnostico e differenziale in modo contestualizzato.
+  </ProjectCard>
+
+  <ProjectCard title="Evoluzione responsabile" icon="i-heroicons-shield-check">
+    Supervisione umana, validazione con professionisti e criteri etici per integrare l'IA in modo sicuro nella pratica clinica.
+  </ProjectCard>
+</div>
+
+<div class="slide-text mt-7 opacity-80">
+  Obiettivo: trasformare la ricerca in funzionalità concrete che aumentano qualità, continuità ed efficacia del percorso terapeutico.
+</div>
+
+<!--
+[IT]
+La collaborazione con l'accademia non è solo istituzionale: è un motore di ricerca e sviluppo.
+Anche sulla base di articoli scientifici recenti, stiamo costruendo sistemi IA di supporto alle decisioni cliniche, fondati su conoscenza validata come ICD-11 e con supervisione umana.
+L'obiettivo è portare nella piattaforma strumenti che aiutino il professionista a leggere meglio i dati, gestire casi complessi e migliorare continuità e qualità del percorso.
+In sintesi: ricerca applicata che diventa impatto clinico concreto.
+[EN-GB]
+Our academic collaboration is not only institutional: it is a research and development engine.
+Also building on recent scientific literature, we are developing AI decision-support systems grounded in validated knowledge such as ICD-11 and designed for human oversight.
+The goal is to bring tools into the platform that help professionals interpret data better, handle complex cases, and improve continuity and quality of care.
+In short: applied research becoming concrete clinical impact.
 -->
 
 ---

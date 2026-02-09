@@ -1,5 +1,6 @@
 import { defineAppSetup } from '@slidev/types'
 import slidesMarkdown from '../slides.md?raw'
+import { emitAudioStart } from './audio-sync'
 
 const SLIDE_SEPARATOR = '---'
 const YAML_TOP_LEVEL_KEY_RE = /^[A-Za-z_][A-Za-z0-9_-]*\s*:/
@@ -268,6 +269,18 @@ export default defineAppSetup(({ router }) => {
 
         const audio = new Audio(audioPath)
         currentAudio = audio
+        let audioStartNotified = false
+        const notifyAudioStart = () => {
+            if (audioStartNotified || requestId !== playbackRequestId) return
+            audioStartNotified = true
+            emitAudioStart({
+                slideNumber,
+                audioFolderName,
+                startedAt: performance.now(),
+                requestId,
+            })
+        }
+        audio.addEventListener('playing', notifyAudioStart, { once: true })
 
         if (!isFallback) {
             let fallbackTriggered = false
