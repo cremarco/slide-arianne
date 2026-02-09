@@ -15,7 +15,7 @@ img/3/anna-rita-pc.jpg
 👉 Dimensioni: 960 x 1080 (Metà schermo verticale)
 
 -----------------------------------------------------------
-SLIDE 6: Dashboard Overview (Dashboard Terapeuta)
+SLIDE 7: Dashboard Overview (Dashboard Terapeuta)
 -----------------------------------------------------------
 img/7/therapist-dashboard.png   (iMac Sinistra)
 img/7/therapist-dashboard-2.png (iMac Destra)
@@ -25,13 +25,13 @@ img/7/therapist-dashboard-3.png (iPad)
 👉 Dimensioni: 1426 x 1076 (4:3 approx)
 
 -----------------------------------------------------------
-SLIDE 7: Clinical Records (Cartella Clinica)
+SLIDE 8: Clinical Records (Cartella Clinica)
 -----------------------------------------------------------
 img/8/clinical-record.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 8: Assignments (Compiti e Diari)
+SLIDE 9: Assignments (Compiti e Diari)
 -----------------------------------------------------------
 img/9/01-therapist-diaries.png
 img/9/02-open-therapist-diary.png
@@ -42,34 +42,34 @@ img/9/06-therapist-assessment-questions-and-answers.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 9: Agenda and Notes (Agenda e Note)
+SLIDE 10: Agenda and Notes (Agenda e Note)
 -----------------------------------------------------------
 img/10/01-therapist-agenda.png
 img/10/02-therapist-notes.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 10: Clinical Insights (Insight e Metriche)
+SLIDE 11: Clinical Insights (Insight e Metriche)
 -----------------------------------------------------------
 img/11/01-assessment-metrics.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 12: Onboarding Matching (Onboarding)
+SLIDE 13: Onboarding Matching (Onboarding)
 -----------------------------------------------------------
 img/13/01-question.png
 img/13/02-question.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 13: Patient Web Overview (Web App Paziente)
+SLIDE 14: Patient Web Overview (Web App Paziente)
 -----------------------------------------------------------
 img/14/patient-dashboard-home.png
 img/14/patient-calendar.png
 👉 Dimensioni: 1355 x 770
 
 -----------------------------------------------------------
-SLIDE 15: Patient Mobile App (App Mobile)
+SLIDE 16: Patient Mobile App (App Mobile)
 -----------------------------------------------------------
 img/16/01-home.png
 img/16/02-diary.png
