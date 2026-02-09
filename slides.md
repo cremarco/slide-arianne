@@ -2202,31 +2202,31 @@ onSlideLeave(() => {
     <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 1 }">
       <img
         src="/img/21/padua/University%20of%20Padova%20UNIPD.svg"
-        alt="Universita di Padova"
+        alt="Università di Padova"
         class="institution-logo"
       />
     </div>
     <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/psicology/Psicologia-POS.svg"
-        alt="Universita di Milano-Bicocca - Psicologia"
+        alt="Università di Milano-Bicocca - Psicologia"
         class="institution-logo logo-light"
       />
       <img
         src="/img/21/psicology/Psicologia-POS-dark.svg"
-        alt="Universita di Milano-Bicocca - Psicologia"
+        alt="Università di Milano-Bicocca - Psicologia"
         class="institution-logo logo-dark"
       />
     </div>
     <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS.svg"
-        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        alt="Università di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
         class="institution-logo logo-light"
       />
       <img
         src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS-dark.svg"
-        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        alt="Università di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
         class="institution-logo logo-dark"
       />
     </div>

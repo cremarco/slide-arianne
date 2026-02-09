@@ -1,67 +1,90 @@
-# Audio Generation Script
+# Generazione Audio Dalle Note Relatore
 
-Questo script (`generate_speaker_notes_audio.py`) permette di generare automaticamente i file audio per le slide a partire dalle note del relatore, utilizzando le API di ElevenLabs.
+Lo script `generate_speaker_notes_audio.py` genera i file audio partendo dalle note relatore (`<!-- ... -->`) in `slides.md`.
 
 ## Prerequisiti
 
-1.  **Python 3.10+** installato.
-2.  Chiave API di **ElevenLabs**.
+- Python 3.10+
+- API key ElevenLabs
 
-## Installazione Dipendenze
-
-È consigliato creare un virtual environment ed installare le dipendenze:
+## Setup rapido
 
 ```bash
 cd scripts
-python3 -m venv venv
-source venv/bin/activate  # Su Windows: venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install elevenlabs python-dotenv
 ```
 
-## Configurazione
-
-Crea un file `.env` nella cartella root del progetto (o nella cartella scripts) con la tua API Key:
+In `.env` (root progetto o cartella `scripts`):
 
 ```env
-ELEVENLABS_API_KEY=tue_api_key_qui
+ELEVENLABS_API_KEY=la_tua_api_key
 ```
 
-In alternativa puoi passare la chiave via riga di comando con `--api-key`.
+## Uso base
 
-## Utilizzo
-
-Esegui lo script dalla root del progetto:
+Dalla root del progetto:
 
 ```bash
 python3 scripts/generate_speaker_notes_audio.py
 ```
 
-### Argomenti Principali
-
--   `--slides`: Percorso al file markdown delle slide (default: `slides.md`).
--   `--audio-dir`: Cartella di output (default: `audio` o `public/audio`).
--   `--dry-run`: Esegui senza chiamare le API (stampa solo cosa farebbe).
--   `--overwrite`: Sovrascrivi i file audio esistenti.
--   `--language`: Forza una lingua (`it`, `en` o `auto`).
--   `--it-voice-id`: ID voce per l'italiano.
--   `--en-voice-id`: ID voce per l'inglese.
-
-### Esempi
-
-**Preview delle operazioni (Dry Run):**
+Preview senza chiamate API:
 
 ```bash
 python3 scripts/generate_speaker_notes_audio.py --dry-run
 ```
 
-**Generazione audio forzando la sovrascrittura:**
+## Comportamento
+
+- Processa solo slide con note relatore non vuote.
+- Usa il campo `name` del frontmatter per creare il path output:
+  - `public/audio/<name>/audio.mp3` (default)
+- Se rileva limiti piano free, attiva fallback automatico:
+  - voce free-tier
+  - output in `public/audio_test` (se `--audio-dir` non è specificato)
+- Non sovrascrive file già presenti: li marca come `SKIP`.
+- Rileva lingua automaticamente (`it`/`en`) con supporto a marker:
+  - prefisso riga, es. `[IT]`, `[EN]`, `language: it`
+  - sezioni dedicate, es. `[IT] ... [EN] ...`
+
+## Opzioni CLI
+
+| Opzione | Descrizione |
+| --- | --- |
+| `--slides` | File markdown slide (default: `slides.md`) |
+| `--audio-dir` | Cartella output audio (default: `public/audio`) |
+| `--api-key` | API key ElevenLabs (priorità su `.env`) |
+| `--model-id` | Modello ElevenLabs (default: `eleven_multilingual_v2`) |
+| `--output-format` | Formato output (default: `mp3_44100_128`) |
+| `--language` | `auto`, `it`, `en` |
+| `--default-language` | Fallback lingua per auto-detect (`it`/`en`) |
+| `--no-language-code` | Non invia `language_code` alla API |
+| `--stability` | Voice setting stability |
+| `--similarity-boost` | Voice setting similarity boost |
+| `--style` | Voice setting style |
+| `--speed` | Voice setting speed |
+| `--no-speaker-boost` | Disabilita `use_speaker_boost` |
+| `--enable-logging` | Abilita logging ElevenLabs lato API |
+| `--dry-run` | Simulazione senza generare audio |
+
+## Esempi
+
+Forzare lingua italiana:
 
 ```bash
-python3 scripts/generate_speaker_notes_audio.py --overwrite
+python3 scripts/generate_speaker_notes_audio.py --language it
 ```
 
-**Specificare una voce diversa per l'italiano:**
+Output custom:
 
 ```bash
-python3 scripts/generate_speaker_notes_audio.py --it-voice-id "ID_VOCE_ALTERNATIVA"
+python3 scripts/generate_speaker_notes_audio.py --audio-dir public/audio_custom
+```
+
+Controllo veloce pipeline:
+
+```bash
+python3 scripts/generate_speaker_notes_audio.py --dry-run --default-language en
 ```

@@ -782,6 +782,93 @@ def resolve_api_key(cli_api_key: str | None) -> str:
     return ""
 
 
+def select_voice_id(language: str, *, use_free_tier_voice: bool) -> str:
+    if use_free_tier_voice:
+        return DEFAULT_FREE_TIER_VOICE_ID
+    return DEFAULT_IT_VOICE_ID if language == "it" else DEFAULT_EN_VOICE_ID
+
+
+def build_note_preview(text: str, max_length: int = 80) -> str:
+    preview = text.replace("\n", " ")
+    if len(preview) <= max_length:
+        return preview
+    return preview[: max_length - 3] + "..."
+
+
+def report_existing_audio(item: SlideNote, output_path: Path) -> bool:
+    if not output_path.exists():
+        return False
+
+    print(
+        f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
+        f"audio gia presente ({output_path})"
+    )
+    return True
+
+
+def write_audio_stream(output_path: Path, audio_stream: Any) -> None:
+    with output_path.open("wb") as output_file:
+        if isinstance(audio_stream, (bytes, bytearray)):
+            output_file.write(audio_stream)
+            return
+
+        for chunk in audio_stream:
+            if isinstance(chunk, (bytes, bytearray)) and chunk:
+                output_file.write(chunk)
+
+
+def initialize_elevenlabs_client(
+    *,
+    args: argparse.Namespace,
+    api_key: str,
+    audio_dir: Path,
+) -> tuple[Any, Any, Path, bool, bool]:
+    elevenlabs_type, _ = get_elevenlabs_types()
+    elevenlabs_client = elevenlabs_type(api_key=api_key)
+    voice_settings = build_voice_settings(args)
+    free_tier_fallback_enabled = False
+    free_plan_output_enabled = False
+
+    if args.audio_dir is None:
+        credit_tier = detect_credit_tier_with_probe(
+            client=elevenlabs_client,
+            voice_settings=voice_settings,
+            model_id=args.model_id,
+            output_format=args.output_format,
+            enable_logging=args.enable_logging,
+        )
+        if credit_tier == "free":
+            audio_dir, free_plan_output_enabled = maybe_enable_free_plan_output(
+                args=args,
+                current_audio_dir=audio_dir,
+                already_enabled=free_plan_output_enabled,
+                reason="Crediti free rilevati, output free-plan attivato",
+            )
+            free_tier_fallback_enabled = True
+            print(
+                "[INFO] Voce free selezionata automaticamente: "
+                f"{DEFAULT_FREE_TIER_VOICE_ID}"
+            )
+        elif credit_tier == "paid":
+            print(
+                "[INFO] Crediti pagati rilevati: "
+                f"output audio su {audio_dir}"
+            )
+        else:
+            print(
+                "[WARN] Verifica crediti non disponibile; uso "
+                f"impostazioni default (output: {audio_dir})."
+            )
+
+    return (
+        elevenlabs_client,
+        voice_settings,
+        audio_dir,
+        free_tier_fallback_enabled,
+        free_plan_output_enabled,
+    )
+
+
 def main() -> int:
     args = parse_arguments()
 
@@ -846,39 +933,17 @@ def main() -> int:
             return 1
 
         try:
-            elevenlabs_type, _ = get_elevenlabs_types()
-            elevenlabs_client = elevenlabs_type(api_key=api_key)
-            voice_settings = build_voice_settings(args)
-            if args.audio_dir is None:
-                credit_tier = detect_credit_tier_with_probe(
-                    client=elevenlabs_client,
-                    voice_settings=voice_settings,
-                    model_id=args.model_id,
-                    output_format=args.output_format,
-                    enable_logging=args.enable_logging,
-                )
-                if credit_tier == "free":
-                    audio_dir, free_plan_output_enabled = maybe_enable_free_plan_output(
-                        args=args,
-                        current_audio_dir=audio_dir,
-                        already_enabled=free_plan_output_enabled,
-                        reason="Crediti free rilevati, output free-plan attivato",
-                    )
-                    free_tier_fallback_enabled = True
-                    print(
-                        "[INFO] Voce free selezionata automaticamente: "
-                        f"{DEFAULT_FREE_TIER_VOICE_ID}"
-                    )
-                elif credit_tier == "paid":
-                    print(
-                        "[INFO] Crediti pagati rilevati: "
-                        f"output audio su {audio_dir}"
-                    )
-                else:
-                    print(
-                        "[WARN] Verifica crediti non disponibile; uso "
-                        f"impostazioni default (output: {audio_dir})."
-                    )
+            (
+                elevenlabs_client,
+                voice_settings,
+                audio_dir,
+                free_tier_fallback_enabled,
+                free_plan_output_enabled,
+            ) = initialize_elevenlabs_client(
+                args=args,
+                api_key=api_key,
+                audio_dir=audio_dir,
+            )
         except Exception as exc:  # noqa: BLE001
             print(f"Errore inizializzazione ElevenLabs: {exc}", file=sys.stderr)
             return 1
@@ -889,11 +954,7 @@ def main() -> int:
 
     for item in notes:
         output_path = build_output_path(audio_dir, item.slide_name)
-        if output_path.exists():
-            print(
-                f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
-                f"audio gia presente ({output_path})"
-            )
+        if report_existing_audio(item, output_path):
             skipped += 1
             continue
 
@@ -902,10 +963,10 @@ def main() -> int:
             args.language,
             args.default_language,
         )
-        if free_tier_fallback_enabled:
-            voice_id = DEFAULT_FREE_TIER_VOICE_ID
-        else:
-            voice_id = DEFAULT_IT_VOICE_ID if language == "it" else DEFAULT_EN_VOICE_ID
+        voice_id = select_voice_id(
+            language,
+            use_free_tier_voice=free_tier_fallback_enabled,
+        )
 
         if not cleaned_note:
             print(
@@ -916,9 +977,7 @@ def main() -> int:
             continue
 
         if args.dry_run:
-            preview = cleaned_note.replace("\n", " ")
-            if len(preview) > 80:
-                preview = preview[:77] + "..."
+            preview = build_note_preview(cleaned_note)
             print(
                 f"[DRY-RUN] slide {item.slide_number} ({item.slide_name}): "
                 f"lang={language} "
@@ -942,6 +1001,8 @@ def main() -> int:
                     enable_logging=args.enable_logging,
                 )
             except Exception as exc:  # noqa: BLE001
+                # Switch permanently to the free-tier voice as soon as we detect
+                # a quota/plan limitation during generation.
                 should_fallback = (
                     not free_tier_fallback_enabled
                     and voice_id != DEFAULT_FREE_TIER_VOICE_ID
@@ -960,11 +1021,7 @@ def main() -> int:
                         reason="Crediti/quota insufficienti, output free-plan attivato",
                     )
                 output_path = build_output_path(audio_dir, item.slide_name)
-                if output_path.exists():
-                    print(
-                        f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
-                        f"audio gia presente ({output_path})"
-                    )
+                if report_existing_audio(item, output_path):
                     skipped += 1
                     continue
                 output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -983,13 +1040,7 @@ def main() -> int:
                     language_code=language_code,
                     enable_logging=args.enable_logging,
                 )
-            with output_path.open("wb") as output_file:
-                if isinstance(audio_stream, (bytes, bytearray)):
-                    output_file.write(audio_stream)
-                else:
-                    for chunk in audio_stream:
-                        if isinstance(chunk, (bytes, bytearray)) and chunk:
-                            output_file.write(chunk)
+            write_audio_stream(output_path, audio_stream)
             generated += 1
             print(
                 f"[OK] slide {item.slide_number} ({item.slide_name}): "
