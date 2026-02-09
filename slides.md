@@ -2107,32 +2107,54 @@ class: bg-[#4F46E5] slide-theme-invert
 .highlight {
   position: relative;
   display: inline-block;
-  padding: 0 4px;
+  padding: 0 5px;
   /* Create a stacking context so z-index -1 stays within the span */
+  isolation: isolate;
   z-index: 1;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .highlight::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 2px;
+  bottom: 1px;
   width: 100%;
-  height: 45%;
-  background-color: #A3E635;
+  height: 32%;
+  background: linear-gradient(
+    180deg,
+    rgba(163, 230, 53, 0.15) 0%,
+    rgba(163, 230, 53, 0.58) 48%,
+    rgba(132, 204, 22, 0.85) 100%
+  );
   /* Stay behind the text but inside the .highlight stacking context */
   z-index: -1;
   transform: scaleX(0);
   transform-origin: left;
-  animation: highlight-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.5s;
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(163, 230, 53, 0.3);
+  animation:
+    highlight-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.5s,
+    highlight-settle 280ms ease-out forwards 1.7s;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(132, 204, 22, 0.18);
 }
 
 @keyframes highlight-draw {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
   to {
     transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes highlight-settle {
+  to {
+    opacity: 0.82;
   }
 }
 </style>
