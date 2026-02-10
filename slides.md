@@ -1963,24 +1963,41 @@ class: relative
 }
 
 .cat-cell {
-  @apply px-2 py-1 align-top;
+  @apply px-2 py-1 align-middle;
   overflow: hidden;
+  position: relative;
 }
 
 .cat-badge {
-  @apply grid grid-cols-[auto,1fr] items-start gap-1.5 text-[0.52rem] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200;
+  @apply relative flex items-center text-[0.52rem] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200;
   width: 100%;
-  white-space: nowrap;
+  height: 100%;
+  min-height: 100%;
+  white-space: normal;
   line-height: 1.05;
 }
 
 .cat-badge > span:last-child {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  text-overflow: clip;
+  width: 100%;
+  min-height: 100%;
+  padding-left: 0.5rem;
+  line-height: 1.15;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .cat-icon {
-  @apply text-sm text-orange-500;
+  @apply absolute pointer-events-none text-orange-500/10 dark:text-orange-400/12;
+  top: -0.72rem;
+  left: -1.02rem;
+  font-size: 2.95rem;
+  transform: rotate(-12deg);
 }
 
 .status {
