@@ -940,7 +940,7 @@ class: relative p-0
     <div>
       <h1 class="mb-4">La cartella clinica</h1>
       <div class="slide-text opacity-90">
-        Tutto lo <strong>storico clinico</strong> in un unico spazio: <br /><strong>anamnesi</strong>, <strong>note</strong>, <strong>referti</strong> e <strong>attività</strong>.
+        Tutto lo <strong>storico clinico</strong> in un unico spazio: <br /><strong>anamnesi</strong>, <strong>note</strong> e <strong>attività</strong>.
       </div>
     </div>
     
@@ -962,11 +962,11 @@ class: relative p-0
 
 <!--
 [IT]
-La cartella clinica è il riferimento unico: anamnesi, note, referti, somministrazioni e materiali.
+La cartella clinica è il riferimento unico: anamnesi, note, somministrazioni e materiali.
 Le informazioni non restano disperse in file o chat separate, e diventano sempre recuperabili.
 Questo migliora continuità, qualità della documentazione e sicurezza del dato.
 [EN-GB]
-The clinical record is the single place where everything lives: history, notes, reports, assessments and materials.
+The clinical record is the single place where everything lives: history, notes, assessments and materials.
 Nothing is scattered across files or separate chats, and everything stays easy to retrieve.
 That improves continuity, the quality of documentation, and data security.
 -->
@@ -1560,13 +1560,41 @@ So therapeutic continuity becomes genuinely portable, without adding extra effor
 
 ---
 layout: default
+name: patient-solution-details
+class: relative p-0
+---
+
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--orange overflow-hidden">
+  <div class="ribbons-container">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+  </div>
+
+  <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-center gap-3">
+    <h1 class="section-splash-title !mb-0">I dettagli <br /> della soluzione</h1>
+  </div>
+</div>
+
+<!--
+[IT]
+Da qui entriamo nel dettaglio della soluzione lato paziente.
+Vediamo in modo concreto funzionalita, flussi e strumenti che rendono il percorso continuo.
+[EN-GB]
+From here we move into the patient-side solution details.
+We look concretely at features, flows and tools that keep the journey continuous.
+-->
+
+---
+layout: default
 name: integrated-assessments
 ---
 
 # Strumenti clinici integrati
 
 <div class="slide-text opacity-90 mb-8">
-  <strong>29 questionari integrati</strong>, diario cognitivo, comportamentale, del sonno, del mattino e molto altro.
+  <strong>29 questionari integrati</strong>, diario cognitivo-comportamentale, diario del sonno (mattino), diario del sonno (sera) e molto altro.
 </div>
 
 <div class="implementations-grid grid grid-cols-2 lg:grid-cols-3 gap-4 text-left mt-4">
