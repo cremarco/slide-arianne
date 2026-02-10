@@ -193,6 +193,14 @@ def parse_arguments() -> argparse.Namespace:
         help="Disabilita voice setting use_speaker_boost.",
     )
     parser.add_argument(
+        "--force-free-voice",
+        action="store_true",
+        help=(
+            "Forza l'uso della voce free-tier "
+            f"({DEFAULT_FREE_TIER_VOICE_ID}) per tutte le slide."
+        ),
+    )
+    parser.add_argument(
         "--enable-logging",
         action="store_true",
         help=(
@@ -829,6 +837,20 @@ def initialize_elevenlabs_client(
     free_tier_fallback_enabled = False
     free_plan_output_enabled = False
 
+    if args.force_free_voice:
+        free_tier_fallback_enabled = True
+        print(
+            "[INFO] Voce free forzata via CLI: "
+            f"{DEFAULT_FREE_TIER_VOICE_ID}"
+        )
+        return (
+            elevenlabs_client,
+            voice_settings,
+            audio_dir,
+            free_tier_fallback_enabled,
+            free_plan_output_enabled,
+        )
+
     if args.audio_dir is None:
         credit_tier = detect_credit_tier_with_probe(
             client=elevenlabs_client,
@@ -965,7 +987,9 @@ def main() -> int:
         )
         voice_id = select_voice_id(
             language,
-            use_free_tier_voice=free_tier_fallback_enabled,
+            use_free_tier_voice=(
+                args.force_free_voice or free_tier_fallback_enabled
+            ),
         )
 
         if not cleaned_note:

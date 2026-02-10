@@ -402,28 +402,37 @@ class: relative overflow-hidden p-0
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onSlideEnter, onSlideLeave } from '@slidev/client'
-import { onAudioStartedFor } from './setup/audio-sync'
+import { onAudioEndedFor, onAudioStartedFor } from './setup/audio-sync'
 import { timings } from './setup/timings'
 
 const audioStarted = ref(false)
-let stopAudioListener: (() => void) | null = null
+const audioEnded = ref(false)
+let stopAudioStartListener: (() => void) | null = null
+let stopAudioEndListener: (() => void) | null = null
 
 onSlideEnter(() => {
   const enteredAt = performance.now()
   audioStarted.value = false
-  stopAudioListener = onAudioStartedFor('product-vision', () => {
+  audioEnded.value = false
+  stopAudioStartListener = onAudioStartedFor('product-vision', () => {
     audioStarted.value = true
+  }, enteredAt)
+  stopAudioEndListener = onAudioEndedFor('product-vision', () => {
+    audioEnded.value = true
   }, enteredAt)
 })
 
 onSlideLeave(() => {
-  if (stopAudioListener) stopAudioListener()
-  stopAudioListener = null
+  if (stopAudioStartListener) stopAudioStartListener()
+  stopAudioStartListener = null
+  if (stopAudioEndListener) stopAudioEndListener()
+  stopAudioEndListener = null
   audioStarted.value = false
+  audioEnded.value = false
 })
 </script>
 
-<div class="flex h-full" :class="{ 'product-vision--audio-started': audioStarted }">
+<div class="flex h-full" :class="{ 'product-vision--audio-started': audioStarted, 'product-vision--audio-ended': audioEnded }">
   <!-- Text Column (3/5) -->
   <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
     <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
@@ -471,7 +480,7 @@ onSlideLeave(() => {
   object-position: top;
 }
 
-.product-vision--audio-started .scrolling-image {
+.product-vision--audio-ended .scrolling-image {
   animation: scroll-vertical v-bind('timings.slide2.scrollingImageDuration + "ms"') ease-in-out infinite alternate;
 }
 
@@ -947,7 +956,7 @@ class: relative p-0
   </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
-    <video src="/img/6/anna-rita-scrive-2.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
+    <video src="/img/6/anna-rita-scrive.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
   </div>
 </div>
 

@@ -1,12 +1,17 @@
 import { defineAppSetup } from '@slidev/types'
 import slidesMarkdown from '../slides.md?raw'
-import { emitAudioStart } from './audio-sync'
+import { emitAudioEnd, emitAudioStart } from './audio-sync'
 import { buildSlideNameByNumberMap } from './slide-name-map'
 
 const PRIMARY_AUDIO_DIR = 'audio_test'
 const FALLBACK_AUDIO_DIR = 'audio'
 const AUDIO_HINT_ID = 'audio-activation-hint'
 const AUDIO_HINT_CLASS = 'audio-activation-hint'
+const NEXT_SLIDE_HINT_ID = 'audio-next-slide-hint'
+const NEXT_SLIDE_HINT_CLASS = 'audio-next-slide-hint'
+const NEXT_SLIDE_HINT_VISIBLE_CLASS = 'is-visible'
+const NEXT_SLIDE_HINT_ICON_CLASS =
+  'audio-next-slide-hint__icon i-heroicons-chevron-right-20-solid'
 
 const slideNameByNumber = buildSlideNameByNumberMap(slidesMarkdown)
 
@@ -61,6 +66,39 @@ export default defineAppSetup(({ router }) => {
     if (hint) hint.remove()
   }
 
+  const ensureNextSlideHint = (): HTMLDivElement => {
+    const existingHint = document.getElementById(NEXT_SLIDE_HINT_ID)
+    if (existingHint instanceof HTMLDivElement) return existingHint
+
+    const hint = document.createElement('div')
+    hint.id = NEXT_SLIDE_HINT_ID
+    hint.className = NEXT_SLIDE_HINT_CLASS
+    hint.setAttribute('role', 'status')
+    hint.setAttribute('aria-live', 'polite')
+    hint.setAttribute('aria-label', 'Audio terminato, puoi passare alla slide successiva')
+    hint.setAttribute('aria-hidden', 'true')
+
+    const icon = document.createElement('span')
+    icon.className = NEXT_SLIDE_HINT_ICON_CLASS
+    icon.setAttribute('aria-hidden', 'true')
+    hint.appendChild(icon)
+
+    document.body.appendChild(hint)
+    return hint
+  }
+
+  const hideNextSlideHint = () => {
+    const hint = ensureNextSlideHint()
+    hint.classList.remove(NEXT_SLIDE_HINT_VISIBLE_CLASS)
+    hint.setAttribute('aria-hidden', 'true')
+  }
+
+  const showNextSlideHint = () => {
+    const hint = ensureNextSlideHint()
+    hint.classList.add(NEXT_SLIDE_HINT_VISIBLE_CLASS)
+    hint.setAttribute('aria-hidden', 'false')
+  }
+
   const playAudio = (
     audioPath: string,
     slideNumber: string,
@@ -76,6 +114,7 @@ export default defineAppSetup(({ router }) => {
     const notifyAudioStart = () => {
       if (audioStartNotified || requestId !== playbackRequestId) return
       audioStartNotified = true
+      hideNextSlideHint()
       emitAudioStart({
         slideNumber,
         audioFolderName,
@@ -84,6 +123,18 @@ export default defineAppSetup(({ router }) => {
       })
     }
     audio.addEventListener('playing', notifyAudioStart, { once: true })
+
+    const notifyAudioEnd = () => {
+      if (requestId !== playbackRequestId) return
+      showNextSlideHint()
+      emitAudioEnd({
+        slideNumber,
+        audioFolderName,
+        endedAt: performance.now(),
+        requestId,
+      })
+    }
+    audio.addEventListener('ended', notifyAudioEnd, { once: true })
 
     if (!isFallback) {
       let fallbackTriggered = false
@@ -120,12 +171,20 @@ export default defineAppSetup(({ router }) => {
     }
 
     audio.play().catch((error: unknown) => {
+      if (requestId !== playbackRequestId) return
       if (isAutoplayBlockError(error)) return
 
       if (audio.error) {
         console.log(
           `No audio found for slide ${slideNumber} in /${PRIMARY_AUDIO_DIR} or /${FALLBACK_AUDIO_DIR}`,
         )
+        showNextSlideHint()
+        emitAudioEnd({
+          slideNumber,
+          audioFolderName,
+          endedAt: performance.now(),
+          requestId,
+        })
         return
       }
 
@@ -138,6 +197,8 @@ export default defineAppSetup(({ router }) => {
   }
 
   const attemptPlay = (slideNumber: string) => {
+    hideNextSlideHint()
+
     if (!hasUserInteracted) {
       pendingSlideNumber = slideNumber
       return
@@ -145,7 +206,10 @@ export default defineAppSetup(({ router }) => {
     if (slideNumber === lastPlayedSlideNumber) return
 
     const audioFolderName = resolveAudioFolderName(slideNumber)
-    if (!audioFolderName) return
+    if (!audioFolderName) {
+      showNextSlideHint()
+      return
+    }
 
     lastPlayedSlideNumber = slideNumber
     pendingSlideNumber = null
@@ -185,6 +249,7 @@ export default defineAppSetup(({ router }) => {
   }
 
   ensureAudioHint()
+  hideNextSlideHint()
 
   window.addEventListener('pointerdown', unlockAudioOnFirstInteraction, {
     once: true,

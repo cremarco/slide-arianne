@@ -1,4 +1,4 @@
-# Generazione Audio Dalle Note Relatore
+# Generazione Voci Audio Dalle Note Relatore
 
 Lo script `generate_speaker_notes_audio.py` genera i file audio partendo dalle note relatore (`<!-- ... -->`) in `slides.md`.
 
@@ -30,6 +30,12 @@ Dalla root del progetto:
 python3 scripts/generate_speaker_notes_audio.py
 ```
 
+Comando consigliato su piano Free (voci free + output in `audio_test`):
+
+```bash
+python3 scripts/generate_speaker_notes_audio.py --audio-dir public/audio_test --force-free-voice
+```
+
 Preview senza chiamate API:
 
 ```bash
@@ -44,7 +50,8 @@ python3 scripts/generate_speaker_notes_audio.py --dry-run
 - Se rileva limiti piano free, attiva fallback automatico:
   - voce free-tier
   - output in `public/audio_test` (se `--audio-dir` non è specificato)
-- Non sovrascrive file già presenti: li marca come `SKIP`.
+- Puoi forzare sempre la voce free-tier con `--force-free-voice`.
+- Non sovrascrive e non elimina file già presenti: li marca come `SKIP`.
 - Rileva lingua automaticamente (`it`/`en`) con supporto a marker:
   - prefisso riga, es. `[IT]`, `[EN]`, `language: it`
   - sezioni dedicate, es. `[IT] ... [EN] ...`
@@ -66,6 +73,7 @@ python3 scripts/generate_speaker_notes_audio.py --dry-run
 | `--style` | Voice setting style |
 | `--speed` | Voice setting speed |
 | `--no-speaker-boost` | Disabilita `use_speaker_boost` |
+| `--force-free-voice` | Forza la voce free-tier (`JBFqnCBsd6RMkjVDRZzb`) |
 | `--enable-logging` | Abilita logging ElevenLabs lato API |
 | `--dry-run` | Simulazione senza generare audio |
 
@@ -81,6 +89,18 @@ Output custom:
 
 ```bash
 python3 scripts/generate_speaker_notes_audio.py --audio-dir public/audio_custom
+```
+
+Forzare voce free-tier (utile su piano Free):
+
+```bash
+python3 scripts/generate_speaker_notes_audio.py --audio-dir public/audio_test --force-free-voice
+```
+
+Preview completo con voce free-tier senza chiamate API:
+
+```bash
+python3 scripts/generate_speaker_notes_audio.py --dry-run --audio-dir public/audio_test --force-free-voice
 ```
 
 Controllo veloce pipeline:
