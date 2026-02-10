@@ -1863,7 +1863,7 @@ class: relative
         <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td rowspan="4" class="cat-cell">
+        <td rowspan="3" class="cat-cell">
           <div class="cat-badge">
             <span class="cat-icon i-heroicons-shield-check"></span>
             <span>Sicurezza & accessibilità</span>
@@ -1897,16 +1897,6 @@ class: relative
         <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
         <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
         <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-      </tr>
-      <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Emergenze / limiti</td>
-        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       </tbody>
       </table>
