@@ -40,7 +40,7 @@ routerMode: history
 
 <style scoped>
 .cover-animated {
-  background: oklch(64.6% 0.222 41.116);
+  background: oklch(75% 0.183 55.934);
   overflow: hidden;
 }
 
@@ -431,7 +431,7 @@ onSlideLeave(() => {
       Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale.</strong>
       <br />
       <br />
-      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>.
+      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>, con un'interfaccia <strong>multilingua</strong>.
     </div>
   </div>
 
@@ -511,10 +511,12 @@ onSlideLeave(() => {
 [IT]
 Che la seduta sia online o in studio, pazienti e terapeuti lavorano nello stesso percorso, dalla presa in carico alla continuità tra le sedute.
 Non è solo una videochiamata: è un ecosistema che integra comunicazione sicura, strumenti clinici e monitoraggio tra un incontro e l'altro.
+L'interfaccia multilingua aiuta a ridurre barriere di accesso e comprensione.
 Così il percorso resta ordinato, più sostenibile nel tempo, e davvero personalizzabile.
 [EN-GB]
 Whether the session is online or in the clinic, patients and therapists follow one shared journey, from intake to continuity between sessions.
 It's not just a video call: it's an ecosystem that combines secure communication, clinical tools and monitoring between appointments.
+The multilingual interface helps reduce access and comprehension barriers.
 So the journey stays organised, sustainable over time, and genuinely tailored.
 -->
 
@@ -1243,7 +1245,7 @@ class: relative
 
 # Onboarding e abbinamento guidato
 
-Questionario iniziale e preferenze: il percorso parte dalle informazioni **clinicamente rilevanti**.
+Questionario iniziale, preferenze e lingua: il percorso parte dalle informazioni **clinicamente rilevanti**.
 
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -1315,12 +1317,12 @@ onSlideLeave(() => {
 <!--
 [IT]
 L'onboarding avviene in pochi passaggi.
-Raccoglie bisogni, preferenze e disponibilità e propone un abbinamento guidato con professionisti qualificati.
+Raccoglie bisogni, preferenze, disponibilità e lingua dell'interfaccia, poi propone un abbinamento guidato con professionisti qualificati.
 Questo riduce il sovraccarico di scegliere da soli e aumenta la probabilità di trovare la giusta compatibilità terapeutica.
 E fin dall'inizio mette al centro fiducia, trasparenza e tutela della privacy.
 [EN-GB]
 Onboarding takes just a few steps.
-It captures needs, preferences and availability, then provides guided matching with qualified professionals.
+It captures needs, preferences, availability and interface language, then provides guided matching with qualified professionals.
 That reduces the burden of choosing alone and increases the chance of finding the right therapeutic match.
 And from day one it prioritises trust, transparency and privacy protection.
 -->
@@ -1432,6 +1434,11 @@ class: relative p-0
         Il traffico non passa da servizi esterni di terze parti: tutto resta nel <strong>perimetro della piattaforma</strong>.
       </ProjectCard>
     </div>
+    <div class="mt-auto pt-4">
+      <div class="slide-text text-[0.72rem] opacity-70">
+        Nota: le videochiamate non vengono registrate.
+      </div>
+    </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
     <video src="/img/15/call.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
@@ -1453,11 +1460,11 @@ class: relative p-0
 [IT]
 Le videochiamate sono integrate e progettate per il contesto clinico.
 Non devi usare link esterni o piattaforme terze: la sessione resta nel perimetro di Arianne, con connessioni protette.
-Questo migliora privacy e sicurezza, ma anche stabilità ed efficienza, riducendo i punti di rottura del percorso.
+Questo migliora privacy e sicurezza, ma anche stabilità ed efficienza, riducendo attriti e interruzioni nel percorso terapeutico.
 [EN-GB]
 Video calls are built in and designed for clinical use.
 You don't need external links or third-party platforms: the session stays within Arianne, with protected connections.
-That strengthens privacy and security, and also improves stability and efficiency by reducing points of failure along the journey.
+That strengthens privacy and security, and also improves stability and efficiency by reducing friction and interruptions along the journey.
 -->
 
 ---
@@ -1547,7 +1554,7 @@ layout: default
 name: integrated-assessments
 ---
 
-# Implementazioni
+# Strumenti clinici integrati
 
 <div class="slide-text opacity-90 mb-8">
   <strong>29 questionari integrati</strong>, diario cognitivo, comportamentale, del sonno, del mattino e molto altro.
@@ -2107,7 +2114,7 @@ name: pricing-model
 class: relative
 ---
 
-# Come funziona Arianne
+# Come funziona Arianne <span class="pricing-role pricing-role--therapists">per i terapeuti</span>
 
 <div class="slide-text opacity-80">
   A differenza delle altre piattaforme, il costo resta <strong>trasparente</strong> e <strong>prevedibile</strong>.
@@ -2133,7 +2140,7 @@ class: relative
   </ProjectCard>
 
   <ProjectCard title="Piano mensile" icon="i-heroicons-calendar-days">
-    <div class="mb-4 text-sm opacity-70"><strong>Canone fisso</strong> in base al numero di pazienti</div>
+    <div class="mb-4 text-sm opacity-70"><strong>Canone</strong> in base al numero di pazienti</div>
     <ul class="feature-list">
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
@@ -2147,6 +2154,10 @@ class: relative
       </ProjectCard>
 </div>
 
+<div class="slide-text mt-5 text-sm opacity-75">
+  Nota: ogni terapeuta decide in autonomia la propria tariffa oraria.
+</div>
+
 <!--
 [IT]
 Il modello è semplice e trasparente.
@@ -2156,6 +2167,67 @@ Poi un canone mensile prevedibile, calibrato sul numero di pazienti, con disdett
 The model is simple and transparent.
 You get 14 days of free trial to test everything, with no risk.
 Then a predictable monthly fee, scaled to the number of patients, with the freedom to cancel at any time.
+-->
+
+---
+layout: default
+name: pricing-model-patients
+class: relative
+---
+
+# Come funziona Arianne <span class="pricing-role pricing-role--patients">per i pazienti</span>
+
+<div class="slide-text opacity-80">
+  Percorso semplice e costo trasparente: <strong>da 50€ a seduta</strong>, con importo visibile prima della conferma.
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-10 text-left flex-1 content-center">
+  <ProjectCard title="Primo colloquio" icon="i-heroicons-sparkles">
+    <div class="mb-4 text-sm opacity-70"><strong>Primo colloquio gratuito</strong> per iniziare con serenità</div>
+    <ul class="feature-list">
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Accesso iniziale senza costo</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Abbinamento con terapeuta adeguato</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Prenotazione guidata</strong></span>
+      </li>
+    </ul>
+  </ProjectCard>
+
+  <ProjectCard title="Costo per seduta" icon="i-heroicons-banknotes">
+    <div class="mb-4 text-sm opacity-70"><strong>Da 50€ a seduta</strong></div>
+    <ul class="feature-list">
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Prezzo visibile prima della conferma</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Costo effettivo definito dal terapeuta</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Nessun abbonamento lato paziente</strong></span>
+      </li>
+    </ul>
+  </ProjectCard>
+</div>
+
+<!--
+[IT]
+Per il paziente il modello è diretto: primo colloquio gratuito e, dalle sedute successive, costo indicato per singola sessione.
+Il prezzo parte da 50€ a seduta ed è mostrato prima della conferma, così la scelta resta chiara.
+L'importo effettivo viene definito dal terapeuta in base al percorso.
+[EN-GB]
+For patients, the model is straightforward: a free first consultation and then a per-session fee.
+Pricing starts from €50 per session and is shown before confirmation, so the choice stays clear.
+The final amount is set by the therapist based on the care pathway.
 -->
 
 ---
@@ -2254,13 +2326,21 @@ import { timings } from './setup/timings'
 const activeRevealStep = ref(0)
 let stopAudioListener: (() => void) | null = null
 let revealTimers: ReturnType<typeof setTimeout>[] = []
+let revealFallbackTimer: ReturnType<typeof setTimeout> | null = null
+let revealStarted = false
 
 const clearRevealTimers = () => {
   for (const timer of revealTimers) clearTimeout(timer)
   revealTimers = []
 }
 
+const clearRevealFallbackTimer = () => {
+  if (revealFallbackTimer) clearTimeout(revealFallbackTimer)
+  revealFallbackTimer = null
+}
+
 const scheduleReveal = () => {
+  revealStarted = true
   clearRevealTimers()
   activeRevealStep.value = 0
 
@@ -2275,15 +2355,29 @@ const scheduleReveal = () => {
 
 onSlideEnter(() => {
   const enteredAt = performance.now()
+  revealStarted = false
   activeRevealStep.value = 0
   clearRevealTimers()
-  stopAudioListener = onAudioStartedFor('academic-logos', scheduleReveal, enteredAt)
+  clearRevealFallbackTimer()
+
+  const startReveal = () => {
+    if (revealStarted) return
+    scheduleReveal()
+  }
+
+  revealFallbackTimer = setTimeout(startReveal, 1200)
+  stopAudioListener = onAudioStartedFor('academic-logos', () => {
+    clearRevealFallbackTimer()
+    startReveal()
+  }, enteredAt)
 })
 
 onSlideLeave(() => {
   if (stopAudioListener) stopAudioListener()
   stopAudioListener = null
+  clearRevealFallbackTimer()
   clearRevealTimers()
+  revealStarted = false
   activeRevealStep.value = 0
 })
 </script>
@@ -2439,8 +2533,46 @@ class: relative p-0
   class="w-full h-full flex items-center justify-center"
   style="background:#ff8c42; background:oklch(64.6% 0.222 41.116);"
 >
-  <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
+  <div class="outro-content">
+    <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
+    <a
+      href="https://arianne.whattadata.it/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="outro-link"
+    >
+      https://arianne.whattadata.it/
+    </a>
+    <img src="/img/qr-code-arianne-site.svg" class="outro-qr" alt="QR code sito web Arianne" />
+  </div>
 </div>
+
+<style scoped>
+.outro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.outro-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1b1b1b;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.outro-qr {
+  width: 9.2rem;
+  height: 9.2rem;
+  display: block;
+  background: #fff;
+  padding: 0.46rem;
+  border-radius: 0.78rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+</style>
 
 <!--
 [IT]
