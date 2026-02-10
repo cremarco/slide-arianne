@@ -1609,9 +1609,39 @@ name: competitor-analysis
 class: relative
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+
+const revealRows = ref(false)
+const comparisonBody = ref<HTMLTableSectionElement | null>(null)
+
+const scheduleRowReveal = () => {
+  const rows = comparisonBody.value?.querySelectorAll('tr')
+  if (!rows?.length) return
+
+  rows.forEach((row, index) => {
+    row.style.setProperty('--row-delay', `${index * 36}ms`)
+  })
+}
+
+onSlideEnter(() => {
+  scheduleRowReveal()
+  revealRows.value = false
+
+  requestAnimationFrame(() => {
+    revealRows.value = true
+  })
+})
+
+onSlideLeave(() => {
+  revealRows.value = false
+})
+</script>
+
 <div class="relative h-full min-h-0 flex flex-col items-center justify-start px-4 pt-0.5 pb-0 gap-0.5">
   <div class="flex-1 min-h-0 w-full max-w-[95%] bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 overflow-hidden">
-    <div class="comparison-scale">
+    <div class="comparison-scale" :class="{ 'comparison-scale--revealing': revealRows }">
       <table class="w-full h-full table-fixed comparison-matrix border-collapse">
       <colgroup>
         <col class="w-[18%]">
@@ -1637,7 +1667,7 @@ class: relative
           <th class="px-1 py-1 text-center"><span class="header-text">MioDottore</span></th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.55rem]">
+      <tbody ref="comparisonBody" class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.55rem]">
       <tr>
         <td rowspan="7" class="cat-cell">
           <div class="cat-badge">
@@ -1953,6 +1983,18 @@ class: relative
   white-space: nowrap;
 }
 
+.comparison-matrix tbody tr {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.comparison-scale--revealing .comparison-matrix tbody tr {
+  opacity: 0;
+  transform: translateY(0.35rem);
+  animation: comparison-row-reveal 360ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--row-delay, 0ms);
+}
+
 .header-pill {
   @apply inline-flex items-center justify-center rounded-md px-1.5 py-0.5 bg-white/95 border border-slate-200/70 shadow-sm;
 }
@@ -2023,6 +2065,26 @@ class: relative
 
 .status--no {
   @apply text-slate-400 dark:text-slate-500;
+}
+
+@keyframes comparison-row-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comparison-scale--revealing .comparison-matrix tbody tr {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 
