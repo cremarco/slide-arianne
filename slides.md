@@ -2147,6 +2147,90 @@ Arianne combines access, the therapeutic relationship and clinical tools in a si
 
 ---
 layout: default
+name: arianne-differences
+class: relative
+---
+
+# Differenze chiave di Arianne
+
+<div class="slide-text opacity-85 mb-6">
+  La differenza non è una singola funzione: è l'integrazione end-to-end tra <strong>accesso</strong>, <strong>processo clinico</strong> e <strong>continuità terapeutica</strong>.
+</div>
+
+<div class="grid grid-cols-2 gap-4 text-left flex-1 content-start">
+  <ProjectCard title="1) Accesso vs presa in carico" icon="i-heroicons-user-plus">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Matching, agenda e videoseduta come elementi principali.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Accesso guidato + scelta terapeuta + passaggio immediato a un percorso strutturato.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="2) Sessione vs lavoro tra sedute" icon="i-heroicons-chat-bubble-left-right">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Il valore si concentra nella chiamata e in chat non strutturate.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Chat asincrona, materiali, compiti e psicoeducazione all'interno dello stesso flusso.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="3) Tool generici vs strumenti clinici" icon="i-heroicons-clipboard-document-list">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Feature trasversali, ma poco orientamento clinico specialistico.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">29 questionari integrati, diari strutturati e lettura clinica dei dati nel tempo.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="4) Strumenti separati vs unico ecosistema" icon="i-heroicons-squares-2x2">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Operatività distribuita tra piattaforme esterne per agenda, pagamenti e documenti.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Cartella clinica, amministrazione, pagamenti e monitoraggio outcome in un unico ambiente.</p>
+    </div>
+  </ProjectCard>
+</div>
+
+<div class="slide-text opacity-75 mt-3 text-sm">
+  In sintesi: Arianne non aggiunge solo feature, ma collega paziente e terapeuta in un sistema clinico continuo e misurabile.
+</div>
+
+<style scoped>
+.diff-block {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.diff-label {
+  @apply inline-flex items-center self-start rounded-md px-2 py-0.5 text-[0.57rem] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300;
+}
+
+.diff-label--arianne {
+  @apply bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-200;
+}
+
+.diff-copy {
+  @apply text-[0.8rem] leading-snug opacity-95 mb-1;
+}
+</style>
+
+<!--
+[IT]
+Questa slide chiarisce il punto centrale emerso dalla matrice: la differenza non è una colonna di check, ma il modo in cui le funzionalità si collegano nel percorso clinico.
+Le alternative sono forti su singoli blocchi, ma spesso restano frammentate tra accesso, relazione terapeutica e parte gestionale.
+Arianne, invece, tiene insieme presa in carico, strumenti clinici e misurazione degli outcome in un unico ecosistema.
+[EN-GB]
+This slide clarifies the core point from the matrix: the difference is not one column of checks, but how features connect across the clinical journey.
+Alternatives are strong in single blocks, but they often remain fragmented across access, therapeutic relationship and operations.
+Arianne, instead, keeps intake, clinical tools and outcome measurement together in one ecosystem.
+-->
+
+---
+layout: default
 name: pricing-model
 class: relative
 ---
