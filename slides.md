@@ -2,6 +2,10 @@
 title: Arianne - L'ecosistema digitale per la salute mentale
 titleTemplate: '%s'
 name: arianne-cover
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: true
 layout: default
 class: relative p-0
 routerMode: history
@@ -395,6 +399,10 @@ Like Ariadne's thread, it guides patients and therapists along a clear path, ses
 
 ---
 name: product-vision
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: true
 layout: default
 class: relative overflow-hidden p-0
 ---
@@ -486,6 +494,10 @@ So the journey stays organised, sustainable over time, and genuinely tailored.
 ---
 layout: default
 name: project-overview
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: true
 class: relative h-full flex flex-col
 ---
 
@@ -601,6 +613,10 @@ That enables collaboration, continuous support, and spotting early signals along
 ---
 layout: default
 name: target-users
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative h-full flex flex-col
 ---
 
@@ -675,6 +691,10 @@ It works for online therapy and for in-person care: the setting changes, the jou
 ---
 layout: default
 name: professional-intro
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative p-0
 ---
 
@@ -705,6 +725,10 @@ So you spend less energy on organisation and more time on care.
 ---
 layout: default
 name: dashboard-overview
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -815,6 +839,10 @@ You can tell what needs attention, and you go into each session with more contex
 ---
 layout: default
 name: clinical-records
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative p-0
 ---
 
@@ -857,6 +885,10 @@ That improves continuity, the quality of documentation, and data security.
 ---
 layout: default
 name: assignments
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative overflow-hidden
 ---
 # Attività tra le sedute
@@ -936,6 +968,10 @@ Those completions become longitudinal data, useful to prepare the next session a
 ---
 layout: default
 name: agenda-and-notes
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative overflow-hidden
 ---
 # Agenda e note
@@ -987,6 +1023,10 @@ Fewer tool switches, more traceability, and faster access to the information you
 ---
 layout: default
 name: clinical-insights
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative overflow-hidden
 ---
 # Insight leggibili
@@ -1029,6 +1069,10 @@ They support better-informed decisions and make therapy more personalised.
 ---
 layout: default
 name: patient-intro
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative p-0
 ---
 
@@ -1059,6 +1103,10 @@ That improves adherence, engagement and continuity, without adding complexity.
 ---
 layout: default
 name: onboarding-matching
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -1113,6 +1161,10 @@ And from day one it prioritises trust, transparency and privacy protection.
 ---
 layout: default
 name: patient-web-overview
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative h-full flex flex-col
 ---
 
@@ -1170,6 +1222,10 @@ That boosts engagement and continuity.
 ---
 layout: default
 name: secure-call-system
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative p-0
 ---
 
@@ -1226,6 +1282,10 @@ That strengthens privacy and security, and also improves stability and efficienc
 ---
 layout: default
 name: patient-mobile-app
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative h-full flex flex-col
 ---
 
@@ -1286,6 +1346,10 @@ So therapeutic continuity becomes genuinely portable, without adding extra effor
 ---
 layout: default
 name: integrated-assessments
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 ---
 
 # Implementazioni
@@ -1347,6 +1411,10 @@ So measurement becomes part of the journey: you don't just monitor, you also mea
 ---
 layout: default
 name: competitor-analysis
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -1776,6 +1844,10 @@ Arianne combines access, the therapeutic relationship and clinical tools in a si
 ---
 layout: default
 name: pricing-model
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -1833,6 +1905,10 @@ Then a predictable monthly fee, scaled to the number of patients, with the freed
 ---
 layout: default
 name: unimib-spinoff
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: bg-[#4F46E5] slide-theme-invert
 ---
 
@@ -1892,6 +1968,10 @@ We bring clinically validated tools into everyday practice, without complicating
 ---
 layout: default
 name: academic-logos
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative p-0
 ---
 
@@ -1986,6 +2066,10 @@ That lets the product evolve with method: clinical practice, data and technology
 
 ---
 name: arianne-outro
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 layout: default
 class: relative p-0
 ---

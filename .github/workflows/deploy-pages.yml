@@ -38,7 +38,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build slides
+        env:
+          VITE_SLIDES_PASSWORDS: ${{ secrets.VITE_SLIDES_PASSWORDS }}
         run: |
+          if [ -z "${VITE_SLIDES_PASSWORDS}" ]; then
+            echo "Missing required GitHub secret: VITE_SLIDES_PASSWORDS"
+            exit 1
+          fi
           if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
             BASE="/"
           else

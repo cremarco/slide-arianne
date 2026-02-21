@@ -14,6 +14,39 @@ Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
 
+## Protezione con password
+
+- La presentazione mostra una schermata iniziale di accesso prima delle slide.
+- Password di default: `arianne`.
+- Compatibilita': puoi ancora usare `VITE_SLIDES_PASSWORD`.
+- Multi-password: usa `VITE_SLIDES_PASSWORDS` con formato `chiave=password` separato da `,` o `;`.
+  - Inizializzazione attuale: `VITE_SLIDES_PASSWORDS=arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`
+- Le chiavi (`arianne_full`, `arianne_sa`, ecc.) sono quelle da usare nel campo `access` delle slide.
+- Visibilita' slide per password: usa il campo `access` nel frontmatter di ogni slide.
+
+Esempio frontmatter:
+
+```yaml
+---
+name: product-vision
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: true
+---
+```
+
+Regole di visibilita':
+
+- Se `access` non e' presente, la slide e' visibile a tutte le password.
+- Se la chiave della password e' presente (`arianne_full`, `arianne_sa`, ecc.), vale quel booleano.
+- Se la chiave non e' presente ma c'e' `default`, viene usato `default`.
+
+Set iniziale del deck:
+
+- `arianne_full` vede tutte le slide.
+- `arianne_sa` vede solo le prime tre: `arianne-cover`, `product-vision`, `project-overview`.
+
 ## Audio per slide
 
 - L'audio viene risolto dal `name` nel frontmatter della slide (API route metadata di Slidev).
@@ -29,6 +62,8 @@ Passaggi:
 - Pusha la repository su GitHub.
 - Vai su `Settings > Pages`.
 - In `Build and deployment`, imposta `Source: GitHub Actions`.
+- Vai su `Settings > Secrets and variables > Actions > New repository secret`.
+- Crea il secret `VITE_SLIDES_PASSWORDS` con il valore delle password (esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`).
 - Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
 
 URL finale:
