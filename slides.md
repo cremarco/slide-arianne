@@ -695,7 +695,7 @@ name: target-users
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative h-full flex flex-col
 ---
 
@@ -1005,7 +1005,7 @@ name: assignments
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative overflow-hidden
 ---
 # Attività tra le sedute
@@ -1216,7 +1216,7 @@ name: clinical-insights
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative overflow-hidden
 ---
 # Insight leggibili
@@ -1262,7 +1262,7 @@ name: patient-intro
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative p-0
 ---
 
@@ -1390,7 +1390,7 @@ name: patient-web-overview
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative h-full flex flex-col
 ---
 
@@ -1538,7 +1538,7 @@ name: patient-mobile-app
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative h-full flex flex-col
 ---
 
@@ -1621,6 +1621,10 @@ So therapeutic continuity becomes genuinely portable, without adding extra effor
 ---
 layout: default
 name: patient-solution-details
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: true
 class: relative p-0
 ---
 
@@ -1652,7 +1656,7 @@ name: integrated-assessments
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 ---
 
 # Strumenti clinici integrati
@@ -1716,7 +1720,7 @@ layout: default
 name: competitor-analysis
 access:
   default: false
-  arianne_full: true
+  arianne_full: false
   arianne_sa: false
 class: relative
 ---
@@ -2216,6 +2220,10 @@ Arianne combines access, the therapeutic relationship and clinical tools in a si
 ---
 layout: default
 name: arianne-differences
+access:
+  default: false
+  arianne_full: false
+  arianne_sa: false
 class: relative
 ---
 
@@ -2365,6 +2373,10 @@ Then a predictable monthly fee, scaled to the number of patients, with the freed
 ---
 layout: default
 name: pricing-model-patients
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -2429,7 +2441,7 @@ name: unimib-spinoff
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: bg-[#4F46E5] slide-theme-invert
 ---
 
@@ -2514,7 +2526,7 @@ name: academic-logos
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 class: relative p-0
 ---
 
@@ -2683,6 +2695,10 @@ That lets the product evolve with method: clinical practice, data and technology
 ---
 layout: default
 name: academic-research-solutions
+access:
+  default: false
+  arianne_full: true
+  arianne_sa: false
 class: relative
 ---
 
@@ -2729,7 +2745,7 @@ name: arianne-outro
 access:
   default: false
   arianne_full: true
-  arianne_sa: false
+  arianne_sa: true
 layout: default
 class: relative p-0
 ---

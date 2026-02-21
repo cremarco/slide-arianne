@@ -40,10 +40,14 @@ jobs:
       - name: Build slides
         env:
           VITE_SLIDES_PASSWORDS: ${{ secrets.VITE_SLIDES_PASSWORDS }}
+          VITE_SLIDES_PASSWORD: ${{ secrets.VITE_SLIDES_PASSWORD }}
         run: |
-          if [ -z "${VITE_SLIDES_PASSWORDS}" ]; then
-            echo "Missing required GitHub secret: VITE_SLIDES_PASSWORDS"
+          if [ -z "${VITE_SLIDES_PASSWORDS}" ] && [ -z "${VITE_SLIDES_PASSWORD}" ]; then
+            echo "Missing required GitHub secret: set VITE_SLIDES_PASSWORDS (preferred) or VITE_SLIDES_PASSWORD"
             exit 1
+          fi
+          if [ -z "${VITE_SLIDES_PASSWORDS}" ]; then
+            echo "VITE_SLIDES_PASSWORDS not set: using VITE_SLIDES_PASSWORD fallback"
           fi
           if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
             BASE="/"

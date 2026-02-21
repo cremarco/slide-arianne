@@ -107,7 +107,9 @@ Passaggi:
 2. Vai su `Settings > Pages`.
 3. In `Build and deployment`, imposta `Source: GitHub Actions`.
 4. Vai su `Settings > Secrets and variables > Actions > New repository secret`.
-5. Crea il secret `VITE_SLIDES_PASSWORDS` con il valore delle password (esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`).
+5. Crea almeno uno dei seguenti secret:
+   - `VITE_SLIDES_PASSWORDS` (consigliato) con formato multi-password, esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`.
+   - `VITE_SLIDES_PASSWORD` (fallback) con password singola.
 6. Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
 
 URL finale:
