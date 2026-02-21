@@ -1,18 +1,35 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Arianne Slides (Slidev)
 
-Prerequisiti:
+Presentazione Slidev del progetto Arianne.
+
+## Prerequisiti
 
 - Node.js 20+
+- pnpm
 
-To start the slide show:
+## Avvio locale
 
-- `pnpm install`
-- `pnpm dev`
-- visit <http://localhost:8080>
+```bash
+pnpm install
+pnpm dev
+```
 
-Edit the [slides.md](./slides.md) to see the changes.
+Apri [http://localhost:8080](http://localhost:8080).
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+## Build
+
+```bash
+pnpm build
+```
+
+## Struttura principale
+
+- `slides.md`: contenuto slide + script/style locali.
+- `setup/main.ts`: orchestrazione audio in runtime (autoplay dopo interazione utente).
+- `setup/slide-name-map.ts`: parser markdown usato per mappare `numero slide -> name` del frontmatter.
+- `setup/timings.ts`: timing condivisi delle animazioni (configurazione read-only).
+- `scripts/generate_speaker_notes_audio.py`: generazione audio da note relatore.
+- `scripts/README.md`: guida completa allo script Python.
 
 ## Protezione con password
 
@@ -49,51 +66,50 @@ Set iniziale del deck:
 
 ## Audio per slide
 
-- L'audio viene risolto dal `name` nel frontmatter della slide (API route metadata di Slidev).
-- Path cercati in ordine: `public/audio_test/<name>/audio.mp3`, poi `public/audio/<name>/audio.mp3`.
+- L'audio viene risolto dal campo `name` nel frontmatter.
+- Ordine lookup audio lato runtime:
+  - `public/audio_test/<name>/audio.mp3`
+  - `public/audio/<name>/audio.mp3`
 - Se cambi `name`, aggiorna anche la cartella audio corrispondente.
 
-## Deploy su GitHub Pages
+## Regole tipografiche
 
-Il progetto include il workflow `/.github/workflows/deploy-pages.yml` che pubblica automaticamente la cartella `dist` su GitHub Pages quando fai push su `main` o `master`.
+- Titoli: usare `#` (h1) senza utility tipografiche (`text-*`, `font-*`, `tracking-*`, `leading-*`, colori custom).
+- Testo: usare stile base; nei blocchi HTML usare `class="slide-text"`.
+- Enfasi: usare `<strong>`.
+- Card: usare `ProjectCard` senza override di stile tipografico.
+- Slide scure: usare `slide-theme-invert`.
+- Modifiche globali stile: intervenire in `styles/index.css`.
+
+## Pattern slide riusabili
+
+### Slide tipo "solution" (slide 2)
+
+- `layout: default` e `class: relative overflow-hidden p-0`.
+- Wrapper contenuto con padding (`px-14 pt-32 pb-10`).
+- Testo a sinistra con `class="slide-text"`.
+- Immagine a destra con `slide-image-right-lg` o `slide-image-right-md`.
+
+### Slide tipo "project" (slide 3)
+
+- `layout: default` e `class: relative h-full flex flex-col`.
+- Titolo `#` senza classi tipografiche custom.
+- Griglia card: `grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center`.
+- Card con `ProjectCard` e contenuto via `v-for`.
+
+## Deploy GitHub Pages
+
+È presente il workflow `/.github/workflows/deploy-pages.yml` che pubblica `dist` su GitHub Pages su push a `main` o `master`.
 
 Passaggi:
 
-- Pusha la repository su GitHub.
-- Vai su `Settings > Pages`.
-- In `Build and deployment`, imposta `Source: GitHub Actions`.
-- Vai su `Settings > Secrets and variables > Actions > New repository secret`.
-- Crea il secret `VITE_SLIDES_PASSWORDS` con il valore delle password (esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`).
-- Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
+1. Pusha il repository su GitHub.
+2. Vai su `Settings > Pages`.
+3. In `Build and deployment`, imposta `Source: GitHub Actions`.
+4. Vai su `Settings > Secrets and variables > Actions > New repository secret`.
+5. Crea il secret `VITE_SLIDES_PASSWORDS` con il valore delle password (esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`).
+6. Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
 
 URL finale:
 
 - `https://<username>.github.io/<nome-repo>/`
-
-## Regole tipografiche per le slide
-
-- Titoli: usare sempre `#` (h1). Non aggiungere classi `text-*`, `font-*`, `tracking-*`, `leading-*` o colori ai titoli.
-- Testo: usare lo stile base. Per blocchi HTML usare `class="slide-text"` ed evitare classi che cambiano dimensione, font, peso, line-height o colore.
-- Enfasi: usare `<strong>`; niente colori custom.
-- Card: usare `ProjectCard` senza sovrascrivere dimensioni/colore; il testo segue lo stile base.
-- Eccezioni: per slide a fondo scuro usare `slide-theme-invert` sul contenitore mantenendo `slide-text` per dimensioni e line-height.
-- Aggiornamenti: se serve cambiare lo stile globale, modificare solo `styles/index.css` (variabili `--slide-*`).
-
-## Slide 2 come prototipo
-
-La slide "solution" (slide 2) e' il riferimento per le slide di contenuto con testo + lista + immagine a destra. Per crearne una nuova:
-
-- Usa `layout: default` e `class: relative overflow-hidden p-0`.
-- Contenuto principale dentro un wrapper con padding (`px-14 pt-32 pb-10`).
-- Testo a sisnistra con `class="slide-text"`.
-- Immagine a destra con `slide-image-right-lg` o `slide-image-right-md`.
-
-## Slide 3 come prototipo
-
-La slide "project" (slide 3) e' il riferimento per le slide con titolo + griglia di card:
-
-- Usa `layout: default` e `class: relative h-full flex flex-col`.
-- Titolo con `#` (h1) senza classi tipografiche custom.
-- Griglia card con `grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center`.
-- Card realizzate con `ProjectCard` e contenuto via `v-for` su un array locale.
-- Testo nelle card: usa solo `ProjectCard` (gia' uniformato).

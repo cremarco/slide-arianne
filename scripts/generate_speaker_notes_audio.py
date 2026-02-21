@@ -15,6 +15,33 @@ DEFAULT_IT_VOICE_ID = "kAzI34nYjizE0zON6rXv"
 DEFAULT_EN_VOICE_ID = "xjlfQQ3ynqiEyRpArrT8"
 DEFAULT_MODEL_ID = "eleven_multilingual_v2"
 DEFAULT_OUTPUT_FORMAT = "mp3_44100_128"
+DEFAULT_FREE_TIER_VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
+DEFAULT_AUDIO_DIR = "public/audio"
+DEFAULT_FREE_PLAN_AUDIO_DIR = "public/audio_test"
+
+FREE_TIER_RETRY_STATUS_CODES = {402, 403}
+FREE_PLAN_CREDIT_HINTS = (
+    "quota_exceeded",
+    "insufficient_credit",
+    "insufficient credits",
+    "not enough credits",
+    "no credits",
+    "credit balance",
+)
+FREE_PLAN_VOICE_HINTS = (
+    "payment_required",
+    "payment required",
+    "subscription tier",
+    "available for your subscription",
+    "available on your plan",
+    "voice not available for your plan",
+    "voice is not available for your plan",
+    "free users cannot use library voices via the api",
+    "requires creator",
+    "requires pro",
+)
+FREE_PLAN_OUTPUT_HINTS = (*FREE_PLAN_CREDIT_HINTS, *FREE_PLAN_VOICE_HINTS)
+FREE_TIER_RETRY_HINTS = (*FREE_PLAN_CREDIT_HINTS, *FREE_PLAN_VOICE_HINTS)
 
 SLIDE_SEPARATOR = "---"
 MULTILINE_NOTE_RE = re.compile(r"<!--\s*\n(.*?)\n\s*-->", re.DOTALL)
@@ -87,8 +114,7 @@ def parse_arguments() -> argparse.Namespace:
         "--audio-dir",
         default=None,
         help=(
-            "Cartella output audio. Se omessa usa 'audio' se esiste, "
-            "altrimenti 'public/audio' se esiste, altrimenti crea 'audio'."
+            "Cartella output audio. Se omessa usa 'public/audio'."
         ),
     )
     parser.add_argument(
@@ -97,16 +123,6 @@ def parse_arguments() -> argparse.Namespace:
         help=(
             "API key ElevenLabs. Priorita: argomento CLI > ELEVENLABS_API_KEY."
         ),
-    )
-    parser.add_argument(
-        "--it-voice-id",
-        default=DEFAULT_IT_VOICE_ID,
-        help=f"Voice ID per italiano (default: {DEFAULT_IT_VOICE_ID})",
-    )
-    parser.add_argument(
-        "--en-voice-id",
-        default=DEFAULT_EN_VOICE_ID,
-        help=f"Voice ID per inglese (default: {DEFAULT_EN_VOICE_ID})",
     )
     parser.add_argument(
         "--model-id",
@@ -177,6 +193,14 @@ def parse_arguments() -> argparse.Namespace:
         help="Disabilita voice setting use_speaker_boost.",
     )
     parser.add_argument(
+        "--force-free-voice",
+        action="store_true",
+        help=(
+            "Forza l'uso della voce free-tier "
+            f"({DEFAULT_FREE_TIER_VOICE_ID}) per tutte le slide."
+        ),
+    )
+    parser.add_argument(
         "--enable-logging",
         action="store_true",
         help=(
@@ -189,25 +213,21 @@ def parse_arguments() -> argparse.Namespace:
         action="store_true",
         help="Non chiama ElevenLabs; mostra solo cosa verrebbe generato.",
     )
-    parser.add_argument(
-        "--overwrite",
-        action="store_true",
-        help="Rigenera anche gli audio gia presenti.",
-    )
     return parser.parse_args()
 
 
-def choose_default_audio_dir(explicit: str | None) -> Path:
+def choose_default_audio_dir(
+    explicit: str | None,
+    *,
+    prefer_audio_test: bool = False,
+) -> Path:
     if explicit:
         return Path(explicit)
 
-    audio_dir = Path("audio")
-    public_audio_dir = Path("public/audio")
-    if audio_dir.exists():
-        return audio_dir
-    if public_audio_dir.exists():
-        return public_audio_dir
-    return audio_dir
+    if prefer_audio_test:
+        return Path(DEFAULT_FREE_PLAN_AUDIO_DIR)
+
+    return Path(DEFAULT_AUDIO_DIR)
 
 
 def normalize_text(text: str) -> str:
@@ -642,6 +662,116 @@ def synthesize_with_elevenlabs(
         return client.text_to_speech.convert(**fallback_kwargs)
 
 
+def iter_error_fragments(payload: Any) -> Iterable[str]:
+    if payload is None:
+        return
+    if isinstance(payload, str):
+        yield payload
+        return
+    if isinstance(payload, dict):
+        for key, value in payload.items():
+            yield str(key)
+            yield from iter_error_fragments(value)
+        return
+    if isinstance(payload, (list, tuple, set)):
+        for item in payload:
+            yield from iter_error_fragments(item)
+        return
+    yield str(payload)
+
+
+def normalize_error_message(exc: Exception) -> str:
+    fragments: list[str] = [str(exc)]
+    for attr_name in ("body", "detail", "details", "message"):
+        if not hasattr(exc, attr_name):
+            continue
+        fragments.extend(iter_error_fragments(getattr(exc, attr_name)))
+    return " ".join(fragment.lower() for fragment in fragments if fragment)
+
+
+def should_retry_with_free_tier_voice(exc: Exception) -> bool:
+    status_code = getattr(exc, "status_code", None)
+    if isinstance(status_code, int) and status_code in FREE_TIER_RETRY_STATUS_CODES:
+        return True
+
+    normalized_error = normalize_error_message(exc)
+    return any(hint in normalized_error for hint in FREE_TIER_RETRY_HINTS)
+
+
+def should_enable_free_plan_output_on_error(exc: Exception) -> bool:
+    normalized_error = normalize_error_message(exc)
+    return any(hint in normalized_error for hint in FREE_PLAN_OUTPUT_HINTS)
+
+
+def detect_credit_tier_from_subscription(client: Any) -> str | None:
+    try:
+        subscription = client.user.subscription.get()
+    except Exception:  # noqa: BLE001
+        return None
+
+    status = str(getattr(subscription, "status", "")).strip().lower()
+    tier = str(getattr(subscription, "tier", "")).strip().lower()
+    if status in {"free", "free_disabled"}:
+        return "free"
+    if tier.startswith("free"):
+        return "free"
+    if status or tier:
+        return "paid"
+    return None
+
+
+def detect_credit_tier_with_probe(
+    *,
+    client: Any,
+    voice_settings: Any,
+    model_id: str,
+    output_format: str,
+    enable_logging: bool,
+) -> str:
+    subscription_tier = detect_credit_tier_from_subscription(client)
+    if subscription_tier in {"paid", "free"}:
+        return subscription_tier
+
+    try:
+        probe_stream = synthesize_with_elevenlabs(
+            client=client,
+            voice_settings=voice_settings,
+            voice_id=DEFAULT_IT_VOICE_ID,
+            model_id=model_id,
+            output_format=output_format,
+            text="Verifica piano.",
+            language_code="it",
+            enable_logging=enable_logging,
+        )
+        if not isinstance(probe_stream, (bytes, bytearray)):
+            for chunk in probe_stream:
+                if chunk:
+                    break
+        return "paid"
+    except Exception as exc:  # noqa: BLE001
+        if should_retry_with_free_tier_voice(exc):
+            return "free"
+        return "unknown"
+
+
+def maybe_enable_free_plan_output(
+    *,
+    args: argparse.Namespace,
+    current_audio_dir: Path,
+    already_enabled: bool,
+    reason: str,
+) -> tuple[Path, bool]:
+    if already_enabled or args.audio_dir is not None:
+        return current_audio_dir, already_enabled
+
+    free_plan_audio_dir = choose_default_audio_dir(
+        args.audio_dir,
+        prefer_audio_test=True,
+    )
+    print(f"[INFO] {reason}: {free_plan_audio_dir}")
+    return free_plan_audio_dir, True
+
+
 def resolve_api_key(cli_api_key: str | None) -> str:
     if cli_api_key:
         return cli_api_key.strip()
@@ -660,6 +790,107 @@ def resolve_api_key(cli_api_key: str | None) -> str:
     return ""
 
 
+def select_voice_id(language: str, *, use_free_tier_voice: bool) -> str:
+    if use_free_tier_voice:
+        return DEFAULT_FREE_TIER_VOICE_ID
+    return DEFAULT_IT_VOICE_ID if language == "it" else DEFAULT_EN_VOICE_ID
+
+
+def build_note_preview(text: str, max_length: int = 80) -> str:
+    preview = text.replace("\n", " ")
+    if len(preview) <= max_length:
+        return preview
+    return preview[: max_length - 3] + "..."
+
+
+def report_existing_audio(item: SlideNote, output_path: Path) -> bool:
+    if not output_path.exists():
+        return False
+
+    print(
+        f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
+        f"audio gia presente ({output_path})"
+    )
+    return True
+
+
+def write_audio_stream(output_path: Path, audio_stream: Any) -> None:
+    with output_path.open("wb") as output_file:
+        if isinstance(audio_stream, (bytes, bytearray)):
+            output_file.write(audio_stream)
+            return
+
+        for chunk in audio_stream:
+            if isinstance(chunk, (bytes, bytearray)) and chunk:
+                output_file.write(chunk)
+
+
+def initialize_elevenlabs_client(
+    *,
+    args: argparse.Namespace,
+    api_key: str,
+    audio_dir: Path,
+) -> tuple[Any, Any, Path, bool, bool]:
+    elevenlabs_type, _ = get_elevenlabs_types()
+    elevenlabs_client = elevenlabs_type(api_key=api_key)
+    voice_settings = build_voice_settings(args)
+    free_tier_fallback_enabled = False
+    free_plan_output_enabled = False
+
+    if args.force_free_voice:
+        free_tier_fallback_enabled = True
+        print(
+            "[INFO] Voce free forzata via CLI: "
+            f"{DEFAULT_FREE_TIER_VOICE_ID}"
+        )
+        return (
+            elevenlabs_client,
+            voice_settings,
+            audio_dir,
+            free_tier_fallback_enabled,
+            free_plan_output_enabled,
+        )
+
+    if args.audio_dir is None:
+        credit_tier = detect_credit_tier_with_probe(
+            client=elevenlabs_client,
+            voice_settings=voice_settings,
+            model_id=args.model_id,
+            output_format=args.output_format,
+            enable_logging=args.enable_logging,
+        )
+        if credit_tier == "free":
+            audio_dir, free_plan_output_enabled = maybe_enable_free_plan_output(
+                args=args,
+                current_audio_dir=audio_dir,
+                already_enabled=free_plan_output_enabled,
+                reason="Crediti free rilevati, output free-plan attivato",
+            )
+            free_tier_fallback_enabled = True
+            print(
+                "[INFO] Voce free selezionata automaticamente: "
+                f"{DEFAULT_FREE_TIER_VOICE_ID}"
+            )
+        elif credit_tier == "paid":
+            print(
+                "[INFO] Crediti pagati rilevati: "
+                f"output audio su {audio_dir}"
+            )
+        else:
+            print(
+                "[WARN] Verifica crediti non disponibile; uso "
+                f"impostazioni default (output: {audio_dir})."
+            )
+
+    return (
+        elevenlabs_client,
+        voice_settings,
+        audio_dir,
+        free_tier_fallback_enabled,
+        free_plan_output_enabled,
+    )
+
+
 def main() -> int:
     args = parse_arguments()
 
@@ -668,7 +899,10 @@ def main() -> int:
         print(f"Errore: file slide non trovato: {slides_path}", file=sys.stderr)
         return 1
 
-    audio_dir = choose_default_audio_dir(args.audio_dir)
+    audio_dir = choose_default_audio_dir(
+        args.audio_dir,
+        prefer_audio_test=False,
+    )
     api_key = resolve_api_key(args.api_key)
 
     markdown = slides_path.read_text(encoding="utf-8")
@@ -708,6 +942,8 @@ def main() -> int:
     failures = 0
     elevenlabs_client = None
     voice_settings = None
+    free_tier_fallback_enabled = False
+    free_plan_output_enabled = False
 
     if not args.dry_run:
         if not api_key:
@@ -719,9 +955,17 @@ def main() -> int:
             return 1
 
         try:
-            elevenlabs_type, _ = get_elevenlabs_types()
-            elevenlabs_client = elevenlabs_type(api_key=api_key)
-            voice_settings = build_voice_settings(args)
+            (
+                elevenlabs_client,
+                voice_settings,
+                audio_dir,
+                free_tier_fallback_enabled,
+                free_plan_output_enabled,
+            ) = initialize_elevenlabs_client(
+                args=args,
+                api_key=api_key,
+                audio_dir=audio_dir,
+            )
         except Exception as exc:  # noqa: BLE001
             print(f"Errore inizializzazione ElevenLabs: {exc}", file=sys.stderr)
             return 1
@@ -732,11 +976,7 @@ def main() -> int:
 
     for item in notes:
         output_path = build_output_path(audio_dir, item.slide_name)
-        if output_path.exists() and not args.overwrite:
-            print(
-                f"[SKIP] slide {item.slide_number} ({item.slide_name}): "
-                f"audio gia presente ({output_path})"
-            )
+        if report_existing_audio(item, output_path):
             skipped += 1
             continue
 
@@ -745,7 +985,12 @@ def main() -> int:
             args.language,
             args.default_language,
         )
-        voice_id = args.it_voice_id if language == "it" else args.en_voice_id
+        voice_id = select_voice_id(
+            language,
+            use_free_tier_voice=(
+                args.force_free_voice or free_tier_fallback_enabled
+            ),
+        )
 
         if not cleaned_note:
             print(
@@ -756,9 +1001,7 @@ def main() -> int:
             continue
 
         if args.dry_run:
-            preview = cleaned_note.replace("\n", " ")
-            if len(preview) > 80:
-                preview = preview[:77] + "..."
+            preview = build_note_preview(cleaned_note)
             print(
                 f"[DRY-RUN] slide {item.slide_number} ({item.slide_name}): "
                 f"lang={language} "
@@ -770,23 +1013,58 @@ def main() -> int:
 
         try:
             language_code = None if args.no_language_code else language
-            audio_stream = synthesize_with_elevenlabs(
-                client=elevenlabs_client,
-                voice_settings=voice_settings,
-                voice_id=voice_id,
-                model_id=args.model_id,
-                output_format=args.output_format,
-                text=cleaned_note,
-                language_code=language_code,
-                enable_logging=args.enable_logging,
-            )
-            with output_path.open("wb") as output_file:
-                if isinstance(audio_stream, (bytes, bytearray)):
-                    output_file.write(audio_stream)
-                else:
-                    for chunk in audio_stream:
-                        if isinstance(chunk, (bytes, bytearray)) and chunk:
-                            output_file.write(chunk)
+            try:
+                audio_stream = synthesize_with_elevenlabs(
+                    client=elevenlabs_client,
+                    voice_settings=voice_settings,
+                    voice_id=voice_id,
+                    model_id=args.model_id,
+                    output_format=args.output_format,
+                    text=cleaned_note,
+                    language_code=language_code,
+                    enable_logging=args.enable_logging,
+                )
+            except Exception as exc:  # noqa: BLE001
+                # Switch permanently to the free-tier voice as soon as we detect
+                # a quota/plan limitation during generation.
+                should_fallback = (
+                    not free_tier_fallback_enabled
+                    and voice_id != DEFAULT_FREE_TIER_VOICE_ID
+                    and should_retry_with_free_tier_voice(exc)
+                )
+                if not should_fallback:
+                    raise
+
+                free_tier_fallback_enabled = True
+                voice_id = DEFAULT_FREE_TIER_VOICE_ID
+                if should_enable_free_plan_output_on_error(exc):
+                    audio_dir, free_plan_output_enabled = maybe_enable_free_plan_output(
+                        args=args,
+                        current_audio_dir=audio_dir,
+                        already_enabled=free_plan_output_enabled,
+                        reason="Crediti/quota insufficienti, output free-plan attivato",
+                    )
+                output_path = build_output_path(audio_dir, item.slide_name)
+                if report_existing_audio(item, output_path):
+                    skipped += 1
+                    continue
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                print(
+                    f"[WARN] slide {item.slide_number} ({item.slide_name}): "
+                    "crediti/quota insufficienti o voce non disponibile sul piano "
+                    f"corrente, attivo fallback free-tier voice={voice_id}."
+                )
+                audio_stream = synthesize_with_elevenlabs(
+                    client=elevenlabs_client,
+                    voice_settings=voice_settings,
+                    voice_id=voice_id,
+                    model_id=args.model_id,
+                    output_format=args.output_format,
+                    text=cleaned_note,
+                    language_code=language_code,
+                    enable_logging=args.enable_logging,
+                )
+            write_audio_stream(output_path, audio_stream)
             generated += 1
             print(
                 f"[OK] slide {item.slide_number} ({item.slide_name}): "

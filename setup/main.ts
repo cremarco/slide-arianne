@@ -1,5 +1,6 @@
 import { defineAppSetup } from '@slidev/types'
 import slidesMarkdown from '../slides.md?raw'
+import { emitAudioEnd, emitAudioStart } from './audio-sync'
 
 const SLIDE_SEPARATOR = '---'
 const YAML_TOP_LEVEL_KEY_RE = /^[A-Za-z_][A-Za-z0-9_-]*\s*:/
@@ -7,6 +8,15 @@ const YAML_NESTED_KEY_RE = /^\s+['"]?[A-Za-z0-9_* -]+['"]?\s*:/
 const YAML_LIST_ITEM_RE = /^\s*-\s+/
 const FRONTMATTER_NAME_RE = /^name\s*:\s*(.+?)\s*$/i
 const FRONTMATTER_ACCESS_RE = /^access\s*:\s*(.*)$/i
+const PRIMARY_AUDIO_DIR = 'audio_test'
+const FALLBACK_AUDIO_DIR = 'audio'
+const AUDIO_HINT_ID = 'audio-activation-hint'
+const AUDIO_HINT_CLASS = 'audio-activation-hint'
+const NEXT_SLIDE_HINT_ID = 'audio-next-slide-hint'
+const NEXT_SLIDE_HINT_CLASS = 'audio-next-slide-hint'
+const NEXT_SLIDE_HINT_VISIBLE_CLASS = 'is-visible'
+const NEXT_SLIDE_HINT_ICON_CLASS =
+    'audio-next-slide-hint__icon i-heroicons-chevron-right-20-solid'
 
 type SlideAccessMap = Record<string, boolean>
 
@@ -357,17 +367,44 @@ const buildSlideMetadataByNumberMap = (markdown: string): Map<string, SlideMetad
 
 const slideMetadataByNumber = buildSlideMetadataByNumberMap(slidesMarkdown)
 
+const buildPathWithBase = (baseUrl: string, relativePath: string): string => {
+    const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
+    const normalizedRelative = relativePath.replace(/^\/+/, '')
+    return `${normalizedBase}${normalizedRelative}`
+}
+
+const isAutoplayBlockError = (error: unknown): boolean => {
+    return error instanceof DOMException && error.name === 'NotAllowedError'
+}
+
+const resolveSlideNumber = (path: string): string | null => {
+    // Normalize path: remove trailing slash if present (except root)
+    const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+
+    if (normalizedPath === '/' || normalizedPath === '/1') {
+        return '1'
+    }
+
+    const match = normalizedPath.match(/^\/(\d+)(?:\/.*)?$/)
+    if (match) {
+        return match[1]
+    }
+
+    return null
+}
+
+const hasOwnProperty = (record: SlideAccessMap, key: string): boolean =>
+    Object.prototype.hasOwnProperty.call(record, key)
+
+const resolveAudioFolderName = (slideNumber: string): string | null => {
+    return slideMetadataByNumber.get(slideNumber)?.audioFolderName ?? null
+}
+
 export default defineAppSetup(({ router }) => {
     if (typeof window === 'undefined') return
 
-    const PRIMARY_AUDIO_DIR = 'audio_test'
-    const FALLBACK_AUDIO_DIR = 'audio'
     const baseUrl = import.meta.env.BASE_URL || '/'
-    const withBase = (relativePath: string) => {
-        const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
-        const normalizedRelative = relativePath.replace(/^\/+/, '')
-        return `${normalizedBase}${normalizedRelative}`
-    }
+    const withBase = (relativePath: string) => buildPathWithBase(baseUrl, relativePath)
     const buildAudioPath = (directory: string, audioFolderName: string) =>
         withBase(`${directory}/${audioFolderName}/audio.mp3`)
 
@@ -376,8 +413,6 @@ export default defineAppSetup(({ router }) => {
     let hasUserInteracted = false
     let pendingSlideNumber: string | null = null
     let lastPlayedSlideNumber: string | null = null
-    const AUDIO_HINT_ID = 'audio-activation-hint'
-    const AUDIO_HINT_STYLE_ID = 'audio-activation-hint-style'
     const DEFAULT_DECK_PASSWORD = 'arianne'
     const DEFAULT_PASSWORD_PROFILE_KEY = 'default'
     const DECK_PASSWORD = String(import.meta.env.VITE_SLIDES_PASSWORD ?? DEFAULT_DECK_PASSWORD).trim()
@@ -401,36 +436,11 @@ export default defineAppSetup(({ router }) => {
     const PASSWORD_LOCK_CLASS = 'slide-password-lock'
 
     const ensureAudioHint = () => {
-        if (hasUserInteracted) return
-        if (!document.getElementById(AUDIO_HINT_STYLE_ID)) {
-            const style = document.createElement('style')
-            style.id = AUDIO_HINT_STYLE_ID
-            style.textContent = `
-#${AUDIO_HINT_ID} {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
-  z-index: 9999;
-  padding: 0.65rem 0.95rem;
-  border-radius: 9999px;
-  font-size: 0.94rem;
-  font-weight: 600;
-  line-height: 1.1;
-  color: #111827;
-  background: color-mix(in srgb, white 88%, transparent);
-  border: 1px solid color-mix(in srgb, #111827 20%, transparent);
-  box-shadow: 0 10px 28px color-mix(in srgb, #111827 22%, transparent);
-  backdrop-filter: blur(3px);
-  pointer-events: none;
-}
-`
-            document.head.appendChild(style)
-        }
+        if (hasUserInteracted || document.getElementById(AUDIO_HINT_ID)) return
 
-        if (document.getElementById(AUDIO_HINT_ID)) return
         const hint = document.createElement('div')
         hint.id = AUDIO_HINT_ID
+        hint.className = AUDIO_HINT_CLASS
         hint.setAttribute('role', 'status')
         hint.setAttribute('aria-live', 'polite')
         hint.textContent = 'Audio disponibile: fai click o premi un tasto per attivarlo.'
@@ -440,6 +450,39 @@ export default defineAppSetup(({ router }) => {
     const removeAudioHint = () => {
         const hint = document.getElementById(AUDIO_HINT_ID)
         if (hint) hint.remove()
+    }
+
+    const ensureNextSlideHint = (): HTMLDivElement => {
+        const existingHint = document.getElementById(NEXT_SLIDE_HINT_ID)
+        if (existingHint instanceof HTMLDivElement) return existingHint
+
+        const hint = document.createElement('div')
+        hint.id = NEXT_SLIDE_HINT_ID
+        hint.className = NEXT_SLIDE_HINT_CLASS
+        hint.setAttribute('role', 'status')
+        hint.setAttribute('aria-live', 'polite')
+        hint.setAttribute('aria-label', 'Audio terminato, puoi passare alla slide successiva')
+        hint.setAttribute('aria-hidden', 'true')
+
+        const icon = document.createElement('span')
+        icon.className = NEXT_SLIDE_HINT_ICON_CLASS
+        icon.setAttribute('aria-hidden', 'true')
+        hint.appendChild(icon)
+
+        document.body.appendChild(hint)
+        return hint
+    }
+
+    const hideNextSlideHint = () => {
+        const hint = ensureNextSlideHint()
+        hint.classList.remove(NEXT_SLIDE_HINT_VISIBLE_CLASS)
+        hint.setAttribute('aria-hidden', 'true')
+    }
+
+    const showNextSlideHint = () => {
+        const hint = ensureNextSlideHint()
+        hint.classList.add(NEXT_SLIDE_HINT_VISIBLE_CLASS)
+        hint.setAttribute('aria-hidden', 'false')
     }
 
     const removePasswordGate = () => {
@@ -464,6 +507,31 @@ export default defineAppSetup(({ router }) => {
 
         const audio = new Audio(audioPath)
         currentAudio = audio
+        let audioStartNotified = false
+        const notifyAudioStart = () => {
+            if (audioStartNotified || requestId !== playbackRequestId) return
+            audioStartNotified = true
+            hideNextSlideHint()
+            emitAudioStart({
+                slideNumber,
+                audioFolderName,
+                startedAt: performance.now(),
+                requestId,
+            })
+        }
+        audio.addEventListener('playing', notifyAudioStart, { once: true })
+
+        const notifyAudioEnd = () => {
+            if (requestId !== playbackRequestId) return
+            showNextSlideHint()
+            emitAudioEnd({
+                slideNumber,
+                audioFolderName,
+                endedAt: performance.now(),
+                requestId,
+            })
+        }
+        audio.addEventListener('ended', notifyAudioEnd, { once: true })
 
         if (!isFallback) {
             let fallbackTriggered = false
@@ -481,10 +549,9 @@ export default defineAppSetup(({ router }) => {
 
             audio.addEventListener('error', triggerFallback, { once: true })
 
-            // We intentionally do not wait for 'canplay' to play() to be as fast as possible,
-            // maximizing chances to be considered part of an interaction chain if one exists.
-            audio.play().catch((e: unknown) => {
-                if (e instanceof DOMException && e.name === 'NotAllowedError') return
+            // Do not wait for canplay: immediate play() keeps autoplay-unlock chances higher.
+            audio.play().catch((error: unknown) => {
+                if (isAutoplayBlockError(error)) return
 
                 if (audio.error) {
                     triggerFallback()
@@ -494,51 +561,36 @@ export default defineAppSetup(({ router }) => {
                 console.log(
                     `Audio play prevented for slide ${slideNumber} ` +
                     `(audio folder: ${audioFolderName}, path: ${audioPath}):`,
-                    e,
+                    error,
                 )
             })
             return
         }
 
-        audio.play().catch((e: unknown) => {
-            if (e instanceof DOMException && e.name === 'NotAllowedError') return
+        audio.play().catch((error: unknown) => {
+            if (requestId !== playbackRequestId) return
+            if (isAutoplayBlockError(error)) return
 
             if (audio.error) {
                 console.log(
                     `No audio found for slide ${slideNumber} in /${PRIMARY_AUDIO_DIR} or /${FALLBACK_AUDIO_DIR}`,
                 )
+                showNextSlideHint()
+                emitAudioEnd({
+                    slideNumber,
+                    audioFolderName,
+                    endedAt: performance.now(),
+                    requestId,
+                })
                 return
             }
 
             console.log(
                 `Audio play prevented for slide ${slideNumber} ` +
                 `(audio folder: ${audioFolderName}, fallback path: ${audioPath}):`,
-                e,
+                error,
             )
         })
-    }
-
-    const resolveSlideNumber = (path: string): string | null => {
-        // Normalize path: remove trailing slash if present (except root)
-        const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
-
-        if (normalizedPath === '/' || normalizedPath === '/1') {
-            return '1'
-        }
-
-        const match = normalizedPath.match(/^\/(\d+)(?:\/.*)?$/)
-        if (match) {
-            return match[1]
-        }
-
-        return null
-    }
-
-    const hasOwnProperty = (record: SlideAccessMap, key: string): boolean =>
-        Object.prototype.hasOwnProperty.call(record, key)
-
-    const resolveAudioFolderName = (slideNumber: string): string | null => {
-        return slideMetadataByNumber.get(slideNumber)?.audioFolderName ?? null
     }
 
     const isSlideVisibleForPassword = (slideNumber: string, passwordKey: string | null): boolean => {
@@ -600,6 +652,8 @@ export default defineAppSetup(({ router }) => {
     }
 
     const attemptPlay = (slideNumber: string) => {
+        hideNextSlideHint()
+
         if (!hasUserInteracted) {
             pendingSlideNumber = slideNumber
             return
@@ -607,7 +661,10 @@ export default defineAppSetup(({ router }) => {
         if (slideNumber === lastPlayedSlideNumber) return
 
         const audioFolderName = resolveAudioFolderName(slideNumber)
-        if (!audioFolderName) return
+        if (!audioFolderName) {
+            showNextSlideHint()
+            return
+        }
 
         lastPlayedSlideNumber = slideNumber
         pendingSlideNumber = null
@@ -791,6 +848,7 @@ export default defineAppSetup(({ router }) => {
     } else {
         ensurePasswordGate()
     }
+    hideNextSlideHint()
 
     window.addEventListener('pointerdown', unlockAudioOnFirstInteraction, { once: true, passive: true })
     window.addEventListener('keydown', unlockAudioOnFirstInteraction, { once: true })

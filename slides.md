@@ -44,7 +44,7 @@ routerMode: history
 
 <style scoped>
 .cover-animated {
-  background: oklch(64.6% 0.222 41.116);
+  background: oklch(75% 0.183 55.934);
   overflow: hidden;
 }
 
@@ -407,15 +407,48 @@ layout: default
 class: relative overflow-hidden p-0
 ---
 
-<div class="flex h-full">
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioEndedFor, onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const audioStarted = ref(false)
+const audioEnded = ref(false)
+let stopAudioStartListener: (() => void) | null = null
+let stopAudioEndListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  audioStarted.value = false
+  audioEnded.value = false
+  stopAudioStartListener = onAudioStartedFor('product-vision', () => {
+    audioStarted.value = true
+  }, enteredAt)
+  stopAudioEndListener = onAudioEndedFor('product-vision', () => {
+    audioEnded.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioStartListener) stopAudioStartListener()
+  stopAudioStartListener = null
+  if (stopAudioEndListener) stopAudioEndListener()
+  stopAudioEndListener = null
+  audioStarted.value = false
+  audioEnded.value = false
+})
+</script>
+
+<div class="flex h-full" :class="{ 'product-vision--audio-started': audioStarted, 'product-vision--audio-ended': audioEnded }">
   <!-- Text Column (3/5) -->
   <div class="w-3/5 relative px-14 pt-32 pb-10 flex flex-col justify-center h-full">
     <img src="/img/2/arianne-logo-orange.svg" class="absolute top-[40px] left-[54px] h-10 logo-animation" alt="Logo Arianne" />
     <div class="slide-text mb-6">
-      Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale</strong>
+      Arianne è un <strong>ecosistema</strong> per la <strong>salute mentale.</strong>
       <br />
       <br />
-      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>.
+      Una <strong>piattaforma digitale</strong> che unisce <strong>ricerca</strong> e <strong>tecnologia</strong> per rendere la <strong>psicoterapia</strong> online e in presenza più <strong>accessibile</strong>, <strong>continua</strong> e <strong>centrata sui bisogni di pazienti e terapeuti</strong>, con un'interfaccia <strong>multilingua</strong>.
     </div>
   </div>
 
@@ -436,16 +469,27 @@ class: relative overflow-hidden p-0
 
 <style scoped>
 .logo-animation {
-  animation: logo-entry 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.product-vision--audio-started .logo-animation {
+  animation: logo-entry v-bind('timings.slide2.logoEntryDuration + "ms"') ease-out forwards;
 }
 
 .computer-image {
   opacity: 0;
-  animation: slide-in-right 1s ease-out forwards 0.3s;
+}
+
+.product-vision--audio-started .computer-image {
+  animation: slide-in-right v-bind('timings.slide2.computerSlideInDuration + "ms"') ease-out forwards v-bind('timings.slide2.computerSlideInDelay + "ms"');
 }
 
 .scrolling-image {
-  animation: scroll-vertical 40s ease-in-out infinite alternate;
+  object-position: top;
+}
+
+.product-vision--audio-ended .scrolling-image {
+  animation: scroll-vertical v-bind('timings.slide2.scrollingImageDuration + "ms"') ease-in-out infinite alternate;
 }
 
 @keyframes scroll-vertical {
@@ -484,10 +528,12 @@ class: relative overflow-hidden p-0
 [IT]
 Che la seduta sia online o in studio, pazienti e terapeuti lavorano nello stesso percorso, dalla presa in carico alla continuità tra le sedute.
 Non è solo una videochiamata: è un ecosistema che integra comunicazione sicura, strumenti clinici e monitoraggio tra un incontro e l'altro.
+L'interfaccia multilingua aiuta a ridurre barriere di accesso e comprensione.
 Così il percorso resta ordinato, più sostenibile nel tempo, e davvero personalizzabile.
 [EN-GB]
 Whether the session is online or in the clinic, patients and therapists follow one shared journey, from intake to continuity between sessions.
 It's not just a video call: it's an ecosystem that combines secure communication, clinical tools and monitoring between appointments.
+The multilingual interface helps reduce access and comprehension barriers.
 So the journey stays organised, sustainable over time, and genuinely tailored.
 -->
 
@@ -505,39 +551,70 @@ class: relative h-full flex flex-col
 
 **Due ambienti**, un **percorso condiviso**.
 
-<div v-click class="hidden"></div>
 
-<div class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
+
+<div v-if="contentTimelineStarted" class="grid grid-cols-3 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
-    v-for="card in projectCards"
+    v-for="(card, index) in projectCards"
     :key="card.title"
     :title="card.title"
     :icon="card.icon"
-    v-click
-    :v-motion="cardMotion"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 250,
+        damping: 20,
+        delay: timings.slide3.cardBaseDelay + (index * timings.slide3.cardStagger)
+      }
+    }"
   >
     <span v-html="card.description"></span>
   </ProjectCard>
 </div>
 
 <script setup lang="ts">
-const cardMotion = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    scale: 0.9,
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 250,
-      damping: 20,
-    },
-  },
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { ref } from 'vue'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const curtainOpen = ref(false)
+const contentTimelineStarted = ref(false)
+let curtainTimer: ReturnType<typeof setTimeout> | null = null
+let stopAudioListener: (() => void) | null = null
+
+const startContentTimeline = () => {
+  if (contentTimelineStarted.value) return
+
+  contentTimelineStarted.value = true
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = setTimeout(() => {
+    curtainOpen.value = true
+  }, timings.slide3.curtainOpenDelay)
 }
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  curtainOpen.value = false
+  contentTimelineStarted.value = false
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = null
+  stopAudioListener = onAudioStartedFor('project-overview', startContentTimeline, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  if (curtainTimer) clearTimeout(curtainTimer)
+  curtainTimer = null
+  curtainOpen.value = false
+  contentTimelineStarted.value = false
+})
 
 const projectCards = [
   {
@@ -564,8 +641,9 @@ const projectCards = [
 <div class="absolute inset-0 z-50 flex pointer-events-none">
   <!-- EnzoWrapper -->
   <div 
-    class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
-    :class="$slidev.nav.clicks > 0 ? '-translate-x-full' : 'translate-x-0'"
+    class="relative w-1/2 h-full transition-transform ease-in-out"
+    :style="{ transitionDuration: timings.slide3.curtainTransitionDuration + 'ms' }"
+    :class="curtainOpen ? '-translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
       <div class="bg-[#ff8c42] bg-opacity-100 text-white text-center px-6 py-2 rounded-lg shadow-lg leading-tight">
@@ -582,8 +660,9 @@ const projectCards = [
   
   <!-- AnnaRitaWrapper -->
   <div 
-    class="relative w-1/2 h-full transition-transform duration-1000 ease-in-out"
-    :class="$slidev.nav.clicks > 0 ? 'translate-x-full' : 'translate-x-0'"
+    class="relative w-1/2 h-full transition-transform ease-in-out"
+    :style="{ transitionDuration: timings.slide3.curtainTransitionDuration + 'ms' }"
+    :class="curtainOpen ? 'translate-x-full' : 'translate-x-0'"
   >
     <div class="absolute bottom-12 w-full flex justify-center z-20">
       <div class="bg-[#006279] bg-opacity-100 text-white text-center px-6 py-2 rounded-lg shadow-lg leading-tight">
@@ -624,40 +703,55 @@ class: relative h-full flex flex-col
 
 Pensata per **professionisti della salute mentale** e **pazienti**, in **presenza** o **online**.
 
-<div v-click class="hidden"></div>
 
 
-<div class="grid grid-cols-2 gap-6 mt-12 text-left flex-1 content-center">
+
+<div v-if="contentTimelineStarted" class="grid grid-cols-2 gap-6 mt-12 text-left flex-1 content-center">
   <ProjectCard
-    v-for="card in projectCards"
+    v-for="(card, index) in projectCards"
     :key="card.title"
     :title="card.title"
     :icon="card.icon"
-    v-click
-    :v-motion="cardMotion"
+    v-motion
+    :initial="{ y: 50, opacity: 0, scale: 0.9 }"
+    :enter="{
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 250,
+        damping: 20,
+        delay: timings.slide4.cardBaseDelay + (index * timings.slide4.cardStagger)
+      }
+    }"
   >
     <span v-html="card.description"></span>
   </ProjectCard>
 </div>
 
 <script setup lang="ts">
-const cardMotion = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    scale: 0.9,
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 250,
-      damping: 20,
-    },
-  },
-}
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('target-users', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
 
 const projectCards = [
   {
@@ -732,18 +826,41 @@ access:
 class: relative
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('dashboard-overview', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+</script>
+
 # Dashboard
 
 Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno amministrazione**, **più tempo per la cura**.
 
-<div class="dashboard-showcase relative mt-8 flex justify-center items-center gap-6">
+<div v-if="contentTimelineStarted" class="dashboard-showcase relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
   <div 
     class="dashboard-shell relative flex justify-center"
-    v-click="1"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.desktopBaseDelay } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -757,10 +874,9 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   <!-- iMac 2 -->
   <div 
     class="dashboard-shell relative flex justify-center"
-    v-click="2"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.desktopBaseDelay + timings.slide6.desktopStagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -775,10 +891,9 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
   <div class="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
     <div 
       class="dashboard-tablet relative"
-      v-click="3"
       v-motion
       :initial="{ y: 110, opacity: 0, scale: 0.9 }"
-      :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+      :enter="{ y: 60, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide6.tabletDelay } }"
     >
       <img src="/img/ipad.png" class="w-full relative z-20" />
       <div class="absolute top-[4.6%] left-[4%] w-[92.5%] h-[91%] z-30 overflow-hidden flex items-start justify-start rounded-[4px] device-screen bg-white">
@@ -829,10 +944,12 @@ Una **panoramica immediata** su pazienti, attività e comunicazioni: **meno ammi
 [IT]
 La dashboard è il punto di controllo quotidiano.
 In un colpo d'occhio vedi pazienti, appuntamenti, attività e comunicazioni.
+L'interfaccia è semplice e guidata, quindi è utilizzabile con naturalezza anche da chi ha meno dimestichezza con la tecnologia.
 Capisci cosa richiede attenzione e arrivi alla seduta con più contesto e meno frizione.
 [EN-GB]
 The dashboard is your daily control centre.
 At a glance you see patients, appointments, activities and communications.
+The interface is simple and guided, so it feels natural to use even for people with less confidence with technology.
 You can tell what needs attention, and you go into each session with more context and less friction.
 -->
 
@@ -851,7 +968,7 @@ class: relative p-0
     <div>
       <h1 class="mb-4">La cartella clinica</h1>
       <div class="slide-text opacity-90">
-        Tutto lo <strong>storico clinico</strong> in un unico spazio: <br /><strong>anamnesi</strong>, <strong>note</strong>, <strong>referti</strong> e <strong>attività</strong>.
+        Tutto lo <strong>storico clinico</strong> in un unico spazio: <br /><strong>anamnesi</strong>, <strong>note</strong> e <strong>attività</strong>.
       </div>
     </div>
     
@@ -867,17 +984,17 @@ class: relative p-0
   </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
-    <video src="/img/6/anna-rita-scrive-2.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
+    <video src="/img/6/anna-rita-scrive.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
   </div>
 </div>
 
 <!--
 [IT]
-La cartella clinica è il riferimento unico: anamnesi, note, referti, somministrazioni e materiali.
+La cartella clinica è il riferimento unico: anamnesi, note, somministrazioni e materiali.
 Le informazioni non restano disperse in file o chat separate, e diventano sempre recuperabili.
 Questo migliora continuità, qualità della documentazione e sicurezza del dato.
 [EN-GB]
-The clinical record is the single place where everything lives: history, notes, reports, assessments and materials.
+The clinical record is the single place where everything lives: history, notes, assessments and materials.
 Nothing is scattered across files or separate chats, and everything stays easy to retrieve.
 That improves continuity, the quality of documentation, and data security.
 -->
@@ -895,48 +1012,85 @@ class: relative overflow-hidden
 
 Nella sezione **Compiti**, il terapeuta assegna **attività personalizzate** tra una seduta e l’altra: **diari**, **esercizi** e **questionari**.
 
-<div v-click="1" class="hidden"></div>
-<div v-click="2" class="hidden"></div>
-<div v-click="3" class="hidden"></div>
-<div v-click="4" class="hidden"></div>
-<div v-click="5" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimers: ReturnType<typeof setTimeout>[] = []
+
+const clearShotTimers = () => {
+  for (const timer of shotTimers) clearTimeout(timer)
+  shotTimers = []
+}
+
+const scheduleShots = () => {
+  clearShotTimers()
+  activeShotIndex.value = 0
+
+  for (let step = 1; step <= 5; step += 1) {
+    const delay = timings.slide8.shotBaseDelay + ((step - 1) * timings.slide8.shotStagger)
+    const timer = setTimeout(() => {
+      activeShotIndex.value = step
+    }, delay)
+    shotTimers.push(timer)
+  }
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimers()
+  stopAudioListener = onAudioStartedFor('assignments', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimers()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/9/01-therapist-diaries.png"
         alt="Compiti - diari"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 1"
+        v-show="activeShotIndex === 1"
         src="/img/9/02-open-therapist-diary.png"
         alt="Compiti - dettaglio diario"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 2"
+        v-show="activeShotIndex === 2"
         src="/img/9/03-therapist-exercises-to-assign-list.png"
         alt="Compiti - lista esercizi"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 3"
+        v-show="activeShotIndex === 3"
         src="/img/9/04-assessments.png"
         alt="Compiti - valutazioni"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks === 4"
+        v-show="activeShotIndex === 4"
         src="/img/9/05-bipolar-disorders.png"
         alt="Compiti - questionario specifico"
         class="assignments-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 5"
+        v-show="activeShotIndex >= 5"
         src="/img/9/06-therapist-assessment-questions-and-answers.png"
         alt="Compiti - domande e risposte"
         class="assignments-shot"
@@ -978,20 +1132,56 @@ class: relative overflow-hidden
 
 Agenda **sincronizzabile** con calendari digitali e **note cliniche** in un unico flusso: **appuntamenti**, **eventi** e **appunti** sempre disponibili.
 
-<div v-click="1" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimer: ReturnType<typeof setTimeout> | null = null
+
+const clearShotTimer = () => {
+  if (shotTimer) clearTimeout(shotTimer)
+  shotTimer = null
+}
+
+const scheduleShots = () => {
+  clearShotTimer()
+  activeShotIndex.value = 0
+  shotTimer = setTimeout(() => {
+    activeShotIndex.value = 1
+  }, timings.slide9.shotDelay)
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimer()
+  stopAudioListener = onAudioStartedFor('agenda-and-notes', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimer()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/10/01-therapist-agenda.png"
         alt="Agenda terapeuta"
         class="agenda-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 1"
+        v-show="activeShotIndex >= 1"
         src="/img/10/02-therapist-notes.png"
         alt="Note terapeuta"
         class="agenda-shot"
@@ -1112,22 +1302,58 @@ class: relative
 
 # Onboarding e abbinamento guidato
 
-Questionario iniziale e preferenze: il percorso parte dalle informazioni **clinicamente rilevanti**.
+Questionario iniziale, preferenze e lingua: il percorso parte dalle informazioni **clinicamente rilevanti**.
 
-<div v-click="1" class="hidden"></div>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeShotIndex = ref(0)
+let stopAudioListener: (() => void) | null = null
+let shotTimer: ReturnType<typeof setTimeout> | null = null
+
+const clearShotTimer = () => {
+  if (shotTimer) clearTimeout(shotTimer)
+  shotTimer = null
+}
+
+const scheduleShots = () => {
+  clearShotTimer()
+  activeShotIndex.value = 0
+  shotTimer = setTimeout(() => {
+    activeShotIndex.value = 1
+  }, timings.slide12.shotDelay)
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  activeShotIndex.value = 0
+  clearShotTimer()
+  stopAudioListener = onAudioStartedFor('onboarding-matching', scheduleShots, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearShotTimer()
+  activeShotIndex.value = 0
+})
+</script>
 
 <div class="slide-device-stage">
   <div class="relative w-full z-10">
     <img src="/img/imac.png" alt="iMac" class="w-full relative z-20" />
     <div class="absolute top-[2.6%] left-[2.55%] w-[94.9%] h-[63.9%] overflow-hidden z-30 device-screen">
       <img
-        v-show="$slidev.nav.clicks === 0"
+        v-show="activeShotIndex === 0"
         src="/img/13/01-question.png"
         alt="Onboarding - questionario iniziale"
         class="matching-shot"
       />
       <img
-        v-show="$slidev.nav.clicks >= 1"
+        v-show="activeShotIndex >= 1"
         src="/img/13/02-question.png"
         alt="Onboarding - domanda successiva"
         class="matching-shot"
@@ -1148,12 +1374,12 @@ Questionario iniziale e preferenze: il percorso parte dalle informazioni **clini
 <!--
 [IT]
 L'onboarding avviene in pochi passaggi.
-Raccoglie bisogni, preferenze e disponibilità e propone un abbinamento guidato con professionisti qualificati.
+Raccoglie bisogni, preferenze, disponibilità e lingua dell'interfaccia, poi propone un abbinamento guidato con professionisti qualificati.
 Questo riduce il sovraccarico di scegliere da soli e aumenta la probabilità di trovare la giusta compatibilità terapeutica.
 E fin dall'inizio mette al centro fiducia, trasparenza e tutela della privacy.
 [EN-GB]
 Onboarding takes just a few steps.
-It captures needs, preferences and availability, then provides guided matching with qualified professionals.
+It captures needs, preferences, availability and interface language, then provides guided matching with qualified professionals.
 That reduces the burden of choosing alone and increases the chance of finding the right therapeutic match.
 And from day one it prioritises trust, transparency and privacy protection.
 -->
@@ -1172,14 +1398,37 @@ class: relative h-full flex flex-col
 
 Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **promemoria** e **azioni rapide** sempre disponibili.
 
-<div class="relative mt-8 flex justify-center items-center gap-6">
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('patient-web-overview', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+</script>
+
+<div v-if="contentTimelineStarted" class="relative mt-8 flex justify-center items-center gap-6">
   <!-- iMac 1 -->
   <div 
     class="relative w-[45%] flex justify-center"
-    v-click="1"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide13.desktopBaseDelay } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -1193,10 +1442,9 @@ Compiti, sedute e reminder in un’unica vista: **attività assegnate**, **prome
   <!-- iMac 2 -->
   <div 
     class="relative w-[45%] flex justify-center"
-    v-click="2"
     v-motion
     :initial="{ y: 50, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 250, damping: 20, delay: timings.slide13.desktopBaseDelay + timings.slide13.desktopStagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/imac.png" class="w-full relative z-20" />
@@ -1251,6 +1499,11 @@ class: relative p-0
         Il traffico non passa da servizi esterni di terze parti: tutto resta nel <strong>perimetro della piattaforma</strong>.
       </ProjectCard>
     </div>
+    <div class="mt-auto pt-4">
+      <div class="slide-text text-[0.72rem] opacity-70">
+        Nota: le videochiamate non vengono registrate.
+      </div>
+    </div>
   </div>
   <div class="absolute top-0 right-0 h-full w-auto overflow-hidden z-0">
     <video src="/img/15/call.mp4" autoplay loop muted playsinline class="h-full w-auto object-cover scale-[1.2]"></video>
@@ -1272,11 +1525,11 @@ class: relative p-0
 [IT]
 Le videochiamate sono integrate e progettate per il contesto clinico.
 Non devi usare link esterni o piattaforme terze: la sessione resta nel perimetro di Arianne, con connessioni protette.
-Questo migliora privacy e sicurezza, ma anche stabilità ed efficienza, riducendo i punti di rottura del percorso.
+Questo migliora privacy e sicurezza, ma anche stabilità ed efficienza, riducendo attriti e interruzioni nel percorso terapeutico.
 [EN-GB]
 Video calls are built in and designed for clinical use.
 You don't need external links or third-party platforms: the session stays within Arianne, with protected connections.
-That strengthens privacy and security, and also improves stability and efficiency by reducing points of failure along the journey.
+That strengthens privacy and security, and also improves stability and efficiency by reducing friction and interruptions along the journey.
 -->
 
 ---
@@ -1293,7 +1546,29 @@ class: relative h-full flex flex-col
 
 Compiti, diario e notifiche sempre a portata di mano: la **continuità terapeutica** prosegue anche da smartphone.
 
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const contentTimelineStarted = ref(false)
+let stopAudioListener: (() => void) | null = null
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  contentTimelineStarted.value = false
+  stopAudioListener = onAudioStartedFor('patient-mobile-app', () => {
+    contentTimelineStarted.value = true
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  contentTimelineStarted.value = false
+})
+
 const mobileScreens = [
   { src: `${import.meta.env.BASE_URL}img/16/01-home.png`, alt: 'App mobile - Home' },
   { src: `${import.meta.env.BASE_URL}img/16/02-diary.png`, alt: 'App mobile - Diario 1' },
@@ -1302,14 +1577,14 @@ const mobileScreens = [
 ]
 </script>
 
-<div class="relative mt-6 flex justify-center items-end gap-2">
+<div v-if="contentTimelineStarted" class="relative mt-6 flex justify-center items-end gap-2">
   <div
     v-for="(screen, idx) in mobileScreens"
     :key="screen.src"
     class="relative w-[19%] flex justify-center"
     v-motion
     :initial="{ y: 40, opacity: 0, scale: 0.9 }"
-    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * 80 } }"
+    :enter="{ y: 0, opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22, delay: idx * timings.slide16.stagger } }"
   >
     <div class="relative w-full z-10">
       <img src="/img/iphone.png" class="w-full relative z-20" />
@@ -1345,6 +1620,34 @@ So therapeutic continuity becomes genuinely portable, without adding extra effor
 
 ---
 layout: default
+name: patient-solution-details
+class: relative p-0
+---
+
+<div class="w-full h-full absolute inset-0 animated-bg ribbon-theme ribbon-theme--orange overflow-hidden">
+  <div class="ribbons-container">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+  </div>
+
+  <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-center gap-3">
+    <h1 class="section-splash-title !mb-0">I dettagli <br /> della soluzione</h1>
+  </div>
+</div>
+
+<!--
+[IT]
+Da qui entriamo nel dettaglio della soluzione lato paziente.
+Vediamo in modo concreto funzionalita, flussi e strumenti che rendono il percorso continuo.
+[EN-GB]
+From here we move into the patient-side solution details.
+We look concretely at features, flows and tools that keep the journey continuous.
+-->
+
+---
+layout: default
 name: integrated-assessments
 access:
   default: false
@@ -1352,10 +1655,10 @@ access:
   arianne_sa: false
 ---
 
-# Implementazioni
+# Strumenti clinici integrati
 
 <div class="slide-text opacity-90 mb-8">
-  <strong>29 questionari integrati</strong>, diario cognitivo, comportamentale, del sonno, del mattino e molto altro.
+  <strong>29 questionari integrati</strong>, diario cognitivo-comportamentale, diario del sonno (mattino), diario del sonno (sera) e molto altro.
 </div>
 
 <div class="implementations-grid grid grid-cols-2 lg:grid-cols-3 gap-4 text-left mt-4">
@@ -1418,9 +1721,39 @@ access:
 class: relative
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+
+const revealRows = ref(false)
+const comparisonBody = ref<HTMLTableSectionElement | null>(null)
+
+const scheduleRowReveal = () => {
+  const rows = comparisonBody.value?.querySelectorAll('tr')
+  if (!rows?.length) return
+
+  rows.forEach((row, index) => {
+    row.style.setProperty('--row-delay', `${index * 36}ms`)
+  })
+}
+
+onSlideEnter(() => {
+  scheduleRowReveal()
+  revealRows.value = false
+
+  requestAnimationFrame(() => {
+    revealRows.value = true
+  })
+})
+
+onSlideLeave(() => {
+  revealRows.value = false
+})
+</script>
+
 <div class="relative h-full min-h-0 flex flex-col items-center justify-start px-4 pt-0.5 pb-0 gap-0.5">
   <div class="flex-1 min-h-0 w-full max-w-[95%] bg-white dark:bg-slate-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 overflow-hidden">
-    <div class="comparison-scale">
+    <div class="comparison-scale" :class="{ 'comparison-scale--revealing': revealRows }">
       <table class="w-full h-full table-fixed comparison-matrix border-collapse">
       <colgroup>
         <col class="w-[18%]">
@@ -1446,7 +1779,7 @@ class: relative
           <th class="px-1 py-1 text-center"><span class="header-text">MioDottore</span></th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.55rem]">
+      <tbody ref="comparisonBody" class="divide-y divide-slate-200/60 dark:divide-slate-700/60 text-[0.55rem]">
       <tr>
         <td rowspan="7" class="cat-cell">
           <div class="cat-badge">
@@ -1672,7 +2005,7 @@ class: relative
         <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       <tr>
-        <td rowspan="4" class="cat-cell">
+        <td rowspan="3" class="cat-cell">
           <div class="cat-badge">
             <span class="cat-icon i-heroicons-shield-check"></span>
             <span>Sicurezza & accessibilità</span>
@@ -1706,16 +2039,6 @@ class: relative
         <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
         <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
         <td class="px-1 py-1 text-center"><span class="status i-heroicons-check-circle"></span></td>
-      </tr>
-      <tr>
-        <td class="px-2 py-1 text-slate-800 dark:text-slate-100 font-medium">Emergenze / limiti</td>
-        <td class="px-1 py-1 text-center bg-orange-50/60 dark:bg-orange-500/10"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--partial i-heroicons-minus-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
-        <td class="px-1 py-1 text-center"><span class="status status--no i-heroicons-x-circle"></span></td>
       </tr>
       </tbody>
       </table>
@@ -1772,6 +2095,18 @@ class: relative
   white-space: nowrap;
 }
 
+.comparison-matrix tbody tr {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.comparison-scale--revealing .comparison-matrix tbody tr {
+  opacity: 0;
+  transform: translateY(0.35rem);
+  animation: comparison-row-reveal 360ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--row-delay, 0ms);
+}
+
 .header-pill {
   @apply inline-flex items-center justify-center rounded-md px-1.5 py-0.5 bg-white/95 border border-slate-200/70 shadow-sm;
 }
@@ -1782,24 +2117,41 @@ class: relative
 }
 
 .cat-cell {
-  @apply px-2 py-1 align-top;
+  @apply px-2 py-1 align-middle;
   overflow: hidden;
+  position: relative;
 }
 
 .cat-badge {
-  @apply grid grid-cols-[auto,1fr] items-start gap-1.5 text-[0.52rem] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200;
+  @apply relative flex items-center text-[0.52rem] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200;
   width: 100%;
-  white-space: nowrap;
+  height: 100%;
+  min-height: 100%;
+  white-space: normal;
   line-height: 1.05;
 }
 
 .cat-badge > span:last-child {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  text-overflow: clip;
+  width: 100%;
+  min-height: 100%;
+  padding-left: 0.5rem;
+  line-height: 1.15;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .cat-icon {
-  @apply text-sm text-orange-500;
+  @apply absolute pointer-events-none text-orange-500/10 dark:text-orange-400/12;
+  top: -0.72rem;
+  left: -1.02rem;
+  font-size: 2.95rem;
+  transform: rotate(-12deg);
 }
 
 .status {
@@ -1826,6 +2178,26 @@ class: relative
 .status--no {
   @apply text-slate-400 dark:text-slate-500;
 }
+
+@keyframes comparison-row-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comparison-scale--revealing .comparison-matrix tbody tr {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 
 <!--
@@ -1843,6 +2215,90 @@ Arianne combines access, the therapeutic relationship and clinical tools in a si
 
 ---
 layout: default
+name: arianne-differences
+class: relative
+---
+
+# Differenze chiave di Arianne
+
+<div class="slide-text opacity-85 mb-6">
+  La differenza non è una singola funzione: è l'integrazione end-to-end tra <strong>accesso</strong>, <strong>processo clinico</strong> e <strong>continuità terapeutica</strong>.
+</div>
+
+<div class="grid grid-cols-2 gap-4 text-left flex-1 content-start">
+  <ProjectCard title="1) Accesso vs presa in carico" icon="i-heroicons-user-plus">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Matching, agenda e videoseduta come elementi principali.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Accesso guidato + scelta terapeuta + passaggio immediato a un percorso strutturato.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="2) Sessione vs lavoro tra sedute" icon="i-heroicons-chat-bubble-left-right">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Il valore si concentra nella chiamata e in chat non strutturate.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Chat asincrona, materiali, compiti e psicoeducazione all'interno dello stesso flusso.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="3) Tool generici vs strumenti clinici" icon="i-heroicons-clipboard-document-list">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Feature trasversali, ma poco orientamento clinico specialistico.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">29 questionari integrati, diari strutturati e lettura clinica dei dati nel tempo.</p>
+    </div>
+  </ProjectCard>
+
+  <ProjectCard title="4) Strumenti separati vs unico ecosistema" icon="i-heroicons-squares-2x2">
+    <div class="diff-block">
+      <div class="diff-label">Altri sistemi</div>
+      <p class="diff-copy">Operatività distribuita tra piattaforme esterne per agenda, pagamenti e documenti.</p>
+      <div class="diff-label diff-label--arianne">Arianne</div>
+      <p class="diff-copy">Cartella clinica, amministrazione, pagamenti e monitoraggio outcome in un unico ambiente.</p>
+    </div>
+  </ProjectCard>
+</div>
+
+<div class="slide-text opacity-75 mt-3 text-sm">
+  In sintesi: Arianne non aggiunge solo feature, ma collega paziente e terapeuta in un sistema clinico continuo e misurabile.
+</div>
+
+<style scoped>
+.diff-block {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.diff-label {
+  @apply inline-flex items-center self-start rounded-md px-2 py-0.5 text-[0.57rem] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300;
+}
+
+.diff-label--arianne {
+  @apply bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-200;
+}
+
+.diff-copy {
+  @apply text-[0.8rem] leading-snug opacity-95 mb-1;
+}
+</style>
+
+<!--
+[IT]
+Questa slide chiarisce il punto centrale emerso dalla matrice: la differenza non è una colonna di check, ma il modo in cui le funzionalità si collegano nel percorso clinico.
+Le alternative sono forti su singoli blocchi, ma spesso restano frammentate tra accesso, relazione terapeutica e parte gestionale.
+Arianne, invece, tiene insieme presa in carico, strumenti clinici e misurazione degli outcome in un unico ecosistema.
+[EN-GB]
+This slide clarifies the core point from the matrix: the difference is not one column of checks, but how features connect across the clinical journey.
+Alternatives are strong in single blocks, but they often remain fragmented across access, therapeutic relationship and operations.
+Arianne, instead, keeps intake, clinical tools and outcome measurement together in one ecosystem.
+-->
+
+---
+layout: default
 name: pricing-model
 access:
   default: false
@@ -1851,7 +2307,7 @@ access:
 class: relative
 ---
 
-# Come funziona Arianne
+# Come funziona Arianne <span class="pricing-role pricing-role--therapists">per i terapeuti</span>
 
 <div class="slide-text opacity-80">
   A differenza delle altre piattaforme, il costo resta <strong>trasparente</strong> e <strong>prevedibile</strong>.
@@ -1877,7 +2333,7 @@ class: relative
   </ProjectCard>
 
   <ProjectCard title="Piano mensile" icon="i-heroicons-calendar-days">
-    <div class="mb-4 text-sm opacity-70"><strong>Canone fisso</strong> in base al numero di pazienti</div>
+    <div class="mb-4 text-sm opacity-70"><strong>Canone</strong> in base al numero di pazienti</div>
     <ul class="feature-list">
       <li class="feature-item">
         <span class="feature-icon i-heroicons-check"></span>
@@ -1891,6 +2347,10 @@ class: relative
       </ProjectCard>
 </div>
 
+<div class="slide-text mt-5 text-sm opacity-75">
+  Nota: ogni terapeuta decide in autonomia la propria tariffa oraria.
+</div>
+
 <!--
 [IT]
 Il modello è semplice e trasparente.
@@ -1900,6 +2360,67 @@ Poi un canone mensile prevedibile, calibrato sul numero di pazienti, con disdett
 The model is simple and transparent.
 You get 14 days of free trial to test everything, with no risk.
 Then a predictable monthly fee, scaled to the number of patients, with the freedom to cancel at any time.
+-->
+
+---
+layout: default
+name: pricing-model-patients
+class: relative
+---
+
+# Come funziona Arianne <span class="pricing-role pricing-role--patients">per i pazienti</span>
+
+<div class="slide-text opacity-80">
+  Percorso semplice e costo trasparente: <strong>da 50€ a seduta</strong>, con importo visibile prima della conferma.
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-10 text-left flex-1 content-center">
+  <ProjectCard title="Primo colloquio" icon="i-heroicons-sparkles">
+    <div class="mb-4 text-sm opacity-70"><strong>Primo colloquio gratuito</strong> per iniziare con serenità</div>
+    <ul class="feature-list">
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Accesso iniziale senza costo</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Abbinamento con terapeuta adeguato</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Prenotazione guidata</strong></span>
+      </li>
+    </ul>
+  </ProjectCard>
+
+  <ProjectCard title="Costo per seduta" icon="i-heroicons-banknotes">
+    <div class="mb-4 text-sm opacity-70"><strong>Da 50€ a seduta</strong></div>
+    <ul class="feature-list">
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Prezzo visibile prima della conferma</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Costo effettivo definito dal terapeuta</strong></span>
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon i-heroicons-check"></span>
+        <span><strong>Nessun abbonamento lato paziente</strong></span>
+      </li>
+    </ul>
+  </ProjectCard>
+</div>
+
+<!--
+[IT]
+Per il paziente il modello è diretto: primo colloquio gratuito e, dalle sedute successive, costo indicato per singola sessione.
+Il prezzo parte da 50€ a seduta ed è mostrato prima della conferma, così la scelta resta chiara.
+L'importo effettivo viene definito dal terapeuta in base al percorso.
+[EN-GB]
+For patients, the model is straightforward: a free first consultation and then a per-session fee.
+Pricing starts from €50 per session and is shown before confirmation, so the choice stays clear.
+The final amount is set by the therapist based on the care pathway.
 -->
 
 ---
@@ -1924,32 +2445,54 @@ class: bg-[#4F46E5] slide-theme-invert
 .highlight {
   position: relative;
   display: inline-block;
-  padding: 0 4px;
+  padding: 0 5px;
   /* Create a stacking context so z-index -1 stays within the span */
+  isolation: isolate;
   z-index: 1;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .highlight::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 2px;
+  bottom: 1px;
   width: 100%;
-  height: 45%;
-  background-color: #A3E635;
+  height: 32%;
+  background: linear-gradient(
+    180deg,
+    rgba(163, 230, 53, 0.15) 0%,
+    rgba(163, 230, 53, 0.58) 48%,
+    rgba(132, 204, 22, 0.85) 100%
+  );
   /* Stay behind the text but inside the .highlight stacking context */
   z-index: -1;
   transform: scaleX(0);
   transform-origin: left;
-  animation: highlight-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.5s;
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(163, 230, 53, 0.3);
+  animation:
+    highlight-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.5s,
+    highlight-settle 280ms ease-out forwards 1.7s;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(132, 204, 22, 0.18);
 }
 
 @keyframes highlight-draw {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
   to {
     transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes highlight-settle {
+  to {
+    opacity: 0.82;
   }
 }
 </style>
@@ -1975,36 +2518,101 @@ access:
 class: relative p-0
 ---
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
+import { onAudioStartedFor } from './setup/audio-sync'
+import { timings } from './setup/timings'
+
+const activeRevealStep = ref(0)
+let stopAudioListener: (() => void) | null = null
+let revealTimers: ReturnType<typeof setTimeout>[] = []
+let revealFallbackTimer: ReturnType<typeof setTimeout> | null = null
+let revealStarted = false
+
+const clearRevealTimers = () => {
+  for (const timer of revealTimers) clearTimeout(timer)
+  revealTimers = []
+}
+
+const clearRevealFallbackTimer = () => {
+  if (revealFallbackTimer) clearTimeout(revealFallbackTimer)
+  revealFallbackTimer = null
+}
+
+const scheduleReveal = () => {
+  revealStarted = true
+  clearRevealTimers()
+  activeRevealStep.value = 0
+
+  for (let step = 1; step <= 2; step += 1) {
+    const delay = timings.slide20.revealBaseDelay + ((step - 1) * timings.slide20.revealStagger)
+    const timer = setTimeout(() => {
+      activeRevealStep.value = step
+    }, delay)
+    revealTimers.push(timer)
+  }
+}
+
+onSlideEnter(() => {
+  const enteredAt = performance.now()
+  revealStarted = false
+  activeRevealStep.value = 0
+  clearRevealTimers()
+  clearRevealFallbackTimer()
+
+  const startReveal = () => {
+    if (revealStarted) return
+    scheduleReveal()
+  }
+
+  revealFallbackTimer = setTimeout(startReveal, 1200)
+  stopAudioListener = onAudioStartedFor('academic-logos', () => {
+    clearRevealFallbackTimer()
+    startReveal()
+  }, enteredAt)
+})
+
+onSlideLeave(() => {
+  if (stopAudioListener) stopAudioListener()
+  stopAudioListener = null
+  clearRevealFallbackTimer()
+  clearRevealTimers()
+  revealStarted = false
+  activeRevealStep.value = 0
+})
+</script>
+
 <div class="w-full h-full flex items-center justify-center">
   <div class="logos-row">
-    <div v-click="1" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 1 }">
       <img
         src="/img/21/padua/University%20of%20Padova%20UNIPD.svg"
-        alt="Universita di Padova"
+        alt="Università di Padova"
         class="institution-logo"
       />
     </div>
-    <div v-click="2" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/psicology/Psicologia-POS.svg"
-        alt="Universita di Milano-Bicocca - Psicologia"
+        alt="Università di Milano-Bicocca - Psicologia"
         class="institution-logo logo-light"
       />
       <img
         src="/img/21/psicology/Psicologia-POS-dark.svg"
-        alt="Universita di Milano-Bicocca - Psicologia"
+        alt="Università di Milano-Bicocca - Psicologia"
         class="institution-logo logo-dark"
       />
     </div>
-    <div v-click="2" class="logo-slot">
+    <div class="logo-slot" :class="{ 'logo-slot--visible': activeRevealStep >= 2 }">
       <img
         src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS.svg"
-        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        alt="Università di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
         class="institution-logo logo-light"
       />
       <img
         src="/img/21/informatic/Informatica-Sistemistica-e-Comunicazione-POS-dark.svg"
-        alt="Universita di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
+        alt="Università di Milano-Bicocca - Informatica, Sistemistica e Comunicazione"
         class="institution-logo logo-dark"
       />
     </div>
@@ -2027,6 +2635,14 @@ class: relative p-0
   align-items: center;
   justify-content: center;
   min-height: clamp(6.5rem, 11vh, 8.5rem);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.logo-slot--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .institution-logo {
@@ -2065,6 +2681,50 @@ That lets the product evolve with method: clinical practice, data and technology
 -->
 
 ---
+layout: default
+name: academic-research-solutions
+class: relative
+---
+
+# Collaborazione accademica e ricerca applicata
+
+<div class="slide-text max-w-5xl opacity-95 mb-8">
+  Insieme all'accademia stiamo costruendo <strong>soluzioni di ricerca</strong> che miglioreranno ulteriormente Arianne:
+  sistemi di <strong>supporto alle decisioni</strong> e sistemi di <strong>IA</strong> progettati per affiancare il professionista.
+</div>
+
+<div class="grid grid-cols-3 gap-4 mt-2">
+  <ProjectCard title="Supporto decisionale" icon="i-heroicons-light-bulb">
+    Analisi strutturata di dati clinici, questionari e diario per evidenziare pattern, priorità e ipotesi da approfondire.
+  </ProjectCard>
+
+  <ProjectCard title="Sistemi IA clinici" icon="i-heroicons-cpu-chip">
+    Approcci RAG su conoscenza validata (ICD-11), per supportare il ragionamento diagnostico e differenziale in modo contestualizzato.
+  </ProjectCard>
+
+  <ProjectCard title="Evoluzione responsabile" icon="i-heroicons-shield-check">
+    Supervisione umana, validazione con professionisti e criteri etici per integrare l'IA in modo sicuro nella pratica clinica.
+  </ProjectCard>
+</div>
+
+<div class="slide-text mt-7 opacity-80">
+  Obiettivo: trasformare la ricerca in funzionalità concrete che aumentano qualità, continuità ed efficacia del percorso terapeutico.
+</div>
+
+<!--
+[IT]
+La collaborazione con l'accademia non è solo istituzionale: è un motore di ricerca e sviluppo.
+Anche sulla base di articoli scientifici recenti, stiamo costruendo sistemi IA di supporto alle decisioni cliniche, fondati su conoscenza validata come ICD-11 e con supervisione umana.
+L'obiettivo è portare nella piattaforma strumenti che aiutino il professionista a leggere meglio i dati, gestire casi complessi e migliorare continuità e qualità del percorso.
+In sintesi: ricerca applicata che diventa impatto clinico concreto.
+[EN-GB]
+Our academic collaboration is not only institutional: it is a research and development engine.
+Also building on recent scientific literature, we are developing AI decision-support systems grounded in validated knowledge such as ICD-11 and designed for human oversight.
+The goal is to bring tools into the platform that help professionals interpret data better, handle complex cases, and improve continuity and quality of care.
+In short: applied research becoming concrete clinical impact.
+-->
+
+---
 name: arianne-outro
 access:
   default: false
@@ -2078,8 +2738,46 @@ class: relative p-0
   class="w-full h-full flex items-center justify-center"
   style="background:#ff8c42; background:oklch(64.6% 0.222 41.116);"
 >
-  <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
+  <div class="outro-content">
+    <img src="/img/arianne-logo.svg" class="outro-logo" alt="Arianne" />
+    <a
+      href="https://arianne.whattadata.it/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="outro-link"
+    >
+      https://arianne.whattadata.it/
+    </a>
+    <img src="/img/qr-code-arianne-site.svg" class="outro-qr" alt="QR code sito web Arianne" />
+  </div>
 </div>
+
+<style scoped>
+.outro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.outro-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1b1b1b;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.outro-qr {
+  width: 9.2rem;
+  height: 9.2rem;
+  display: block;
+  background: #fff;
+  padding: 0.46rem;
+  border-radius: 0.78rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+</style>
 
 <!--
 [IT]
