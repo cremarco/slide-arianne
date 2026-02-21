@@ -1,6 +1,7 @@
 ---
 title: Arianne - L'ecosistema digitale per la salute mentale
 titleTemplate: '%s'
+colorSchema: light
 name: arianne-cover
 access:
   default: false
