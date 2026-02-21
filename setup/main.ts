@@ -402,6 +402,9 @@ const resolveAudioFolderName = (slideNumber: string): string | null => {
 
 export default defineAppSetup(({ router }) => {
     if (typeof window === 'undefined') return
+    if (import.meta.env.PROD) {
+        document.documentElement.classList.add('slidev-public-build')
+    }
 
     const baseUrl = import.meta.env.BASE_URL || '/'
     const withBase = (relativePath: string) => buildPathWithBase(baseUrl, relativePath)
