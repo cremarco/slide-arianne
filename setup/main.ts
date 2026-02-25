@@ -504,6 +504,13 @@ export default defineAppSetup(({ router }) => {
     }
 
     const showNextSlideHint = () => {
+        const currentSlideNumber = resolveSlideNumber(router.currentRoute.value.path)
+        const visibleSlides = getVisibleSlideNumbersForPassword(activePasswordKey)
+        const lastVisibleNumber = visibleSlides[visibleSlides.length - 1]
+        if (currentSlideNumber !== null && Number.parseInt(currentSlideNumber, 10) === lastVisibleNumber) {
+            return
+        }
+
         const hint = ensureNextSlideHint()
         hint.classList.add(NEXT_SLIDE_HINT_VISIBLE_CLASS)
         hint.setAttribute('aria-hidden', 'false')
