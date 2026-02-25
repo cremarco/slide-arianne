@@ -367,6 +367,21 @@ const buildSlideMetadataByNumberMap = (markdown: string): Map<string, SlideMetad
 
 const slideMetadataByNumber = buildSlideMetadataByNumberMap(slidesMarkdown)
 
+const KNOWN_MODES = ['pitch', 'santagostino'] as const
+type KnownMode = (typeof KNOWN_MODES)[number]
+const PUBLIC_MODE_KEYS: KnownMode[] = ['santagostino']
+
+const detectInitialMode = (): KnownMode | null => {
+    if (typeof window === 'undefined') return null
+    const path = window.location.pathname
+    for (const mode of KNOWN_MODES) {
+        if (path === `/${mode}` || path.startsWith(`/${mode}/`)) return mode
+    }
+    const params = new URLSearchParams(window.location.search)
+    const queryMode = params.get('mode')
+    return (KNOWN_MODES as readonly string[]).includes(queryMode ?? '') ? (queryMode as KnownMode) : null
+}
+
 const buildPathWithBase = (baseUrl: string, relativePath: string): string => {
     const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
     const normalizedRelative = relativePath.replace(/^\/+/, '')
@@ -430,8 +445,14 @@ export default defineAppSetup(({ router }) => {
         .map((value) => Number.parseInt(value, 10))
         .filter((value) => Number.isFinite(value))
         .sort((left, right) => left - right)
-    let activePasswordKey: string | null = DECK_PASSWORD_ENABLED ? null : DEFAULT_PASSWORD_PROFILE_KEY
-    let isDeckUnlocked = !DECK_PASSWORD_ENABLED
+    const initialMode = detectInitialMode()
+    const isPublicMode = initialMode !== null && PUBLIC_MODE_KEYS.includes(initialMode)
+    let activePasswordKey: string | null = isPublicMode
+        ? initialMode
+        : DECK_PASSWORD_ENABLED
+            ? null
+            : DEFAULT_PASSWORD_PROFILE_KEY
+    let isDeckUnlocked = !DECK_PASSWORD_ENABLED || isPublicMode
     let redirectPathAfterUnlock: string | null = null
     const PASSWORD_GATE_ID = 'slide-password-gate'
     const PASSWORD_INPUT_ID = 'slide-password-input'
@@ -690,12 +711,27 @@ export default defineAppSetup(({ router }) => {
 
     // Handle navigation changes
     router.beforeEach((to, from) => {
+        // Intercept /pitch and /santagostino entry paths → redirect to numbered slide with ?mode= param
+        const pathMode = (KNOWN_MODES as readonly string[]).find(
+            m => to.path === `/${m}` || to.path.startsWith(`/${m}/`)
+        ) as KnownMode | undefined
+        if (pathMode) {
+            const afterMode = to.path.slice(`/${pathMode}`.length).replace(/^\//, '')
+            const slideSegment = afterMode.split('/')[0]
+            const slideNum = /^\d+$/.test(slideSegment) ? slideSegment : '1'
+            return {
+                path: `/${slideNum}`,
+                query: { ...to.query, mode: pathMode },
+                replace: true,
+            }
+        }
+
         const requestedSlideNumber = resolveSlideNumber(to.path)
 
         if (!isDeckUnlocked) {
             if (!requestedSlideNumber || requestedSlideNumber === '1') return true
             redirectPathAfterUnlock = to.fullPath
-            return '/1'
+            return { path: '/1', query: to.query }
         }
 
         if (!requestedSlideNumber) return true

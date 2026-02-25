@@ -5,8 +5,8 @@ colorSchema: light
 name: arianne-cover
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 layout: default
 class: relative p-0
 routerMode: history
@@ -402,8 +402,8 @@ Like Ariadne's thread, it guides patients and therapists along a clear path, ses
 name: product-vision
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 layout: default
 class: relative overflow-hidden p-0
 ---
@@ -543,8 +543,8 @@ layout: default
 name: project-overview
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative h-full flex flex-col
 ---
 
@@ -695,8 +695,8 @@ layout: default
 name: target-users
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative h-full flex flex-col
 ---
 
@@ -788,8 +788,8 @@ layout: default
 name: professional-intro
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative p-0
 ---
 
@@ -822,8 +822,8 @@ layout: default
 name: dashboard-overview
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative
 ---
 
@@ -959,8 +959,8 @@ layout: default
 name: clinical-records
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative p-0
 ---
 
@@ -1005,8 +1005,8 @@ layout: default
 name: assignments
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative overflow-hidden
 ---
 # Attività tra le sedute
@@ -1125,8 +1125,8 @@ layout: default
 name: agenda-and-notes
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative overflow-hidden
 ---
 # Agenda e note
@@ -1216,8 +1216,8 @@ layout: default
 name: clinical-insights
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative overflow-hidden
 ---
 # Insight leggibili
@@ -1262,8 +1262,8 @@ layout: default
 name: patient-intro
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative p-0
 ---
 
@@ -1296,8 +1296,8 @@ layout: default
 name: onboarding-matching
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative
 ---
 
@@ -1390,8 +1390,8 @@ layout: default
 name: patient-web-overview
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative h-full flex flex-col
 ---
 
@@ -1473,8 +1473,8 @@ layout: default
 name: secure-call-system
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative p-0
 ---
 
@@ -1538,8 +1538,8 @@ layout: default
 name: patient-mobile-app
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative h-full flex flex-col
 ---
 
@@ -1624,8 +1624,8 @@ layout: default
 name: patient-solution-details
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative p-0
 ---
 
@@ -1656,8 +1656,8 @@ layout: default
 name: integrated-assessments
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 ---
 
 # Strumenti clinici integrati
@@ -1721,8 +1721,8 @@ layout: default
 name: competitor-analysis
 access:
   default: false
-  arianne_full: false
-  arianne_sa: false
+  pitch: false
+  santagostino: false
 class: relative
 ---
 
@@ -2223,8 +2223,8 @@ layout: default
 name: arianne-differences
 access:
   default: false
-  arianne_full: false
-  arianne_sa: false
+  pitch: false
+  santagostino: false
 class: relative
 ---
 
@@ -2311,8 +2311,8 @@ layout: default
 name: pricing-model
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative
 ---
 
@@ -2376,8 +2376,8 @@ layout: default
 name: pricing-model-patients
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative
 ---
 
@@ -2441,8 +2441,8 @@ layout: default
 name: unimib-spinoff
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: bg-[#4F46E5] slide-theme-invert
 ---
 
@@ -2526,8 +2526,8 @@ layout: default
 name: academic-logos
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 class: relative p-0
 ---
 
@@ -2698,8 +2698,8 @@ layout: default
 name: academic-research-solutions
 access:
   default: false
-  arianne_full: true
-  arianne_sa: false
+  pitch: true
+  santagostino: false
 class: relative
 ---
 
@@ -2745,8 +2745,8 @@ In short: applied research becoming concrete clinical impact.
 name: arianne-outro
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 layout: default
 class: relative p-0
 ---

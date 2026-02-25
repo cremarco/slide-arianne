@@ -31,15 +31,34 @@ pnpm build
 - `scripts/generate_speaker_notes_audio.py`: generazione audio da note relatore.
 - `scripts/README.md`: guida completa allo script Python.
 
-## Protezione con password
+## Modalità di accesso
 
-- La presentazione mostra una schermata iniziale di accesso prima delle slide.
-- Password di default: `arianne`.
-- Compatibilita': puoi ancora usare `VITE_SLIDES_PASSWORD`.
-- Multi-password: usa `VITE_SLIDES_PASSWORDS` con formato `chiave=password` separato da `,` o `;`.
-  - Inizializzazione attuale: `VITE_SLIDES_PASSWORDS=arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`
-- Le chiavi (`arianne_full`, `arianne_sa`, ecc.) sono quelle da usare nel campo `access` delle slide.
-- Visibilita' slide per password: usa il campo `access` nel frontmatter di ogni slide.
+La presentazione ha due modalità, accessibili tramite URL dedicati:
+
+| URL | Modalità | Password | Visibilità |
+|-----|----------|----------|------------|
+| `/pitch` | `pitch` | Sì | Tutte le slide |
+| `/santagostino` | `santagostino` | No (pubblica) | Slide con `santagostino: true` |
+
+- `/pitch` mostra il password gate; dopo l'autenticazione naviga normalmente.
+- `/santagostino` è pubblica: nessuna password richiesta.
+- Il modo viene persistito nel query param `?mode=` durante la navigazione tra slide, così il refresh della pagina funziona correttamente (es. `/3?mode=santagostino`).
+
+### Configurazione password
+
+Variabile d'ambiente attuale (`.env`):
+
+```
+VITE_SLIDES_PASSWORDS=pitch=Ari4nneFull!26
+```
+
+Solo `pitch` ha una password. `santagostino` è sblocata automaticamente dall'app al rilevamento del modo.
+
+Compatibilita': puoi ancora usare `VITE_SLIDES_PASSWORD` come singola password di fallback.
+
+### Visibilità slide per modalità
+
+Usa il campo `access` nel frontmatter di ogni slide. Le chiavi corrispondono ai nomi delle modalità (`pitch`, `santagostino`).
 
 Esempio frontmatter:
 
@@ -48,21 +67,21 @@ Esempio frontmatter:
 name: product-vision
 access:
   default: false
-  arianne_full: true
-  arianne_sa: true
+  pitch: true
+  santagostino: true
 ---
 ```
 
 Regole di visibilita':
 
-- Se `access` non e' presente, la slide e' visibile a tutte le password.
-- Se la chiave della password e' presente (`arianne_full`, `arianne_sa`, ecc.), vale quel booleano.
+- Se `access` non e' presente, la slide è visibile in tutte le modalità.
+- Se la chiave della modalità è presente (`pitch`, `santagostino`), vale quel booleano.
 - Se la chiave non e' presente ma c'e' `default`, viene usato `default`.
 
-Set iniziale del deck:
+Set slide per modalità:
 
-- `arianne_full` vede tutte le slide.
-- `arianne_sa` vede solo le prime tre: `arianne-cover`, `product-vision`, `project-overview`.
+- `pitch` vede tutte le slide con `pitch: true`.
+- `santagostino` vede solo le slide con `santagostino: true`.
 
 ## Audio per slide
 
@@ -108,7 +127,7 @@ Passaggi:
 3. In `Build and deployment`, imposta `Source: GitHub Actions`.
 4. Vai su `Settings > Secrets and variables > Actions > New repository secret`.
 5. Crea almeno uno dei seguenti secret:
-   - `VITE_SLIDES_PASSWORDS` (consigliato) con formato multi-password, esempio: `arianne_full=Ari4nneFull!26,arianne_sa=Ari4nneSa!26`.
+   - `VITE_SLIDES_PASSWORDS` (consigliato) con formato `chiave=password`, esempio: `pitch=Ari4nneFull!26`.
    - `VITE_SLIDES_PASSWORD` (fallback) con password singola.
 6. Fai un nuovo push (o avvia il workflow manualmente da `Actions`).
 
